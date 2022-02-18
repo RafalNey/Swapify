@@ -1,24 +1,16 @@
 import * as React from 'react';
 import { StatusBar, View } from 'react-native';
-import { itemImgs } from './images/itemImgs';
-import ItemsSlider from './components/ItemsSlider';
-import { ScrollView } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import StackNavigator from './stacks/StackNavigator';
 import Nav from './components/Nav/Nav';
-import Logo from './components/Logo';
 
 const App = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <ScrollView>
-        <StatusBar />
-        <Logo />
-        <ItemsSlider data={itemImgs} />
-        <ItemsSlider data={itemImgs} />
-        <ItemsSlider data={itemImgs} />
-        <ItemsSlider data={itemImgs} />
-      </ScrollView>
+    <NavigationContainer>
+      <StatusBar barStyle='default' />
       <Nav />
-    </View>
+      <StackNavigator />
+    </NavigationContainer>
   );
 };
 

@@ -3,12 +3,10 @@ import {
   StatusBar,
   FlatList,
   Image,
-  Animated,
   Text,
   View,
   Dimensions,
   StyleSheet,
-  TouchableOpacity,
 } from 'react-native';
 
 const { width, height } = Dimensions.get('screen');
@@ -45,7 +43,7 @@ export default ItemsSlider;
 const styles = StyleSheet.create({
   listContainer: {
     height: imageH,
-    marginLeft: 20,
+    marginHorizontal: 10,
     marginBottom: 40,
   },
   listHeader: {
