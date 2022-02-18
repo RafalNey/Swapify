@@ -3,7 +3,7 @@ import { StatusBar, View } from 'react-native';
 import { itemImgs } from './images/itemImgs';
 import ItemsSlider from './components/ItemsSlider';
 import { ScrollView } from 'react-native';
-// import Nav from './components/Nav/Nav';
+import Nav from './components/Nav/Nav';
 import Logo from './components/Logo';
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
         <ItemsSlider data={itemImgs} />
         <ItemsSlider data={itemImgs} />
       </ScrollView>
-      {/* <Nav /> */}
+      <Nav />
     </View>
   );
 };
