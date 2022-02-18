@@ -11,7 +11,7 @@ const App = () => {
     <View style={{ flex: 1 }}>
       <ScrollView>
         <StatusBar />
-        {/* <Logo /> */}
+        <Logo />
         <ItemsSlider data={itemImgs} />
         <ItemsSlider data={itemImgs} />
         <ItemsSlider data={itemImgs} />
