@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-// import Menu from './Menu';
+import Menu from './Menu';
 
 const Nav = () => {
   const [isPressed, setIsPressed] = useState(false);
@@ -14,7 +14,7 @@ const Nav = () => {
 
   return (
     <>
-      {/* <Menu isPressed={isPressed} /> */}
+      <Menu isPressed={isPressed} />
       <View style={styles.navContainer}>
         <TouchableOpacity>
           <Ionicons name='home' size={30} color='#6b6565' />
