@@ -7,7 +7,7 @@ import Nav from './components/Nav/Nav';
 const App = () => {
   return (
     <NavigationContainer>
-      <StatusBar barStyle='default' />
+      <StatusBar />
       <Nav />
       <StackNavigator />
     </NavigationContainer>
