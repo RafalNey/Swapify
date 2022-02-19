@@ -1,6 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../components/Home';
 import User from '../components/User/User';
+import UserList from '../components/User/UserList';
+import UserSwaps from '../components/User/UserSwaps';
 
 const Stack = createNativeStackNavigator();
 
@@ -10,6 +12,12 @@ const StackNavigator = () => {
       <Stack.Group>
         <Stack.Screen name='Home' component={Home} />
         <Stack.Screen name='User' component={User} />
+      </Stack.Group>
+      <Stack.Group
+        screenOptions={{ headerShown: false, presentation: 'modal' }}
+      >
+        <Stack.Screen name='UserList' component={UserList} />
+        <Stack.Screen name='UserSwaps' component={UserSwaps} />
       </Stack.Group>
     </Stack.Navigator>
   );
