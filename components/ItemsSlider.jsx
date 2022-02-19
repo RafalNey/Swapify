@@ -22,6 +22,9 @@ const ItemsSlider = ({ data }) => {
         data={data}
         pagingEnabled
         horizontal
+        decelerationRate={0}
+        snapToInterval={imageW + 20}
+        snapToAlignment={'center'}
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => {
