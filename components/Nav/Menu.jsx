@@ -11,7 +11,7 @@ const { width, height } = Dimensions.get('screen');
 const menuH = height / 1.233;
 
 const Menu = ({ navigationHandler, isPressed }) => {
-  const menuItems = ['User', 'Messages', 'Your List', 'Swaps', 'Legal'];
+  const menuItems = ['User', 'Messages', 'My List', 'Swaps', 'Legal'];
 
   const list = () => {
     return menuItems.map((menuItem) => {

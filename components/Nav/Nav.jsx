@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Fontisto, MaterialIcons } from '@expo/vector-icons';
 import Menu from './Menu';
 
 const Nav = () => {
@@ -25,13 +25,16 @@ const Nav = () => {
         <TouchableOpacity>
           <Ionicons
             name='home'
-            size={27}
+            size={26}
             color='#6b6565'
             onPress={() => navigationHandler('Home')}
           />
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text style={styles.navItems}>Items</Text>
+          <Fontisto name='shopping-store' size={20} color='#6b6565' />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <MaterialIcons name='message' size={24} color='#6b6565' />
         </TouchableOpacity>
         <TouchableOpacity onPress={menuOpenHandler}>
           <Ionicons
@@ -55,11 +58,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 20,
     backgroundColor: 'rgba(0, 0, 0, 0.01)',
-    borderTopWidth: 1,
-    borderTopColor: '#ccc9c9',
-  },
-  navItems: {
-    fontSize: 15,
-    textTransform: 'uppercase',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc9c9',
   },
 });

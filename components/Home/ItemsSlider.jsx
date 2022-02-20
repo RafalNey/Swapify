@@ -16,7 +16,6 @@ const imageH = imageW * 1.1;
 const ItemsSlider = ({ data }) => {
   return (
     <View style={styles.listContainer}>
-      <StatusBar hidden />
       <Text style={styles.listHeader}>Recently added</Text>
       <FlatList
         data={data}
