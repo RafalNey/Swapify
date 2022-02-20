@@ -5,11 +5,11 @@ import {
   Dimensions,
   Image,
   SafeAreaView,
-  Button,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { itemImgs } from '../../images/itemImgs';
+import Button from '../Button';
 
 const { width, height } = Dimensions.get('screen');
 const menuW = width * 0.5;
@@ -17,6 +17,9 @@ const menuH = menuW * 1;
 
 const User = () => {
   const navigation = useNavigation();
+  const navigationHandler = (screen) => {
+    navigation.navigate(screen);
+  };
 
   return (
     <SafeAreaView style={styles.userContainer}>
@@ -37,18 +40,8 @@ const User = () => {
       {/* <FontAwesome name='star-half-o' size={24} color='black' />
       <FontAwesome name='star' size={24} color='black' /> */}
       <View style={styles.showBtnsContainer}>
-        <Text>
-          <Button
-            title='My list'
-            onPress={() => navigation.navigate('UserList', { state: 234 })}
-          />
-        </Text>
-        <Text>
-          <Button
-            title='Swaps'
-            onPress={() => navigation.navigate('UserSwaps', { state: 324 })}
-          />
-        </Text>
+        <Button btnText={'My List'} navigationHandler={navigationHandler} />
+        <Button btnText={'Swaps'} navigationHandler={navigationHandler} />
       </View>
     </SafeAreaView>
   );
@@ -87,11 +80,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginVertical: 30,
-  },
-  showBtn: {
-    padding: 15,
-    // backgroundColor: '#ccc9c9',
-    borderRadius: 5,
-    // elevation: 2,
   },
 });
