@@ -48,12 +48,6 @@ const Login = () => {
       <TouchableOpacity>
         <Text style={styles.register}>Register</Text>
       </TouchableOpacity>
-      <View>
-        <Text>Full Name</Text>
-        <Text>Password</Text>
-        <Text>E-mail</Text>
-        <Text>Location</Text>
-      </View>
     </SafeAreaView>
   );
 };
@@ -64,7 +58,8 @@ const styles = StyleSheet.create({
   loginContainer: {
     flex: 1,
     alignItems: 'center',
-    padding: '5%',
+    paddingHorizontal: '5%',
+    paddingVertical: '30%',
     backgroundColor: '#fff',
   },
   loginHeader: {
