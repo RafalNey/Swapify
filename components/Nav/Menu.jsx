@@ -1,19 +1,30 @@
 import {
   StyleSheet,
-  View,
+  SafeAreaView,
   Text,
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { SimpleLineIcons, Entypo } from '@expo/vector-icons';
+import { SimpleLineIcons } from '@expo/vector-icons';
+import { useState } from 'react';
 
 const { width, height } = Dimensions.get('screen');
-const menuH = height / 1.233;
 
 const Menu = ({ navigationHandler, isPressed }) => {
   const menuItems = ['User', 'Messages', 'My List', 'Swaps', 'Legal'];
+  const [isLogged, setIsLogged] = useState(false);
 
-  const list = () => {
+  const loginHandler = () => {
+    // setIsLogged(true);
+    navigationHandler('Login');
+  };
+
+  const logoutHandler = () => {
+    setIsLogged(false);
+    navigationHandler('Home');
+  };
+
+  const loggedInMenu = () => {
     return menuItems.map((menuItem) => {
       return (
         <TouchableOpacity
@@ -28,25 +39,46 @@ const Menu = ({ navigationHandler, isPressed }) => {
     });
   };
 
+  const loggedOutMenu = () => {
+    return (
+      <>
+        <TouchableOpacity style={styles.menuItem} onPress={loginHandler}>
+          <Text style={styles.menuItemText}>Login</Text>
+          <SimpleLineIcons name='arrow-right' size={24} color='#6b6565' />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuItem}>
+          <Text style={styles.menuItemText}>Register</Text>
+          <SimpleLineIcons name='arrow-right' size={24} color='#6b6565' />
+        </TouchableOpacity>
+      </>
+    );
+  };
+
   return (
-    <View
+    <SafeAreaView
       style={{
         ...styles.menu,
-        height: menuH,
         display: isPressed ? 'flex' : 'none',
       }}
     >
-      {list()}
-      <TouchableOpacity style={styles.menuItem} key={'Logout'}>
-        <Text style={styles.menuItemText}>Logout</Text>
-      </TouchableOpacity>
-    </View>
+      {isLogged ? loggedInMenu() : loggedOutMenu()}
+      {isLogged && (
+        <TouchableOpacity
+          style={styles.menuItem}
+          key={'Logout'}
+          onPress={logoutHandler}
+        >
+          <Text style={styles.menuItemText}>Logout</Text>
+        </TouchableOpacity>
+      )}
+    </SafeAreaView>
   );
 };
 export default Menu;
 
 const styles = StyleSheet.create({
   menu: {
+    height: height,
     backgroundColor: 'rgba(0, 0, 0, 0.01)',
   },
   menuItem: {
@@ -57,6 +89,6 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   menuItemText: {
-    fontSize: 15,
+    fontSize: 17,
   },
 });
