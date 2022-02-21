@@ -6,6 +6,7 @@ import {
   Image,
   SafeAreaView,
 } from 'react-native';
+import {SvgUri} from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { itemImgs } from '../../images/itemImgs';
@@ -24,17 +25,16 @@ const User = () => {
   return (
     <SafeAreaView style={styles.userContainer}>
       <View style={styles.userCard}>
-        <Image
-          style={styles.userImg}
-          source={{
-            uri: itemImgs[6],
-          }}
-        />
+        <SvgUri
+         style={styles.userImg}
+         //change 'username' in line below with template literal to reference current user
+        uri={`https://avatars.dicebear.com/api/avataaars/username
+        .svg`}/>
       </View>
       <Text style={styles.userName}>John Malkovich</Text>
       <Text style={styles.userLocation}>
         <Ionicons name='md-location-sharp' size={20} color='#6b6565' />
-        Machester, UK
+        Manchester, UK
       </Text>
       <FontAwesome name='star-o' size={24} color='black' />
       {/* <FontAwesome name='star-half-o' size={24} color='black' />
