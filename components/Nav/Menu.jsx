@@ -15,7 +15,7 @@ const Menu = ({ navigationHandler, isPressed }) => {
   const [isLogged, setIsLogged] = useState(false);
 
   const loginHandler = () => {
-    // setIsLogged(true);
+    setIsLogged(true);
     navigationHandler('Login');
   };
 

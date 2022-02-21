@@ -30,7 +30,7 @@ const Nav = () => {
             onPress={() => navigationHandler('Home')}
           />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigationHandler('Marketplace')}>
           <Fontisto name='shopping-store' size={20} color='#6b6565' />
         </TouchableOpacity>
         <TouchableOpacity>
