@@ -15,7 +15,7 @@ import Logo from './Home/Logo';
 const { width, height } = Dimensions.get('screen');
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
@@ -23,9 +23,11 @@ const Login = () => {
     // Need to implement User authentication with Firebase?
     // When logged in the menu needs to change to the loggedInMenu
     navigation.navigate('Home');
-    setUsername('');
+    setEmail('');
     setPassword('');
   };
+
+
 
   return (
     <SafeAreaView style={styles.loginContainer}>
@@ -33,15 +35,16 @@ const Login = () => {
         <Logo />
         <TextInput
           style={{ ...styles.loginInput, marginTop: 20 }}
-          value={username}
-          placeholder='Enter Username'
-          onChangeText={setUsername}
+          value={email}
+          placeholder='Email address'
+          onChangeText={text => setEmail(text)}
         />
         <TextInput
           style={styles.loginInput}
           value={password}
-          placeholder='Enter Password'
-          onChangeText={setPassword}
+          placeholder='Password'
+          onChangeText={text => setPassword(text)}
+          secureTextEntry
         />
         <Button btnText={'Login'} onSubmit={onSubmit} />
       </View>
