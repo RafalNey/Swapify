@@ -7,7 +7,7 @@ const imageH = imageW * 0.35;
 const Logo = () => {
   return (
     <View style={styles.logoContainer}>
-      <Image source={require('../images/Logo.png')} style={styles.logo} />
+      <Image source={require('../../images/Logo.png')} style={styles.logo} />
     </View>
   );
 };
