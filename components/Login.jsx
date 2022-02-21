@@ -11,22 +11,44 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Button from './Button';
 import Logo from './Home/Logo';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const { width, height } = Dimensions.get('screen');
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
-  const onSubmit = () => {
+  const signin = () => {
     // Need to implement User authentication with Firebase?
     // When logged in the menu needs to change to the loggedInMenu
-    navigation.navigate('Home');
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredentials) => {
+      console.log(userCredentials)
+      navigation.navigate('Home')
     setEmail('');
     setPassword('');
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+   
+    
   };
 
+  const register = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredentials) => {
+      console.log(userCredentials)
+      navigation.navigate('Home')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
 
 
   return (
@@ -46,9 +68,9 @@ const Login = () => {
           onChangeText={text => setPassword(text)}
           secureTextEntry
         />
-        <Button btnText={'Login'} onSubmit={onSubmit} />
+        <Button btnText={'Login'} onSubmit={signin} />
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={register}>
         <Text style={styles.register}>Register</Text>
       </TouchableOpacity>
     </SafeAreaView>
