@@ -1,12 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 
-const Button = ({ btnText, navigationHandler }) => {
+const Button = ({ btnText, navigationHandler, onSubmit }) => {
+  const eventsHandler = () => {
+    onSubmit && onSubmit();
+    navigationHandler && navigationHandler(btnText);
+  };
+
   return (
-    <TouchableOpacity
-      style={styles.btn}
-      onPress={() => navigationHandler && navigationHandler(btnText)}
-    >
+    <TouchableOpacity style={styles.btn} onPress={eventsHandler}>
       <Text style={styles.btnText}>{btnText}</Text>
     </TouchableOpacity>
   );
@@ -16,16 +18,15 @@ export default Button;
 
 const styles = StyleSheet.create({
   btn: {
-    alignSelf: 'flex-end',
     paddingVertical: 10,
-    paddingHorizontal: 18,
+    paddingHorizontal: 20,
     marginBottom: '3%',
     backgroundColor: '#353637',
-    elevation: 1,
+    elevation: 2,
     borderRadius: 5,
   },
   btnText: {
-    fontSize: 15,
+    fontSize: 16,
     color: '#fff',
   },
 });
