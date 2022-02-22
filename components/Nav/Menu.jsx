@@ -8,6 +8,8 @@ import {
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../contexts/UserContext';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -21,8 +23,11 @@ const Menu = ({ navigationHandler, isPressed }) => {
   };
 
   const logoutHandler = () => {
-    setLoggedInUser({});
-    navigationHandler('Home');
+    signOut(auth).then(() => {
+      setLoggedInUser({})
+      navigationHandler('Home');
+    })
+    
   };
 
   const loggedInMenu = () => {

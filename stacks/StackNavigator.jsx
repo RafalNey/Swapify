@@ -6,6 +6,7 @@ import Register from '../components/Register';
 import User from '../components/User/User';
 import UserList from '../components/User/UserList';
 import UserSwaps from '../components/User/UserSwaps';
+import Legal from '../components/Legal'
 
 const Stack = createNativeStackNavigator();
 
@@ -21,8 +22,9 @@ const StackNavigator = () => {
         <Stack.Screen name='Marketplace' component={Marketplace} />
         <Stack.Screen name='My List' component={UserList} />
         <Stack.Screen name='Swaps' component={UserSwaps} />
-        {/* Messages 
-            Legal*/}
+        {/* <Stack.Screen name='Messages' component={Messages}/> */}
+        <Stack.Screen name='Legal' component={Legal}/>
+       
       </Stack.Group>
       <Stack.Group
         screenOptions={{ headerShown: false, presentation: 'modal' }}
