@@ -1,8 +1,8 @@
 import { StyleSheet, Image, View, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('screen');
-const imageW = width * 0.35;
-const imageH = imageW * 0.35;
+const imageW = width * 0.55;
+const imageH = imageW * 0.55;
 
 const Logo = () => {
   return (
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: imageH,
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: 10,
   },
   logo: {
     width: imageW,

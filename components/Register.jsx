@@ -26,21 +26,15 @@ const Register = () => {
       <Logo />
       <View style={styles.loginCard}>
         <TextInput
-          value={fullName}
-          style={styles.loginInput}
-          placeholder='Enter Full Name'
-          onChangeText={(text) => setFullName(text)}
-        />
-        <TextInput
           value={username}
           style={styles.loginInput}
-          placeholder='Enter Username'
+          placeholder='Username'
           onChangeText={(text) => setUsername(text)}
         />
         <TextInput
           value={email}
           style={styles.loginInput}
-          placeholder='Enter Email'
+          placeholder='E-mail'
           onChangeText={(text) => setEmail(text)}
         />
         <TextInput
@@ -68,8 +62,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingHorizontal: '5%',
-    paddingVertical: '10%',
-    backgroundColor: '#fff',
+    paddingVertical: '5%',
+    backgroundColor: 'lightgrey',
   },
   loginCard: {
     alignItems: 'center',
@@ -77,12 +71,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   loginInput: {
-    width: '80%',
+    width: '72.5%',
     marginBottom: 18,
     padding: 9,
     fontSize: 17,
     borderWidth: 1,
     borderRadius: 5,
+    backgroundColor: 'white',
     borderColor: '#ccc9c9',
   },
 });
