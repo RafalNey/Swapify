@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,64 +11,63 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Button from './Button';
 import Logo from './Home/Logo';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { auth } from '../firebase';
 import { UserContext } from '../contexts/UserContext';
 
 const { width, height } = Dimensions.get('screen');
 
-
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {isLoggedIn, loggedInUser, setLoggedInUser} = useContext(UserContext)
+  const { isLoggedIn, loggedInUser, setLoggedInUser } = useContext(UserContext);
   const navigation = useNavigation();
 
   const signin = () => {
     // Need to implement User authentication with Firebase?
     // When logged in the menu needs to change to the loggedInMenu
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredentials) => {
-      setLoggedInUser(userCredentials)
-      console.log(userCredentials.user)
-      navigation.navigate('Home')
-    setEmail('');
-    setPassword('');
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-   
-    
+      .then((userCredentials) => {
+        setLoggedInUser(userCredentials);
+        console.log(userCredentials.user);
+        navigation.navigate('Home');
+        setEmail('');
+        setPassword('');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const register = () => {
     createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredentials) => {
-      console.log(userCredentials)
-      navigation.navigate('Home')
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
-
+      .then((userCredentials) => {
+        console.log(userCredentials);
+        navigation.navigate('Home');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <SafeAreaView style={styles.loginContainer}>
+      <Logo />
       <View style={styles.loginCard}>
-        <Logo />
         <TextInput
-          style={{ ...styles.loginInput, marginTop: 20 }}
+          style={{ ...styles.loginInput }}
           value={email}
           placeholder='Email address'
-          onChangeText={text => setEmail(text)}
+          onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           style={styles.loginInput}
           value={password}
           placeholder='Password'
-          onChangeText={text => setPassword(text)}
+          onChangeText={(text) => setPassword(text)}
           secureTextEntry
         />
         <Button btnText={'Login'} onSubmit={signin} />
@@ -90,16 +89,14 @@ const styles = StyleSheet.create({
     paddingVertical: '30%',
     backgroundColor: '#fff',
   },
-  loginHeader: {
-    fontSize: 22,
-    marginBottom: 20,
-  },
   loginCard: {
     alignItems: 'center',
     width: width,
+    marginTop: 20,
   },
   loginInput: {
-    width: '65%',
+    width: '80%',
+
     marginBottom: 18,
     padding: 9,
     fontSize: 17,
