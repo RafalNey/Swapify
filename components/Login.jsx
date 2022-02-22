@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -13,6 +13,7 @@ import Button from './Button';
 import Logo from './Home/Logo';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
+import { UserContext } from '../contexts/UserContext';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -20,6 +21,7 @@ const { width, height } = Dimensions.get('screen');
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {isLoggedIn, loggedInUser, setLoggedInUser} = useContext(UserContext)
   const navigation = useNavigation();
 
   const signin = () => {
@@ -27,7 +29,8 @@ const Login = () => {
     // When logged in the menu needs to change to the loggedInMenu
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredentials) => {
-      console.log(userCredentials)
+      setLoggedInUser(userCredentials)
+      console.log(userCredentials.user)
       navigation.navigate('Home')
     setEmail('');
     setPassword('');
