@@ -6,21 +6,22 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 
 const { width, height } = Dimensions.get('screen');
 
 const Menu = ({ navigationHandler, isPressed }) => {
   const menuItems = ['User', 'Messages', 'My List', 'Swaps', 'Legal'];
   const [isLogged, setIsLogged] = useState(false);
+  const { isLoggedIn, loggedInUser, setLoggedInUser } = useContext(UserContext)
 
   const loginHandler = () => {
-    setIsLogged(true);
     navigationHandler('Login');
   };
 
   const logoutHandler = () => {
-    setIsLogged(false);
+    setLoggedInUser({});
     navigationHandler('Home');
   };
 
@@ -61,8 +62,8 @@ const Menu = ({ navigationHandler, isPressed }) => {
         display: isPressed ? 'flex' : 'none',
       }}
     >
-      {isLogged ? loggedInMenu() : loggedOutMenu()}
-      {isLogged && (
+      {isLoggedIn ? loggedInMenu() : loggedOutMenu()}
+      {isLoggedIn && (
         <TouchableOpacity
           style={styles.menuItem}
           key={'Logout'}
