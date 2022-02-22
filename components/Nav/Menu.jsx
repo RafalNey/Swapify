@@ -16,7 +16,7 @@ const { width, height } = Dimensions.get('screen');
 const Menu = ({ navigationHandler, isPressed }) => {
   const menuItems = ['User', 'Messages', 'My List', 'Swaps', 'Legal'];
   const [isLogged, setIsLogged] = useState(false);
-  const { isLoggedIn, loggedInUser, setLoggedInUser } = useContext(UserContext)
+  const { isLoggedIn, loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   const loginHandler = () => {
     navigationHandler('Login');
@@ -52,7 +52,10 @@ const Menu = ({ navigationHandler, isPressed }) => {
           <Text style={styles.menuItemText}>Login</Text>
           <SimpleLineIcons name='arrow-right' size={24} color='#6b6565' />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => navigationHandler('Register')}
+        >
           <Text style={styles.menuItemText}>Register</Text>
           <SimpleLineIcons name='arrow-right' size={24} color='#6b6565' />
         </TouchableOpacity>

@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../components/Home/Home';
 import Login from '../components/Login';
 import Marketplace from '../components/Marketplace';
+import Register from '../components/Register';
 import User from '../components/User/User';
 import UserList from '../components/User/UserList';
 import UserSwaps from '../components/User/UserSwaps';
@@ -29,6 +30,7 @@ const StackNavigator = () => {
         screenOptions={{ headerShown: false, presentation: 'modal' }}
       >
         <Stack.Screen name='Login' component={Login} />
+        <Stack.Screen name='Register' component={Register} />
         {/* Register 
             AddItem
             Leave Comment? 
