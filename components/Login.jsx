@@ -17,39 +17,46 @@ import {
 } from 'firebase/auth';
 import { auth } from '../firebase';
 import { UserContext } from '../contexts/UserContext';
+import { formatErrorMsg, ErrorMsg } from './Error';
 
 const { width, height } = Dimensions.get('screen');
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loginDetails, setLoginDetails] = useState(null)
-  const { isLoggedIn, loggedInUser, setLoggedInUser } = useContext(UserContext);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [loginDetails, setLoginDetails] = useState(null);
+  const { setLoggedInUser } = useContext(UserContext);
   const navigation = useNavigation();
 
   const signin = () => {
-    setLoginDetails({email: email, password: password})
-    
-  }
-  useEffect(() => {
-    let isMounted = true
-    loginDetails && signInWithEmailAndPassword(auth, loginDetails.email, loginDetails.password)
-    .then((userCredentials) => {
-      isMounted && setLoggedInUser(userCredentials);
-        console.log(auth.currentUser);
-        navigation.navigate('Home');
-        setEmail('');
-        setPassword('');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-      return () => {
-        isMounted = false
-      }
-    }, [loginDetails])
+    setLoginDetails({ email: email, password: password });
+  };
 
-  
+  useEffect(() => {
+    let isMounted = true;
+
+    loginDetails &&
+      signInWithEmailAndPassword(
+        auth,
+        loginDetails.email,
+        loginDetails.password
+      )
+        .then((userCredentials) => {
+          isMounted && setLoggedInUser(userCredentials);
+          navigation.navigate('Home');
+          setEmail('');
+          setPassword('');
+          setErrorMsg(null);
+        })
+        .catch((err) => {
+          setErrorMsg(formatErrorMsg(err.message));
+        });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [loginDetails]);
 
   const register = () => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -80,6 +87,7 @@ const Login = () => {
           secureTextEntry
         />
         <Button btnText={'Login'} onSubmit={signin} />
+        {errorMsg && <ErrorMsg errorMsg={errorMsg} />}
       </View>
       <TouchableOpacity onPress={register}>
         <Text style={styles.register}>Register</Text>
@@ -102,6 +110,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: width,
     marginTop: 20,
+    position: 'relative',
   },
   loginInput: {
     width: '80%',
@@ -114,6 +123,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc9c9',
   },
   register: {
+    marginTop: 30,
     fontSize: 17,
     color: '#0000ff',
   },

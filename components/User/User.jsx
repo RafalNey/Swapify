@@ -1,16 +1,10 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  Image,
-  SafeAreaView,
-} from 'react-native';
-import {SvgUri} from 'react-native-svg';
+import { View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
+import { SvgUri } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import { itemImgs } from '../../images/itemImgs';
 import Button from '../Button';
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 
 const { width, height } = Dimensions.get('screen');
 const menuW = width * 0.5;
@@ -18,6 +12,9 @@ const menuH = menuW * 1;
 
 const User = () => {
   const navigation = useNavigation();
+  const { loggedInUser } = useContext(UserContext);
+  console.log(loggedInUser.user.email);
+
   const navigationHandler = (screen) => {
     navigation.navigate(screen);
   };
@@ -26,12 +23,16 @@ const User = () => {
     <SafeAreaView style={styles.userContainer}>
       <View style={styles.userCard}>
         <SvgUri
-         style={styles.userImg}
-         //change 'username' in line below with template literal to reference current user
-        uri={`https://avatars.dicebear.com/api/avataaars/username
-        .svg`}/>
+          style={styles.userImg}
+          uri={
+            !loggedInUser.user.photoURL
+              ? `https://avatars.dicebear.com/api/avataaars/username
+        .svg`
+              : loggedInUser.user.photoURL
+          }
+        />
       </View>
-      <Text style={styles.userName}>John Malkovich</Text>
+      <Text style={styles.userName}>{loggedInUser.user.displayName}</Text>
       <Text style={styles.userLocation}>
         <Ionicons name='md-location-sharp' size={20} color='#6b6565' />
         Manchester, UK
