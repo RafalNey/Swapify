@@ -30,7 +30,7 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredentials) => {
       setLoggedInUser(userCredentials)
-      console.log(userCredentials.user)
+      console.log(auth.currentUser)
       navigation.navigate('Home')
     setEmail('');
     setPassword('');
@@ -49,7 +49,7 @@ const Login = () => {
       navigation.navigate('Home')
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err.message)
     })
   }
 
