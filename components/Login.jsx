@@ -23,15 +23,19 @@ const { width, height } = Dimensions.get('screen');
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginDetails, setLoginDetails] = useState(null)
   const { isLoggedIn, loggedInUser, setLoggedInUser } = useContext(UserContext);
   const navigation = useNavigation();
 
   const signin = () => {
-    // Need to implement User authentication with Firebase?
-    // When logged in the menu needs to change to the loggedInMenu
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredentials) => {
-        setLoggedInUser(userCredentials);
+    setLoginDetails({email: email, password: password})
+    
+  }
+  useEffect(() => {
+    let isMounted = true
+    loginDetails && signInWithEmailAndPassword(auth, loginDetails.email, loginDetails.password)
+    .then((userCredentials) => {
+      isMounted && setLoggedInUser(userCredentials);
         console.log(auth.currentUser);
         navigation.navigate('Home');
         setEmail('');
@@ -40,7 +44,12 @@ const Login = () => {
       .catch((err) => {
         console.log(err);
       });
-  };
+      return () => {
+        isMounted = false
+      }
+    }, [loginDetails])
+
+  
 
   const register = () => {
     createUserWithEmailAndPassword(auth, email, password)
