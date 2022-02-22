@@ -57,11 +57,6 @@ const Register = () => {
         />
       </View>
       <Button btnText={'Submit'} onPress={submitHandler} />
-      {/* Full Name
-      Username
-      Password
-      Re-type password
-      email */}
     </SafeAreaView>
   );
 };

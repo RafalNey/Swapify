@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -17,18 +17,22 @@ import {
 } from 'firebase/auth';
 import { auth } from '../firebase';
 import { UserContext } from '../contexts/UserContext';
+import { formatErrorMsg, ErrorMsg } from './Error.js';
 
 const { width, height } = Dimensions.get('screen');
+
+// .catch((err) => {
+//   setErrorMsg(formatErrorMsg(err.message));
+// });
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { isLoggedIn, loggedInUser, setLoggedInUser } = useContext(UserContext);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const { setLoggedInUser } = useContext(UserContext);
   const navigation = useNavigation();
 
   const signin = () => {
-    // Need to implement User authentication with Firebase?
-    // When logged in the menu needs to change to the loggedInMenu
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         setLoggedInUser(userCredentials);
@@ -38,7 +42,7 @@ const Login = () => {
         setPassword('');
       })
       .catch((err) => {
-        console.log(err);
+        setErrorMsg(formatErrorMsg(err.message));
       });
   };
 
@@ -71,6 +75,7 @@ const Login = () => {
           secureTextEntry
         />
         <Button btnText={'Login'} onSubmit={signin} />
+        {errorMsg && <ErrorMsg errorMsg={errorMsg} />}
       </View>
       <TouchableOpacity onPress={register}>
         <Text style={styles.register}>Register</Text>
@@ -93,6 +98,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: width,
     marginTop: 20,
+    position: 'relative',
   },
   loginInput: {
     width: '80%',
@@ -105,6 +111,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc9c9',
   },
   register: {
+    marginTop: 30,
     fontSize: 17,
     color: '#0000ff',
   },
