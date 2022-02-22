@@ -11,7 +11,7 @@ import { useState } from 'react';
 const { width, height } = Dimensions.get('screen');
 
 const Menu = ({ navigationHandler, isPressed }) => {
-  const menuItems = ['User', 'Messages', 'My List', 'Swaps', 'Legal'];
+  const menuItems = ['User', 'Messages', 'My List', 'Swaps', 'User Agreement', 'Privacy'];
   const [isLogged, setIsLogged] = useState(false);
 
   const loginHandler = () => {
