@@ -29,7 +29,7 @@ const UserAgreement = () => {return (
     <Text style={styles.legalText}>Use of the service is at the user's own risk.</Text>
     <Text style={styles.legalText}>We are not responsible for any items obtained by swapping, for any damage to items during transit or for any misrepresentations by users.</Text>
     <Text style={styles.legalSubheader2}>Swap Stars</Text>
-    <Text style={styles.legalText}>Swap Stars may be awarded by users following a swap. Swap Stars have no monetary value. We reserve the right to terminate or suspend membership if we reasonably believe that any member has violated or acted inconsistently with the relies of the Swap Stars system.</Text>
+    <Text style={styles.legalText}>Swap Stars may be awarded by users following a swap. Swap Stars have no monetary value. We reserve the right to terminate or suspend membership if we reasonably believe that any member has violated or acted inconsistently with the rules of the Swap Stars system.</Text>
     <Text style={styles.legalSubheader2}>Communications</Text>
     <Text style={styles.legalText}>By accepting this User Agreement, you understand that we may send you notifications when other users make offers against listing you have made.</Text>
     <Text style={styles.legalSubheader2}>Modifications</Text>
