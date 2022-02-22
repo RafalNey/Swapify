@@ -45,15 +45,6 @@ const Login = () => {
         />
         <Button btnText={'Login'} onSubmit={onSubmit} />
       </View>
-      <TouchableOpacity>
-        <Text style={styles.register}>Register</Text>
-      </TouchableOpacity>
-      <View>
-        <Text>Full Name</Text>
-        <Text>Password</Text>
-        <Text>E-mail</Text>
-        <Text>Location</Text>
-      </View>
     </SafeAreaView>
   );
 };
