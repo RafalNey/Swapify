@@ -6,7 +6,8 @@ import Register from '../components/Register';
 import User from '../components/User/User';
 import UserList from '../components/User/UserList';
 import UserSwaps from '../components/User/UserSwaps';
-import Legal from '../components/Legal'
+import UserAgreement from '../components/UserAgreement';
+import Privacy from '../components/Privacy'
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,8 @@ const StackNavigator = () => {
         <Stack.Screen name='My List' component={UserList} />
         <Stack.Screen name='Swaps' component={UserSwaps} />
         {/* <Stack.Screen name='Messages' component={Messages}/> */}
-        <Stack.Screen name='Legal' component={Legal}/>
+        <Stack.Screen name='User Agreement' component={UserAgreement}/>
+        <Stack.Screen name='Privacy' component={Privacy}/>
        
       </Stack.Group>
       <Stack.Group

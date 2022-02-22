@@ -14,7 +14,7 @@ import { auth } from '../../firebase';
 const { width, height } = Dimensions.get('screen');
 
 const Menu = ({ navigationHandler, isPressed }) => {
-  const menuItems = ['User', 'Messages', 'My List', 'Swaps', 'Legal'];
+  const menuItems = ['User', 'Messages', 'My List', 'Swaps', 'User Agreement', 'Privacy'];
   const [isLogged, setIsLogged] = useState(false);
   const { isLoggedIn, loggedInUser, setLoggedInUser } = useContext(UserContext);
 
