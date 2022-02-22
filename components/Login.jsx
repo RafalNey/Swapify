@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -17,34 +17,46 @@ import {
 } from 'firebase/auth';
 import { auth } from '../firebase';
 import { UserContext } from '../contexts/UserContext';
-import { formatErrorMsg, ErrorMsg } from './Error.js';
+import { formatErrorMsg, ErrorMsg } from './Error';
 
 const { width, height } = Dimensions.get('screen');
-
-// .catch((err) => {
-//   setErrorMsg(formatErrorMsg(err.message));
-// });
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState(null);
+  const [loginDetails, setLoginDetails] = useState(null);
   const { setLoggedInUser } = useContext(UserContext);
   const navigation = useNavigation();
 
   const signin = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredentials) => {
-        setLoggedInUser(userCredentials);
-        console.log(auth.currentUser);
-        navigation.navigate('Home');
-        setEmail('');
-        setPassword('');
-      })
-      .catch((err) => {
-        setErrorMsg(formatErrorMsg(err.message));
-      });
+    setLoginDetails({ email: email, password: password });
   };
+
+  useEffect(() => {
+    let isMounted = true;
+
+    loginDetails &&
+      signInWithEmailAndPassword(
+        auth,
+        loginDetails.email,
+        loginDetails.password
+      )
+        .then((userCredentials) => {
+          isMounted && setLoggedInUser(userCredentials);
+          navigation.navigate('Home');
+          setEmail('');
+          setPassword('');
+          setErrorMsg(null);
+        })
+        .catch((err) => {
+          setErrorMsg(formatErrorMsg(err.message));
+        });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [loginDetails]);
 
   const register = () => {
     createUserWithEmailAndPassword(auth, email, password)

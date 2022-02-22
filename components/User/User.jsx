@@ -13,7 +13,6 @@ const menuH = menuW * 1;
 const User = () => {
   const navigation = useNavigation();
   const { loggedInUser } = useContext(UserContext);
-  // console.log(Object.keys(loggedInUser));
   console.log(loggedInUser.user.email);
 
   const navigationHandler = (screen) => {
