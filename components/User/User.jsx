@@ -26,7 +26,7 @@ const User = () => {
           style={styles.userImg}
           uri={
             !loggedInUser.user.photoURL
-              ? `https://avatars.dicebear.com/api/avataaars/username
+              ? `https://avatars.dicebear.com/api/avataaars/${loggedInUser.createdAt}
         .svg`
               : loggedInUser.user.photoURL
           }
