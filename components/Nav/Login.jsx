@@ -16,6 +16,7 @@ import { auth } from '../../firebase';
 import { UserContext } from '../../contexts/UserContext';
 import { ErrorMsg } from '../Error';
 import { formatErrorMsg } from '../../utils/formatErrorMsg';
+// import { formatErrorMsg } from '../../utils/formatErrorMsg';
 
 const { width } = Dimensions.get('screen');
 
