@@ -1,16 +1,18 @@
-import { View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, ScrollView, SafeAreaView } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import Button from '../Reusable/Button';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
+import CameraPage from '../CameraPage';
 
 const { width, height } = Dimensions.get('screen');
 const menuW = width * 0.5;
 const menuH = menuW * 1;
 
 const User = () => {
+  const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const navigation = useNavigation();
   const { loggedInUser } = useContext(UserContext);
   console.log(loggedInUser.user.email);
@@ -21,6 +23,7 @@ const User = () => {
 
   return (
     <SafeAreaView style={styles.userContainer}>
+      <ScrollView >
       <View style={styles.userCard}>
         <SvgUri
           style={styles.userImg}
@@ -44,6 +47,8 @@ const User = () => {
         <Button btnText={'My List'} navigationHandler={navigationHandler} />
         <Button btnText={'Swaps'} navigationHandler={navigationHandler} />
       </View>
+      <CameraPage hasCameraPermission={hasCameraPermission} setHasCameraPermission={setHasCameraPermission} />
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -57,6 +62,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   userCard: {
+    width: menuW,
+    height: menuH,
     marginBottom: 20,
     overflow: 'hidden',
     borderRadius: 180,
