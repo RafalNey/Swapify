@@ -2,6 +2,7 @@ import {
   SafeAreaView,
   StyleSheet,
   View,
+  Text,
   TextInput,
   Dimensions,
 } from 'react-native';
@@ -10,6 +11,14 @@ import Logo from '../Home/Logo';
 import Button from '../Reusable/Button';
 
 const { width } = Dimensions.get('screen');
+
+const onTermsOfUsePressed = () => {
+  console.warn("Terms of Use");
+}
+
+const onPrivacyPolicyPressed = () => {
+  console.warn("Privacy Policy");
+}
 
 const Register = () => {
   const [fullName, setFullName] = useState('');
@@ -25,21 +34,15 @@ const Register = () => {
       <Logo />
       <View style={styles.loginCard}>
         <TextInput
-          value={fullName}
-          style={styles.loginInput}
-          placeholder='Enter Full Name'
-          onChangeText={(text) => setFullName(text)}
-        />
-        <TextInput
           value={username}
           style={styles.loginInput}
-          placeholder='Enter Username'
+          placeholder='Username'
           onChangeText={(text) => setUsername(text)}
         />
         <TextInput
           value={email}
           style={styles.loginInput}
-          placeholder='Enter Email'
+          placeholder='E-mail'
           onChangeText={(text) => setEmail(text)}
         />
         <TextInput
@@ -56,6 +59,11 @@ const Register = () => {
         />
       </View>
       <Button btnText={'Submit'} onPress={submitHandler} />
+      <Text style={styles.text}>
+        By registering, you confirm that you accept our{' '} 
+        <Text style={styles.link} onPress={onTermsOfUsePressed}>Terms of Use</Text> and{' '}
+        <Text style={styles.link} onPress={onPrivacyPolicyPressed}>Privacy Policy</Text>
+      </Text>
     </SafeAreaView>
   );
 };
@@ -67,8 +75,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingHorizontal: '5%',
-    paddingVertical: '10%',
-    backgroundColor: '#fff',
+    paddingVertical: '5%',
+    backgroundColor: 'lightgrey',
   },
   loginCard: {
     alignItems: 'center',
@@ -76,12 +84,20 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   loginInput: {
-    width: '80%',
+    width: '72.5%',
     marginBottom: 18,
     padding: 9,
     fontSize: 17,
     borderWidth: 1,
     borderRadius: 5,
+    backgroundColor: 'white',
     borderColor: '#ccc9c9',
   },
+  text: {
+    color: 'grey',
+    marginVertical: 10,
+  },
+  link: {
+    color: 'red',
+},
 });

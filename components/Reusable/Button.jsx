@@ -18,15 +18,22 @@ export default Button;
 
 const styles = StyleSheet.create({
   btn: {
+    width: '80%',
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginBottom: '3%',
-    backgroundColor: '#353637',
+    backgroundColor: '#3871f3',
     elevation: 2,
     borderRadius: 5,
+    justifyContent: 'center',
+    alignContent: 'center',
   },
   btnText: {
     fontSize: 16,
+    paddingVertical: 7,
+    textAlign: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
     color: '#fff',
   },
 });

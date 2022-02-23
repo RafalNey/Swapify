@@ -90,7 +90,7 @@ const Login = () => {
         {errorMsg && <ErrorMsg errorMsg={errorMsg} />}
       </View>
       <TouchableOpacity onPress={register}>
-        <Text style={styles.register}>Register</Text>
+        <Text style={styles.register}>Don't have an account? Register</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
   },
   loginInput: {
     width: '80%',
-
     marginBottom: 18,
     padding: 9,
     fontSize: 17,
