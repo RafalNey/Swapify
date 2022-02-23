@@ -11,15 +11,13 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Button from '../Reusable/Button';
 import Logo from '../Home/Logo';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { UserContext } from '../../contexts/UserContext';
-import { formatErrorMsg, ErrorMsg } from '../Error';
+import { ErrorMsg } from '../Error';
+import { formatErrorMsg } from '../../utils/formatErrorMsg';
 
-const { width, height } = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -67,7 +65,7 @@ const Login = () => {
     //   .catch((err) => {
     //     console.log(err.message);
     //   });
-    navigation.navigate('Register')
+    navigation.navigate('Register');
   };
 
   return (

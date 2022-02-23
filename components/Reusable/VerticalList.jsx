@@ -12,7 +12,7 @@ import { descriptionFormatter } from '../../utils/descriptionFormatter';
 import { Fontisto } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('screen');
-const imageW = width * 0.4;
+const imageW = width * 0.44;
 const imageH = imageW * 1.1;
 
 const VerticalList = ({ data }) => {
@@ -61,20 +61,20 @@ const styles = StyleSheet.create({
   itemImg: {
     width: imageW,
     height: imageH,
+    resizeMode: 'cover',
   },
   itemDetails: {
     flex: 1,
+    justifyContent: 'space-between',
     padding: '3%',
   },
   itemHeader: {
     textAlign: 'center',
-    marginBottom: 15,
     fontSize: 17,
   },
   itemFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 'auto',
   },
 });
