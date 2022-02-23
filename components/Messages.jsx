@@ -51,10 +51,10 @@ export default function Messages({navigation}) {
           user: doc.data().user
         }))
       );
-    },[]);
+    });
 
 return unsubscribe;
-  });
+  },[]);
 
 
 const onSend = useCallback((messages = []) => {
