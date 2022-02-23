@@ -2,6 +2,7 @@ import {
   SafeAreaView,
   StyleSheet,
   View,
+  Text,
   TextInput,
   Dimensions,
   TouchableOpacity,
@@ -11,6 +12,14 @@ import Logo from './Home/Logo';
 import Button from './Button';
 
 const { width } = Dimensions.get('screen');
+
+const onTermsOfUsePressed = () => {
+  console.warn("Terms of Use");
+}
+
+const onPrivacyPolicyPressed = () => {
+  console.warn("Privacy Policy");
+}
 
 const Register = () => {
   const [fullName, setFullName] = useState('');
@@ -51,6 +60,11 @@ const Register = () => {
         />
       </View>
       <Button btnText={'Submit'} onPress={submitHandler} />
+      <Text style={styles.text}>
+        By registering, you confirm that you accept our{' '} 
+        <Text style={styles.link} onPress={onTermsOfUsePressed}>Terms of Use</Text> and{' '}
+        <Text style={styles.link} onPress={onPrivacyPolicyPressed}>Privacy Policy</Text>
+      </Text>
     </SafeAreaView>
   );
 };
@@ -80,4 +94,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderColor: '#ccc9c9',
   },
+  text: {
+    color: 'grey',
+    marginVertical: 10,
+  },
+  link: {
+    color: 'red',
+},
 });
