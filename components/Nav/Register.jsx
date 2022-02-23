@@ -7,6 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import * as ImagePicker from 'expo-image-picker'
 import { useState, useEffect } from 'react';
 import Logo from '../Home/Logo';
 import Button from '../Reusable/Button';
@@ -32,8 +33,23 @@ const Register = () => {
   const [password2, setPassword2] = useState('');
   const [errorMsg, setErrorMsg] = useState(null);
   const [signupDetails, setSignupDetails] = useState(null)
+  const [image, setImage] = useState(null)
 
   const navigation = useNavigation()
+
+  const pickImage = () => {
+      ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    })
+    .then((result) => {
+      console.log(result)
+    })
+    
+    
+  }
 
   const submitHandler = () => {
 
@@ -101,7 +117,7 @@ const Register = () => {
           onChangeText={(text) => setPassword2(text)}
         />
 
-        
+        <Button btnText={"Pick a display photo"} onSubmit={pickImage} />
       </View>
       <Button btnText={'Submit'} onSubmit={submitHandler} />
       <Text style={styles.text}>
