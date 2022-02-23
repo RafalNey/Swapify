@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { Ionicons, FontAwesome, Fontisto } from '@expo/vector-icons';
 import Button from '../Reusable/Button';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
@@ -14,10 +14,13 @@ const User = () => {
   const navigation = useNavigation();
   const { loggedInUser } = useContext(UserContext);
 
+  const openCamera = () => {
+    navigationHandler('Camera');
+  };
+
   const navigationHandler = (screen) => {
     navigation.navigate(screen);
   };
-  console.log(loggedInUser.user)
 
   return (
     <SafeAreaView style={styles.userContainer}>
@@ -26,11 +29,19 @@ const User = () => {
           style={styles.userImg}
           uri={
             !loggedInUser.user.photoURL
-            //createdAt could be changed to displayName - assume this will correspond to username once registration process is finished? Currently 'undefined'.
-              ? `https://avatars.dicebear.com/api/avataaars/${loggedInUser.createdAt}
+              ? //createdAt could be changed to displayName - assume this will correspond to username once registration process is finished? Currently 'undefined'.
+                `https://avatars.dicebear.com/api/avataaars/${loggedInUser.createdAt}
         .svg`
               : loggedInUser.user.photoURL
           }
+        />
+
+        <Fontisto
+          style={styles.cameraIcon}
+          name='camera'
+          size={35}
+          color='#6b6565'
+          onPress={openCamera}
         />
       </View>
       <Text style={styles.userName}>{loggedInUser.user.displayName}</Text>
@@ -38,9 +49,7 @@ const User = () => {
         <Ionicons name='md-location-sharp' size={20} color='#6b6565' />
         Manchester, UK
       </Text>
-      <FontAwesome name='star-o' size={24} color='black' />
-      {/* <FontAwesome name='star-half-o' size={24} color='black' />
-      <FontAwesome name='star' size={24} color='black' /> */}
+      <FontAwesome name='star-o' size={24} color='#000' />
       <View style={styles.showBtnsContainer}>
         <Button btnText={'My List'} navigationHandler={navigationHandler} />
         <Button btnText={'Swaps'} navigationHandler={navigationHandler} />
@@ -58,16 +67,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   userCard: {
+    position: 'relative',
+    width: menuW + 31,
+    height: menuH + 31,
     marginBottom: 20,
-    overflow: 'hidden',
     borderRadius: 180,
     elevation: 5,
     borderWidth: 2,
     borderColor: 'rgba(0, 0, 0, .4)',
+    backgroundColor: '#fff',
+  },
+  cameraIcon: {
+    position: 'absolute',
+    right: 12,
+    zIndex: 2,
   },
   userImg: {
     width: menuW,
     height: menuH,
+    alignSelf: 'center',
     borderRadius: 180,
   },
   userName: {
