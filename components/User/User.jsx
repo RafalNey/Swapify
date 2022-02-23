@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import Button from '../Button';
+import Button from '../Reusable/Button';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 

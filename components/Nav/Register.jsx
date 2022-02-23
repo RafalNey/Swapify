@@ -4,11 +4,10 @@ import {
   View,
   TextInput,
   Dimensions,
-  TouchableOpacity,
 } from 'react-native';
-import React, { useState } from 'react';
-import Logo from './Home/Logo';
-import Button from './Button';
+import { useState } from 'react';
+import Logo from '../Home/Logo';
+import Button from '../Reusable/Button';
 
 const { width } = Dimensions.get('screen');
 

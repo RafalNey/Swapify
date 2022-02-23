@@ -1,13 +1,13 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../components/Home/Home';
-import Login from '../components/Login';
-import Marketplace from '../components/Marketplace';
-import Register from '../components/Register';
+import Login from '../components/Nav/Login';
+import Register from '../components/Nav/Register';
 import User from '../components/User/User';
 import UserList from '../components/User/UserList';
 import UserSwaps from '../components/User/UserSwaps';
-import UserAgreement from '../components/UserAgreement';
-import Privacy from '../components/Privacy'
+import UserAgreement from '../components/Nav/UserAgreement';
+import Marketplace from '../components/Marketplace';
+import Privacy from '../components/Nav/Privacy';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,9 +24,8 @@ const StackNavigator = () => {
         <Stack.Screen name='My List' component={UserList} />
         <Stack.Screen name='Swaps' component={UserSwaps} />
         {/* <Stack.Screen name='Messages' component={Messages}/> */}
-        <Stack.Screen name='User Agreement' component={UserAgreement}/>
-        <Stack.Screen name='Privacy' component={Privacy}/>
-       
+        <Stack.Screen name='User Agreement' component={UserAgreement} />
+        <Stack.Screen name='Privacy' component={Privacy} />
       </Stack.Group>
       <Stack.Group
         screenOptions={{ headerShown: false, presentation: 'modal' }}
