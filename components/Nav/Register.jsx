@@ -37,17 +37,16 @@ const Register = () => {
 
   const submitHandler = () => {
 
-    
-      setSignupDetails({
+    if(password2 !== password) {
+      console.log('Passwords do not match')
+    } else {
+       setSignupDetails({
       email: email,
       username: username,
-      password: password
+      password: password,
     }) 
     navigation.navigate('Login')
-    
-     
-    
-    
+    }
     // createUserWithEmailAndPassword(auth, email, password)
     // .then((userCredential) => {
     //   updateProfile(auth.currentUser, {
@@ -101,6 +100,8 @@ const Register = () => {
           placeholder='Re-enter Password'
           onChangeText={(text) => setPassword2(text)}
         />
+
+        
       </View>
       <Button btnText={'Submit'} onSubmit={submitHandler} />
       <Text style={styles.text}>
