@@ -26,6 +26,7 @@ const User = () => {
           style={styles.userImg}
           uri={
             !loggedInUser.user.photoURL
+            //createdAt could be changed to displayName - assume this will correspond to username once registration process is finished? Currently 'undefined'.
               ? `https://avatars.dicebear.com/api/avataaars/${loggedInUser.createdAt}
         .svg`
               : loggedInUser.user.photoURL
