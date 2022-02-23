@@ -13,11 +13,11 @@ const menuH = menuW * 1;
 const User = () => {
   const navigation = useNavigation();
   const { loggedInUser } = useContext(UserContext);
-  console.log(loggedInUser.user.email);
 
   const navigationHandler = (screen) => {
     navigation.navigate(screen);
   };
+  console.log(loggedInUser.user)
 
   return (
     <SafeAreaView style={styles.userContainer}>
