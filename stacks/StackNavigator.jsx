@@ -11,6 +11,7 @@ import Marketplace from '../components/Marketplace';
 import Privacy from '../components/Nav/Privacy';
 import AddItem from '../components/User/AddItem';
 
+
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
