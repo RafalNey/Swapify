@@ -1,13 +1,12 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Button from '../Reusable/Button';
 import VerticalList from '../Reusable/VerticalList';
-import { MarketplaceContext } from '../../contexts/MarketplaceContext';
+import { itemImgs } from '../../images/itemImgs';
 
 const UserList = () => {
   const navigation = useNavigation();
-  const { marketplace } = useContext(MarketplaceContext);
+
   const navigationHandler = (screen) => {
     navigation.navigate(screen);
   };
@@ -16,7 +15,7 @@ const UserList = () => {
     <View style={styles.userListContainer}>
       <Text style={styles.userListHeader}>My List</Text>
       <Button btnText={'Add Item'} navigationHandler={navigationHandler} />
-      <VerticalList data={marketplace} />
+      <VerticalList data={itemImgs} />
     </View>
   );
 };

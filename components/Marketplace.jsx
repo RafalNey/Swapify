@@ -1,13 +1,12 @@
 import { StyleSheet, Text, SafeAreaView, View } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Fontisto } from '@expo/vector-icons';
-import { MarketplaceContext } from '../contexts/MarketplaceContext';
+import { itemImgs } from '../images/itemImgs';
 import VerticalList from './Reusable/VerticalList';
 
 const Marketplace = () => {
   const [selectedCategory, setSelectedCategory] = useState();
-  const { marketplace } = useContext(MarketplaceContext);
 
   const onValueChangeHandler = (category) => {
     setSelectedCategory(category);
@@ -36,7 +35,7 @@ const Marketplace = () => {
           Clothing
         </Picker.Item>
       </Picker>
-      <VerticalList data={marketplace} />
+      <VerticalList data={itemImgs} />
     </SafeAreaView>
   );
 };

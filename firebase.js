@@ -24,6 +24,4 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 
-const db = getFirestore();
-export const itemsRef = collection(db, 'items');
 export const database = getFirestore(app);
