@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
+import { dateFormatter } from '../../utils/dateFormatter';
+import { descriptionFormatter } from '../../utils/descriptionFormatter';
 import { Fontisto } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('screen');
@@ -14,6 +16,7 @@ const imageW = width * 0.4;
 const imageH = imageW * 1.1;
 
 const VerticalList = ({ data }) => {
+  console.log(data);
   return (
     <FlatList
       data={data}
@@ -26,12 +29,12 @@ const VerticalList = ({ data }) => {
       renderItem={({ item }) => {
         return (
           <View style={styles.itemCard}>
-            <Image source={{ uri: item }} style={styles.itemImg} />
+            <Image source={{ uri: item.img }} style={styles.itemImg} />
             <View style={styles.itemDetails}>
-              <Text style={styles.itemHeader}>Item Title</Text>
-              <Text>Description</Text>
+              <Text style={styles.itemHeader}>{item.title}</Text>
+              <Text>{descriptionFormatter(item.description)}</Text>
               <View style={styles.itemFooter}>
-                <Text>Posted on</Text>
+                <Text>{dateFormatter(item.posted_at.seconds)}</Text>
                 <TouchableOpacity>
                   <Fontisto name='trash' size={24} color='#6b6565' />
                 </TouchableOpacity>
@@ -61,10 +64,10 @@ const styles = StyleSheet.create({
   },
   itemDetails: {
     flex: 1,
-    padding: '2%',
+    padding: '3%',
   },
   itemHeader: {
-    alignSelf: 'center',
+    textAlign: 'center',
     marginBottom: 15,
     fontSize: 17,
   },
