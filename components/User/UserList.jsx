@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
-import Button from '../Button';
-import VerticalList from '../VerticalList';
+import Button from '../Reusable/Button';
+import VerticalList from '../Reusable/VerticalList';
 import { itemImgs } from '../../images/itemImgs';
 
 const UserList = () => {

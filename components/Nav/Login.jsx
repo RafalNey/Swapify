@@ -9,15 +9,15 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Button from './Button';
-import Logo from './Home/Logo';
+import Button from '../Reusable/Button';
+import Logo from '../Home/Logo';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { auth } from '../firebase';
-import { UserContext } from '../contexts/UserContext';
-import { formatErrorMsg, ErrorMsg } from './Error';
+import { auth } from '../../firebase';
+import { UserContext } from '../../contexts/UserContext';
+import { formatErrorMsg, ErrorMsg } from '../Error';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -59,14 +59,15 @@ const Login = () => {
   }, [loginDetails]);
 
   const register = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredentials) => {
-        console.log(userCredentials);
-        navigation.navigate('Home');
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    // createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredentials) => {
+    //     console.log(userCredentials);
+    //     navigation.navigate('Home');
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
+    navigation.navigate('Register')
   };
 
   return (

@@ -5,11 +5,14 @@ import {
   Text,
   TextInput,
   Dimensions,
-  TouchableOpacity,
 } from 'react-native';
-import React, { useState } from 'react';
-import Logo from './Home/Logo';
-import Button from './Button';
+import { useNavigation } from '@react-navigation/native';
+import { useState, useEffect } from 'react';
+import Logo from '../Home/Logo';
+import Button from '../Reusable/Button';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth } from '../../firebase';
+import { formatErrorMsg } from '../Error';
 
 const { width } = Dimensions.get('screen');
 
@@ -27,9 +30,49 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [signupDetails, setSignupDetails] = useState(null)
 
-  const submitHandler = () => {};
+  const navigation = useNavigation()
 
+  const submitHandler = () => {
+
+    
+      setSignupDetails({
+      email: email,
+      username: username,
+      password: password
+    }) 
+    navigation.navigate('Login')
+    
+     
+    
+    
+    // createUserWithEmailAndPassword(auth, email, password)
+    // .then((userCredential) => {
+    //   updateProfile(auth.currentUser, {
+    //     displayName: username
+    //   })
+    //   console.log(auth.currentUser)
+    // })
+    // .catch((err) => {
+    //   console.log(err)
+    // })
+  };
+  useEffect(() => {
+    signupDetails &&
+    createUserWithEmailAndPassword(auth, signupDetails.email, signupDetails.password)
+    .then((userCredential) => {
+      updateProfile(auth.currentUser, {
+        displayName: signupDetails.username
+      })
+      console.log(auth.currentUser)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, [signupDetails])
+  
   return (
     <SafeAreaView style={styles.registerContainer}>
       <Logo />
@@ -59,7 +102,7 @@ const Register = () => {
           onChangeText={(text) => setPassword2(text)}
         />
       </View>
-      <Button btnText={'Submit'} onPress={submitHandler} />
+      <Button btnText={'Submit'} onSubmit={submitHandler} />
       <Text style={styles.text}>
         By registering, you confirm that you accept our{' '} 
         <Text style={styles.link} onPress={onTermsOfUsePressed}>Terms of Use</Text> and{' '}
