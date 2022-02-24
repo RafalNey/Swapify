@@ -1,8 +1,14 @@
-import { StyleSheet, AppState, TouchableOpacity, View, Image } from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Image,
+  AppState,
+} from 'react-native';
 import { Camera } from 'expo-camera';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { MaterialIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
-import { useNavigation, useIsFocused } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import * as MediaLibrary from 'expo-media-library';
 import finger from '../images/finger.png';
 // import { updateProfile } from 'firebase/auth';
@@ -11,13 +17,34 @@ import finger from '../images/finger.png';
 const CameraPage = () => {
   const navigation = useNavigation();
   const [hasPermission, setHasPermission] = useState(null);
+  const [aState, setAppState] = useState(AppState.currentState);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const [ratio, setRatio] = useState('4:3');
   const [userPhoto, setUserPhoto] = useState(null);
   let camera;
 
-  const appState = useRef(AppState.currentState);
+  useEffect(() => {
+    let isMounted = true;
+    const appStateListener = AppState.addEventListener(
+      'change',
+      (nextAppState) => {
+        isMounted && setAppState(nextAppState);
+      }
+    );
+    return () => {
+      appStateListener?.remove();
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      const { status2 } = await MediaLibrary.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
 
   const takePicture = async () => {
     if (camera) {
@@ -27,14 +54,6 @@ const CameraPage = () => {
       // userPhoto && updateProfile(auth.currentUser, { photoURL: userPhoto });
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      const { status2 } = await MediaLibrary.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
 
   const closeCamera = () => {
     navigation.navigate('User', { userPhoto });
@@ -57,11 +76,9 @@ const CameraPage = () => {
     );
   };
 
-  if (hasPermission === false) {
-    return <View />;
-  }
-
-  return (
+  return aState === 'background' || hasPermission === false ? (
+    <View />
+  ) : (
     <View style={styles.cameraContainer}>
       <Camera
         style={styles.camera}
@@ -101,7 +118,7 @@ const CameraPage = () => {
               size={80}
               color='rgba(255,255,255, 0.65)'
             />
-            <Image source={finger} style={styles.fingerBtn}/>
+            <Image source={finger} style={styles.fingerBtn} />
           </TouchableOpacity>
           <TouchableOpacity onPress={flipCamera}>
             <MaterialIcons
@@ -130,7 +147,7 @@ const styles = StyleSheet.create({
   },
   cameraTopBtns: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     marginTop: '3%',
   },
   cameraBottomBtns: {
@@ -152,10 +169,8 @@ const styles = StyleSheet.create({
     height: 60,
     position: 'absolute',
     top: 20,
-    bottom: 0,
     left: 20,
-    right: 0,
-},
+  },
   cameraBtn: {
     backfaceVisibility: 'hidden',
     color: 'rgba(255, 255, 255, 0.65)',
