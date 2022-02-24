@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import { MaterialIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import * as MediaLibrary from 'expo-media-library';
-import { updateProfile } from 'firebase/auth';
-import { auth } from '../firebase';
+// import { updateProfile } from 'firebase/auth';
+// import { auth } from '../firebase';
 
 const CameraPage = () => {
   const navigation = useNavigation();
@@ -14,7 +14,7 @@ const CameraPage = () => {
   const [userPhoto, setUserPhoto] = useState(null);
   let camera;
 
-  console.log(auth.currentUser);
+  // console.log(auth.currentUser);
 
   const takePicture = async () => {
     if (camera) {
