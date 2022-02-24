@@ -15,23 +15,15 @@ const { width, height } = Dimensions.get('screen');
 const imageW = width * 0.5;
 const imageH = imageW * 1.1;
 
-
-import {  
-    onSnapshot
-  } from 'firebase/firestore';
-import collectionRef from '../../firebase';
-
-
 const ItemsSlider = ({ category }) => {
+
   const [ items, setItems ] = useState([]); 
   useEffect(() => {
-    console.log(category, 'cat in slider')
-    getItems(category).then((itemsFromDb) =>{
-      console.log(itemsFromDb)
+    getItems(category).then((itemsFromDb) => {
       setItems(itemsFromDb);
     })
 }, []);
-  console.log(items, '<<items')
+
   return (
     <View style={styles.listContainer}>
       <Text style={styles.listHeader}>Recently added</Text>
@@ -44,7 +36,6 @@ const ItemsSlider = ({ category }) => {
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => {
-          console.log(item, '<< item in items slider')
           return (
             <View style={styles.itemCard}>
               <Image source={{uri: item.img}} style={styles.itemImg} />

@@ -4,17 +4,10 @@ import { useState } from 'react';
 import { Fontisto } from '@expo/vector-icons';
 import VerticalList from './Reusable/VerticalList';
 
-
-
 const Marketplace = () => {
 
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCategory, setSelectedCategory] = useState('');
 
-  const onValueChangeHandler = (category) => {
-    setSelectedCategory(category);
-    console.log(category);
-  };
- 
   return (
     <SafeAreaView style={styles.marketplaceContainer}>
       <View style={styles.marketplaceHeaderCard}>
@@ -25,21 +18,51 @@ const Marketplace = () => {
       </View>
       <Picker
         selectedValue={selectedCategory}
-        onValueChange={(itemValue) => onValueChangeHandler(itemValue)}
+        onValueChange={(itemValue) => setSelectedCategory(itemValue)}
         style={styles.marketplaceCategory}
       >
+
         <Picker.Item label='All' value='All'>
           All
         </Picker.Item>
-        <Picker.Item label='Electronics' value='Electronics'>
+        <Picker.Item label='Antiques and Collectables' value='antiques_and_collectables'>
+        Antiques and Collectables
+        </Picker.Item>
+        <Picker.Item label='Books, films and comics' value='books_films_comics'>
+          Books, films and comics
+        </Picker.Item>
+        <Picker.Item label='Business and office' value='business_and_office'>
+          Business and office
+        </Picker.Item>
+        <Picker.Item label='Electronics' value='electronics'>
           Electronics
         </Picker.Item>
-        <Picker.Item label='Clothing' value='Clothing'>
-          Clothing
+        <Picker.Item label='Fashion' value='fashion'>
+          Fashion
+        </Picker.Item>
+        <Picker.Item label='Home and Garden' value='home_and_garden'>
+          Home and Garden
+        </Picker.Item>
+        <Picker.Item label='Jewellery and Watches' value='jewellery_and_watches'>
+          Jewellery and Watches
+        </Picker.Item>
+        <Picker.Item label='Motors' value='motors'>
+          Motors
+        </Picker.Item>
+        <Picker.Item label='Musical Instruments' value='musical_instruments'>
+        Musical Instruments
+        </Picker.Item>
+        <Picker.Item label='Pets' value='pets'>
+          Pets
+        </Picker.Item>
+        <Picker.Item label='Sporting Goods' value='sporting_goods'>
+        Sporting Goods
+        </Picker.Item>
+        <Picker.Item label='Toys and Games' value='toys_and_games'>
+        Toys and Games
         </Picker.Item>
       </Picker>
-  
-      <VerticalList class={'all-items'} category={'All'}/>
+      <VerticalList category={selectedCategory}/>
     </SafeAreaView>
   );
 };

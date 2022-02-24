@@ -1,7 +1,6 @@
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import Logo from './Logo';
 import ItemsSlider from './ItemsSlider';
-import { itemImgs } from '../../images/itemImgs';
 
 // need some kind of isLoading state as items not 
 
