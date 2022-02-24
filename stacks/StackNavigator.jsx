@@ -10,7 +10,7 @@ import UserAgreement from '../components/Nav/UserAgreement';
 import Marketplace from '../components/Marketplace';
 import Privacy from '../components/Nav/Privacy';
 import AddItem from '../components/User/AddItem';
-
+import CameraPage from '../components/CameraPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +36,7 @@ const StackNavigator = () => {
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='Register' component={Register} />
         <Stack.Screen name='Add Item' component={AddItem} />
+        <Stack.Screen name='Camera' component={CameraPage} />
         {/* AddItem, LeaveComment?  */}
       </Stack.Group>
     </Stack.Navigator>

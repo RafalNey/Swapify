@@ -7,7 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import * as ImagePicker from 'expo-image-picker'
+import * as ImagePicker from 'expo-image-picker';
 import { useState, useEffect } from 'react';
 import Logo from '../Home/Logo';
 import Button from '../Reusable/Button';
@@ -18,50 +18,45 @@ import { formatErrorMsg } from '../Error';
 const { width } = Dimensions.get('screen');
 
 const onTermsOfUsePressed = () => {
-  console.warn("Terms of Use");
-}
+  console.warn('Terms of Use');
+};
 
 const onPrivacyPolicyPressed = () => {
-  console.warn("Privacy Policy");
-}
+  console.warn('Privacy Policy');
+};
 
 const Register = () => {
+  const navigation = useNavigation();
   const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [errorMsg, setErrorMsg] = useState(null);
-  const [signupDetails, setSignupDetails] = useState(null)
-  const [image, setImage] = useState(null)
-
-  const navigation = useNavigation()
+  const [signupDetails, setSignupDetails] = useState(null);
+  const [image, setImage] = useState(null);
 
   const pickImage = () => {
-      ImagePicker.launchImageLibraryAsync({
+    ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
-    })
-    .then((result) => {
-      console.log(result)
-    })
-    
-    
-  }
+    }).then((result) => {
+      console.log(result);
+    });
+  };
 
   const submitHandler = () => {
-
-    if(password2 !== password) {
-      console.log('Passwords do not match')
+    if (password2 !== password) {
+      console.log('Passwords do not match');
     } else {
-       setSignupDetails({
-      email: email,
-      username: username,
-      password: password,
-    }) 
-    navigation.navigate('Login')
+      setSignupDetails({
+        email: email,
+        username: username,
+        password: password,
+      });
+      navigation.navigate('Login');
     }
     // createUserWithEmailAndPassword(auth, email, password)
     // .then((userCredential) => {
@@ -74,20 +69,25 @@ const Register = () => {
     //   console.log(err)
     // })
   };
+
   useEffect(() => {
     signupDetails &&
-    createUserWithEmailAndPassword(auth, signupDetails.email, signupDetails.password)
-    .then((userCredential) => {
-      updateProfile(auth.currentUser, {
-        displayName: signupDetails.username
-      })
-      console.log(auth.currentUser)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }, [signupDetails])
-  
+      createUserWithEmailAndPassword(
+        auth,
+        signupDetails.email,
+        signupDetails.password
+      )
+        .then((userCredential) => {
+          updateProfile(auth.currentUser, {
+            displayName: signupDetails.username,
+          });
+          console.log(auth.currentUser);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }, [signupDetails]);
+
   return (
     <SafeAreaView style={styles.registerContainer}>
       <Logo />
@@ -117,13 +117,18 @@ const Register = () => {
           onChangeText={(text) => setPassword2(text)}
         />
 
-        <Button btnText={"Pick a display photo"} onSubmit={pickImage} />
+        <Button btnText={'Pick a display photo'} onSubmit={pickImage} />
       </View>
       <Button btnText={'Submit'} onSubmit={submitHandler} />
       <Text style={styles.text}>
-        By registering, you confirm that you accept our{' '} 
-        <Text style={styles.link} onPress={onTermsOfUsePressed}>Terms of Use</Text> and{' '}
-        <Text style={styles.link} onPress={onPrivacyPolicyPressed}>Privacy Policy</Text>
+        By registering, you confirm that you accept our
+        <Text style={styles.link} onPress={onTermsOfUsePressed}>
+          Terms of Use
+        </Text>
+        and
+        <Text style={styles.link} onPress={onPrivacyPolicyPressed}>
+          Privacy Policy
+        </Text>
       </Text>
     </SafeAreaView>
   );
@@ -160,5 +165,5 @@ const styles = StyleSheet.create({
   },
   link: {
     color: 'red',
-},
+  },
 });
