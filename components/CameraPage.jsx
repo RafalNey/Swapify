@@ -1,8 +1,8 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, AppState, TouchableOpacity, View } from 'react-native';
 import { Camera } from 'expo-camera';
 import { useState, useEffect, useRef } from 'react';
 import { MaterialIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import * as MediaLibrary from 'expo-media-library';
 // import { updateProfile } from 'firebase/auth';
 // import { auth } from '../firebase';
@@ -11,10 +11,12 @@ const CameraPage = () => {
   const navigation = useNavigation();
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
+  const [ratio, setRatio] = useState('4:3');
   const [userPhoto, setUserPhoto] = useState(null);
   let camera;
 
-  // console.log(auth.currentUser);
+  const appState = useRef(AppState.currentState);
 
   const takePicture = async () => {
     if (camera) {
@@ -43,6 +45,15 @@ const CameraPage = () => {
         ? Camera.Constants.Type.front
         : Camera.Constants.Type.back
     );
+    setRatio(type === Camera.Constants.Type.back ? '4:3' : '1:1');
+  };
+
+  const openFlash = () => {
+    setFlash(
+      flash === Camera.Constants.FlashMode.off
+        ? Camera.Constants.FlashMode.torch
+        : Camera.Constants.FlashMode.off
+    );
   };
 
   if (hasPermission === false) {
@@ -52,12 +63,30 @@ const CameraPage = () => {
   return (
     <View style={styles.cameraContainer}>
       <Camera
-        autoFocus
         style={styles.camera}
         type={type}
+        flashMode={flash}
+        ratio={ratio}
         ref={(ref) => (camera = ref)}
       >
-        <View style={styles.cameraBtnsContainer}>
+        <View style={styles.cameraTopBtns}>
+          <TouchableOpacity onPress={openFlash}>
+            {flash ? (
+              <Ionicons
+                name='md-flash-sharp'
+                size={40}
+                color='rgba(255,255,255, 0.65)'
+              />
+            ) : (
+              <Ionicons
+                name='md-flash-off-sharp'
+                size={40}
+                color='rgba(255,255,255, 0.65)'
+              />
+            )}
+          </TouchableOpacity>
+        </View>
+        <View style={styles.cameraBottomBtns}>
           <TouchableOpacity onPress={closeCamera}>
             <Ionicons
               name='arrow-back-circle-outline'
@@ -97,7 +126,12 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
-  cameraBtnsContainer: {
+  cameraTopBtns: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: '3%',
+  },
+  cameraBottomBtns: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
