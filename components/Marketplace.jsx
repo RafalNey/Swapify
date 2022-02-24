@@ -35,7 +35,7 @@ const Marketplace = () => {
           Clothing
         </Picker.Item>
       </Picker>
-      <VerticalList data={itemImgs} />
+      <VerticalList class={'all-items'} data={itemImgs} />
     </SafeAreaView>
   );
 };

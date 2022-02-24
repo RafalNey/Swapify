@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import Button from './Button';
 import Logo from './Home/Logo';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+// import { auth } from '../src/firebase';
 
 const { width, height } = Dimensions.get('screen');
 

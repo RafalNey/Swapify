@@ -13,22 +13,22 @@ const { width, height } = Dimensions.get('screen');
 const imageW = width * 0.5;
 const imageH = imageW * 1.1;
 
-const ItemsSlider = ({ data }) => {
+const ItemsSlider = ({ items }) => {
   return (
     <View style={styles.listContainer}>
       <Text style={styles.listHeader}>Recently added</Text>
       <FlatList
-        data={data}
+        items={items}
         pagingEnabled
         horizontal
         decelerationRate={0}
         snapToInterval={imageW + 20}
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, index) => index.toString()}
-        renderItem={({ item }) => {
+        renderItem={( items ) => {
           return (
             <View style={styles.itemCard}>
-              <Image source={{ uri: item }} style={styles.itemImg} />
+              <Image source={{body: items}} style={styles.itemImg} />
               <View style={styles.itemDescriptionContainer}>
                 <Text style={styles.itemTitle}>Image</Text>
               </View>
