@@ -17,62 +17,50 @@ import { formatErrorMsg } from '../Error';
 const { width } = Dimensions.get('screen');
 
 const onTermsOfUsePressed = () => {
-  console.warn("Terms of Use");
-}
+  console.warn('Terms of Use');
+};
 
 const onPrivacyPolicyPressed = () => {
-  console.warn("Privacy Policy");
-}
+  console.warn('Privacy Policy');
+};
 
 const Register = () => {
+  const navigation = useNavigation();
   const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [errorMsg, setErrorMsg] = useState(null);
-  const [signupDetails, setSignupDetails] = useState(null)
-
-  const navigation = useNavigation()
+  const [signupDetails, setSignupDetails] = useState(null);
 
   const submitHandler = () => {
-
-    
-      setSignupDetails({
+    setSignupDetails({
       email: email,
       username: username,
-      password: password
-    }) 
-    navigation.navigate('Login')
-    
-     
-    
-    
-    // createUserWithEmailAndPassword(auth, email, password)
-    // .then((userCredential) => {
-    //   updateProfile(auth.currentUser, {
-    //     displayName: username
-    //   })
-    //   console.log(auth.currentUser)
-    // })
-    // .catch((err) => {
-    //   console.log(err)
-    // })
+      password: password,
+    });
+    navigation.navigate('Login');
   };
+
   useEffect(() => {
     signupDetails &&
-    createUserWithEmailAndPassword(auth, signupDetails.email, signupDetails.password)
-    .then((userCredential) => {
-      updateProfile(auth.currentUser, {
-        displayName: signupDetails.username
-      })
-      console.log(auth.currentUser)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }, [signupDetails])
-  
+      createUserWithEmailAndPassword(
+        auth,
+        signupDetails.email,
+        signupDetails.password
+      )
+        .then((userCredential) => {
+          updateProfile(auth.currentUser, {
+            displayName: signupDetails.username,
+          });
+          console.log(auth.currentUser);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }, [signupDetails]);
+
   return (
     <SafeAreaView style={styles.registerContainer}>
       <Logo />
@@ -104,9 +92,14 @@ const Register = () => {
       </View>
       <Button btnText={'Submit'} onSubmit={submitHandler} />
       <Text style={styles.text}>
-        By registering, you confirm that you accept our{' '} 
-        <Text style={styles.link} onPress={onTermsOfUsePressed}>Terms of Use</Text> and{' '}
-        <Text style={styles.link} onPress={onPrivacyPolicyPressed}>Privacy Policy</Text>
+        By registering, you confirm that you accept our
+        <Text style={styles.link} onPress={onTermsOfUsePressed}>
+          Terms of Use
+        </Text>
+        and
+        <Text style={styles.link} onPress={onPrivacyPolicyPressed}>
+          Privacy Policy
+        </Text>
       </Text>
     </SafeAreaView>
   );
@@ -143,5 +136,5 @@ const styles = StyleSheet.create({
   },
   link: {
     color: 'red',
-},
+  },
 });

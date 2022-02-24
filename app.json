@@ -10,24 +10,31 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "plugins": [
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow $(Swapper) to access your photos.",
+          "savePhotosPermission": "Allow $(Swapper) to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ]
+  },
+  "updates": {
+    "fallbackToCacheTimeout": 0
+  },
+  "assetBundlePatterns": ["**/*"],
+  "ios": {
+    "supportsTablet": true
+  },
+  "android": {
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/adaptive-icon.png",
+      "backgroundColor": "#FFFFFF"
     }
+  },
+  "web": {
+    "favicon": "./assets/favicon.png"
   }
 }

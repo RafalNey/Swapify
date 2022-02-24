@@ -1,27 +1,40 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Camera } from 'expo-camera';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MaterialIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import * as MediaLibrary from 'expo-media-library';
+import { updateProfile } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const CameraPage = () => {
   const navigation = useNavigation();
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const [userPhoto, setUserPhoto] = useState(null);
+  let camera;
 
-  async () => {
-    await g;
+  console.log(auth.currentUser);
+
+  const takePicture = async () => {
+    if (camera) {
+      const { uri } = await camera.takePictureAsync();
+      setUserPhoto(uri);
+      MediaLibrary.saveToLibraryAsync(uri);
+      // userPhoto && updateProfile(auth.currentUser, { photoURL: userPhoto });
+    }
   };
 
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
+      const { status2 } = await MediaLibrary.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
   }, []);
 
   const closeCamera = () => {
-    navigation.goBack();
+    navigation.navigate('User', { userPhoto });
   };
 
   const flipCamera = () => {
@@ -38,7 +51,12 @@ const CameraPage = () => {
 
   return (
     <View style={styles.cameraContainer}>
-      <Camera autoFocus style={styles.camera} type={type} ratio={['1:1']}>
+      <Camera
+        autoFocus
+        style={styles.camera}
+        type={type}
+        ref={(ref) => (camera = ref)}
+      >
         <View style={styles.cameraBtnsContainer}>
           <TouchableOpacity onPress={closeCamera}>
             <Ionicons
@@ -47,7 +65,7 @@ const CameraPage = () => {
               style={styles.cameraBtn}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.takePhotoBtn} onPress={flipCamera}>
+          <TouchableOpacity style={styles.takePhotoBtn} onPress={takePicture}>
             <FontAwesome
               name='circle'
               size={80}

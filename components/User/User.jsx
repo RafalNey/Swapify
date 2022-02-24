@@ -1,16 +1,23 @@
-import { View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  SafeAreaView,
+  Image,
+} from 'react-native';
 import { SvgUri } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons, FontAwesome, Fontisto } from '@expo/vector-icons';
 import Button from '../Reusable/Button';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 
 const { width, height } = Dimensions.get('screen');
 const menuW = width * 0.5;
 const menuH = menuW * 1;
 
-const User = () => {
+const User = ({ route }) => {
   const navigation = useNavigation();
   const { loggedInUser } = useContext(UserContext);
 
@@ -25,16 +32,29 @@ const User = () => {
   return (
     <SafeAreaView style={styles.userContainer}>
       <View style={styles.userCard}>
-        <SvgUri
+        {
+          <SvgUri
+            style={styles.userImg}
+            uri={
+              !loggedInUser.user.photoURL
+                ? //createdAt could be changed to displayName - assume this will correspond to username once registration process is finished? Currently 'undefined'.
+                  `https://avatars.dicebear.com/api/avataaars/${loggedInUser.createdAt}
+            .svg`
+                : loggedInUser.user.photoURL
+            }
+          />
+        }
+
+        {/* <SvgUri
           style={styles.userImg}
           uri={
             !loggedInUser.user.photoURL
               ? //createdAt could be changed to displayName - assume this will correspond to username once registration process is finished? Currently 'undefined'.
                 `https://avatars.dicebear.com/api/avataaars/${loggedInUser.createdAt}
-        .svg`
+            .svg`
               : loggedInUser.user.photoURL
           }
-        />
+        /> */}
 
         <Fontisto
           style={styles.cameraIcon}

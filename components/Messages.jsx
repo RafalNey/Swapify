@@ -51,7 +51,7 @@ export default function Messages({navigation}) {
           user: doc.data().user
         }))
       );
-    });
+    }),[];
 
 return unsubscribe;
   });
