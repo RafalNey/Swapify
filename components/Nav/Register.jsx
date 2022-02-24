@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   Dimensions,
+  Image,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
@@ -36,14 +37,19 @@ const Register = () => {
   const [signupDetails, setSignupDetails] = useState(null);
   const [image, setImage] = useState(null);
 
+  
+
   const pickImage = () => {
     ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     }).then((result) => {
-      console.log(result);
+      if (!result.cancelled) {
+        setImage(result.uri);
+        console.log(image)
+      }
     });
   };
 
@@ -116,7 +122,9 @@ const Register = () => {
           placeholder='Re-enter Password'
           onChangeText={(text) => setPassword2(text)}
         />
-
+        {image ? <Image 
+        style={styles.displayPic}
+        source={{uri: image}} /> : null}
         <Button btnText={'Pick a display photo'} onSubmit={pickImage} />
       </View>
       <Button btnText={'Submit'} onSubmit={submitHandler} />
@@ -165,5 +173,13 @@ const styles = StyleSheet.create({
   },
   link: {
     color: 'red',
+  },
+  displayPic: {
+    height: 100,
+    width: 100,
+    marginBottom: 10,
+    borderColor: 'blue',
+    borderWidth: 2,
+    borderRadius: 50
   },
 });
