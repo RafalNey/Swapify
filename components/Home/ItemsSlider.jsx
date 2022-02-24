@@ -1,4 +1,6 @@
-import * as React from 'react';
+// import * as React from 'react';
+import React, { useState, useEffect } from 'react';
+import  getItems from '../../utils/getItems';
 import {
   StatusBar,
   FlatList,
@@ -13,29 +15,47 @@ const { width, height } = Dimensions.get('screen');
 const imageW = width * 0.5;
 const imageH = imageW * 1.1;
 
-const ItemsSlider = ({ items }) => {
+
+import {  
+    onSnapshot
+  } from 'firebase/firestore';
+import collectionRef from '../../firebase';
+
+
+const ItemsSlider = ({ category }) => {
+  const [ items, setItems ] = useState([]); 
+  useEffect(() => {
+    console.log(category, 'cat in slider')
+    getItems(category).then((itemsFromDb) =>{
+      console.log(itemsFromDb)
+      setItems(itemsFromDb);
+    })
+}, []);
+  console.log(items, '<<items')
   return (
     <View style={styles.listContainer}>
       <Text style={styles.listHeader}>Recently added</Text>
       <FlatList
-        items={items}
+        data={items}
         pagingEnabled
         horizontal
         decelerationRate={0}
         snapToInterval={imageW + 20}
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, index) => index.toString()}
-        renderItem={( items ) => {
+        renderItem={({ item }) => {
+          console.log(item, '<< item in items slider')
           return (
             <View style={styles.itemCard}>
-              <Image source={{body: items}} style={styles.itemImg} />
+              <Image source={{uri: item.img}} style={styles.itemImg} />
               <View style={styles.itemDescriptionContainer}>
-                <Text style={styles.itemTitle}>Image</Text>
+                <Text style={styles.itemTitle}>{item.title}</Text>
+                <Text style={styles.itemTitle}>{item.username}</Text>
               </View>
             </View>
           );
         }}
-      />
+      ></FlatList>
     </View>
   );
 };
