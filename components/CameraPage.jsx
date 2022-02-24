@@ -1,9 +1,10 @@
-import { StyleSheet, AppState, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, AppState, TouchableOpacity, View, Image } from 'react-native';
 import { Camera } from 'expo-camera';
 import { useState, useEffect, useRef } from 'react';
 import { MaterialIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import * as MediaLibrary from 'expo-media-library';
+import finger from '../images/finger.png';
 // import { updateProfile } from 'firebase/auth';
 // import { auth } from '../firebase';
 
@@ -100,6 +101,7 @@ const CameraPage = () => {
               size={80}
               color='rgba(255,255,255, 0.65)'
             />
+            <Image source={finger} style={styles.fingerBtn}/>
           </TouchableOpacity>
           <TouchableOpacity onPress={flipCamera}>
             <MaterialIcons
@@ -145,6 +147,15 @@ const styles = StyleSheet.create({
     padding: 10,
     backfaceVisibility: 'hidden',
   },
+  fingerBtn: {
+    width: 50,
+    height: 60,
+    position: 'absolute',
+    top: 20,
+    bottom: 0,
+    left: 20,
+    right: 0,
+},
   cameraBtn: {
     backfaceVisibility: 'hidden',
     color: 'rgba(255, 255, 255, 0.65)',
