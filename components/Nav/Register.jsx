@@ -13,8 +13,9 @@ import { useState, useEffect } from 'react';
 import Logo from '../Home/Logo';
 import Button from '../Reusable/Button';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth, upload } from '../../firebase';
 import { formatErrorMsg } from '../Error';
+
 
 const { width } = Dimensions.get('screen');
 
@@ -36,6 +37,7 @@ const Register = () => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [signupDetails, setSignupDetails] = useState(null);
   const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false)
 
   
 
@@ -62,6 +64,7 @@ const Register = () => {
         username: username,
         password: password,
       });
+      upload(image, auth.currentUser, setIsLoading)
       navigation.navigate('Login');
       setImage(null)
     }
