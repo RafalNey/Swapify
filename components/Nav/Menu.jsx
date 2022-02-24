@@ -6,22 +6,28 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../../contexts/UserContext';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 const { width, height } = Dimensions.get('screen');
 
 const Menu = ({ navigationHandler, isPressed }) => {
-  const menuItems = ['User', 'Messages', 'My List', 'Swaps', 'Legal'];
+  const menuItems = ['User', 'Messages', 'My List', 'Swaps', 'User Agreement', 'Privacy'];
   const [isLogged, setIsLogged] = useState(false);
+  const { isLoggedIn, loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   const loginHandler = () => {
-    setIsLogged(true);
     navigationHandler('Login');
   };
 
   const logoutHandler = () => {
-    setIsLogged(false);
-    navigationHandler('Home');
+    signOut(auth).then(() => {
+      setLoggedInUser({})
+      navigationHandler('Home');
+    })
+    
   };
 
   const loggedInMenu = () => {
@@ -46,7 +52,10 @@ const Menu = ({ navigationHandler, isPressed }) => {
           <Text style={styles.menuItemText}>Login</Text>
           <SimpleLineIcons name='arrow-right' size={24} color='#6b6565' />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => navigationHandler('Register')}
+        >
           <Text style={styles.menuItemText}>Register</Text>
           <SimpleLineIcons name='arrow-right' size={24} color='#6b6565' />
         </TouchableOpacity>
@@ -61,8 +70,8 @@ const Menu = ({ navigationHandler, isPressed }) => {
         display: isPressed ? 'flex' : 'none',
       }}
     >
-      {isLogged ? loggedInMenu() : loggedOutMenu()}
-      {isLogged && (
+      {isLoggedIn ? loggedInMenu() : loggedOutMenu()}
+      {isLoggedIn && (
         <TouchableOpacity
           style={styles.menuItem}
           key={'Logout'}

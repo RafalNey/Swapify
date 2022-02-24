@@ -1,13 +1,20 @@
 import { View, Text, StyleSheet } from 'react-native';
-import Button from '../Button';
-import VerticalList from '../VerticalList';
+import { useNavigation } from '@react-navigation/native';
+import Button from '../Reusable/Button';
+import VerticalList from '../Reusable/VerticalList';
 import { itemImgs } from '../../images/itemImgs';
 
 const UserList = () => {
+  const navigation = useNavigation();
+
+  const navigationHandler = (screen) => {
+    navigation.navigate(screen);
+  };
+
   return (
     <View style={styles.userListContainer}>
       <Text style={styles.userListHeader}>My List</Text>
-      <Button btnText={'Add Item'} />
+      <Button btnText={'Add Item'} navigationHandler={navigationHandler} />
       <VerticalList data={itemImgs} />
     </View>
   );

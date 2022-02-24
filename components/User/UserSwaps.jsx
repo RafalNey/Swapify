@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import VerticalList from '../VerticalList';
+import VerticalList from '../Reusable/VerticalList';
 import { itemImgs } from '../../images/itemImgs';
 
 const UserSwaps = () => {

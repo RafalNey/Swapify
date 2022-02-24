@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { Fontisto } from '@expo/vector-icons';
 
-const { width, height } = Dimensions.get('screen');
-const imageW = width * 0.4;
+const { width } = Dimensions.get('screen');
+const imageW = width * 0.44;
 const imageH = imageW * 1.1;
 
 const VerticalList = ({ data }) => {
@@ -28,10 +28,10 @@ const VerticalList = ({ data }) => {
           <View style={styles.itemCard}>
             <Image source={{ uri: item }} style={styles.itemImg} />
             <View style={styles.itemDetails}>
-              <Text style={styles.itemHeader}>Item Title</Text>
+              <Text style={styles.itemHeader}>Title</Text>
               <Text>Description</Text>
               <View style={styles.itemFooter}>
-                <Text>Posted on</Text>
+                <Text>Created at</Text>
                 <TouchableOpacity>
                   <Fontisto name='trash' size={24} color='#6b6565' />
                 </TouchableOpacity>
@@ -58,20 +58,20 @@ const styles = StyleSheet.create({
   itemImg: {
     width: imageW,
     height: imageH,
+    resizeMode: 'cover',
   },
   itemDetails: {
     flex: 1,
-    padding: '2%',
+    justifyContent: 'space-between',
+    padding: '3%',
   },
   itemHeader: {
-    alignSelf: 'center',
-    marginBottom: 15,
+    textAlign: 'center',
     fontSize: 17,
   },
   itemFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 'auto',
   },
 });

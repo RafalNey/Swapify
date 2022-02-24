@@ -3,7 +3,7 @@ import { Picker } from '@react-native-picker/picker';
 import { useState } from 'react';
 import { Fontisto } from '@expo/vector-icons';
 import { itemImgs } from '../images/itemImgs';
-import VerticalList from './VerticalList';
+import VerticalList from './Reusable/VerticalList';
 
 const Marketplace = () => {
   const [selectedCategory, setSelectedCategory] = useState();
