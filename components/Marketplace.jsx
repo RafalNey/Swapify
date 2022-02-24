@@ -25,40 +25,40 @@ const Marketplace = () => {
         <Picker.Item label='All' value='All'>
           All
         </Picker.Item>
-        <Picker.Item label='Antiques and Collectables' value='antiques_and_collectables'>
+        <Picker.Item label='Antiques and Collectables' value='Antiques and Collectables'>
         Antiques and Collectables
         </Picker.Item>
-        <Picker.Item label='Books, films and comics' value='books_films_comics'>
-          Books, films and comics
+        <Picker.Item label='Books, Films and Comics' value='Books, Films and Comics'>
+        Books, Films and Comics
         </Picker.Item>
-        <Picker.Item label='Business and office' value='business_and_office'>
+        <Picker.Item label='Business and office' value='Business and Office'>
           Business and office
         </Picker.Item>
-        <Picker.Item label='Electronics' value='electronics'>
+        <Picker.Item label='Electronics' value='Electronics'>
           Electronics
         </Picker.Item>
-        <Picker.Item label='Fashion' value='fashion'>
+        <Picker.Item label='Fashion' value='Fashion'>
           Fashion
         </Picker.Item>
-        <Picker.Item label='Home and Garden' value='home_and_garden'>
+        <Picker.Item label='Home and Garden' value='Home and Garden'>
           Home and Garden
         </Picker.Item>
-        <Picker.Item label='Jewellery and Watches' value='jewellery_and_watches'>
+        <Picker.Item label='Jewellery and Watches' value='Jewellery and Watches'>
           Jewellery and Watches
         </Picker.Item>
-        <Picker.Item label='Motors' value='motors'>
+        <Picker.Item label='Motors' value='Motors'>
           Motors
         </Picker.Item>
-        <Picker.Item label='Musical Instruments' value='musical_instruments'>
+        <Picker.Item label='Musical Instruments' value='Musical Instruments'>
         Musical Instruments
         </Picker.Item>
-        <Picker.Item label='Pets' value='pets'>
+        <Picker.Item label='Pets' value='Pets'>
           Pets
         </Picker.Item>
-        <Picker.Item label='Sporting Goods' value='sporting_goods'>
+        <Picker.Item label='Sporting Goods' value='Sporting Goods'>
         Sporting Goods
         </Picker.Item>
-        <Picker.Item label='Toys and Games' value='toys_and_games'>
+        <Picker.Item label='Toys and Games' value='Toys and Games'>
         Toys and Games
         </Picker.Item>
       </Picker>
