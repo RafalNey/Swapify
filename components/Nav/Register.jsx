@@ -63,6 +63,7 @@ const Register = () => {
         password: password,
       });
       navigation.navigate('Login');
+      setImage(null)
     }
     // createUserWithEmailAndPassword(auth, email, password)
     // .then((userCredential) => {
@@ -125,7 +126,7 @@ const Register = () => {
         {image ? <Image 
         style={styles.displayPic}
         source={{uri: image}} /> : null}
-        <Button btnText={'Pick a display photo'} onSubmit={pickImage} />
+        <Button btnText={!image ? 'Pick a display photo' : 'Change photo'} onSubmit={pickImage} />
       </View>
       <Button btnText={'Submit'} onSubmit={submitHandler} />
       <Text style={styles.text}>
