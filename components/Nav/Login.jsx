@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   loginInput: {
-    width: '80%',
+    width: '90%',
     marginBottom: 18,
     padding: 9,
     fontSize: 17,

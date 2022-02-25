@@ -30,18 +30,21 @@ const User = ({ route }) => {
     navigation.navigate(screen);
   };
 
-  
   return (
     <SafeAreaView style={styles.userContainer}>
       <View style={styles.userCard}>
-        {
-          isLoggedIn && !loggedInUser.user.photoURL ? <SvgUri
+        {isLoggedIn && !loggedInUser.user.photoURL ? (
+          <SvgUri
             style={styles.userImg}
             uri={`https://avatars.dicebear.com/api/avataaars/${loggedInUser.createdAt}
             .svg`}
-          /> : <Image style={styles.userImg} source={{uri: auth.currentUser.photoURL}} />
-          
-        }
+          />
+        ) : (
+          <Image
+            style={styles.userImg}
+            source={{ uri: auth.currentUser.photoURL }}
+          />
+        )}
 
         <Fontisto
           style={styles.cameraIcon}
@@ -51,7 +54,9 @@ const User = ({ route }) => {
           onPress={openCamera}
         />
       </View>
-      <Text style={styles.userName}>{auth.currentUser && auth.currentUser.displayName}</Text>
+      <Text style={styles.userName}>
+        {auth.currentUser && auth.currentUser.displayName}
+      </Text>
       <Text style={styles.userLocation}>
         <Ionicons name='md-location-sharp' size={20} color='#6b6565' />
         Manchester, UK
