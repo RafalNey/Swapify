@@ -81,7 +81,7 @@ const Register = () => {
         .catch((err) => {
           setErrorMsg(formatErrorMsg(err.message));
         });
-  }, [signupDetails]);
+  }, [signupDetails, image]);
 
   return (
     <KeyboardAvoidingView style={styles.registerContainer} behavior='height'>
@@ -89,11 +89,9 @@ const Register = () => {
         <ScrollView
           KeyboardDismissMode='interactive'
           keyboardsHoldPersist='always'
-          showsVerticalScrollIndicator={false}
         >
           <Logo />
           <View style={styles.loginCard}>
-            {errorMsg && <ErrorMsg errorMsg={errorMsg} />}
             <TextInput
               value={username}
               style={styles.loginInput}
@@ -111,12 +109,14 @@ const Register = () => {
               style={styles.loginInput}
               placeholder='Enter Password'
               onChangeText={(text) => setPassword(text)}
+              secureTextEntry
             />
             <TextInput
               value={password2}
               style={styles.loginInput}
               placeholder='Re-enter Password'
               onChangeText={(text) => setPassword2(text)}
+              secureTextEntry
             />
             {image ? (
               <Image style={styles.displayPic} source={{ uri: image }} />
