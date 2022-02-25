@@ -1,18 +1,21 @@
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import Logo from './Logo';
 import ItemsSlider from './ItemsSlider';
-import { itemImgs } from '../../images/itemImgs';
 
-const Home = () => {
+// need some kind of isLoading state as items not 
+
+// Import the functions you need from the SDKs you need
+
+// import { getAuth } from "firebase/auth";
+
+const Home = () => {  
+
   return (
     <SafeAreaView style={{ backgroundColor: '#fff' }}>
       <ScrollView>
         <StatusBar default />
         <Logo />
-        <ItemsSlider data={itemImgs} />
-        <ItemsSlider data={itemImgs} />
-        <ItemsSlider data={itemImgs} />
-        <ItemsSlider data={itemImgs} />
+        <ItemsSlider category={'All'} />
       </ScrollView>
     </SafeAreaView>
   );

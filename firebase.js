@@ -27,6 +27,10 @@ export const auth = getAuth(app);
 
 export const database = getFirestore(app);
 
+const collectionRef = collection(database, 'test');  
+
+export default collectionRef;
+
 export const storage = getStorage()
 
 //storage
