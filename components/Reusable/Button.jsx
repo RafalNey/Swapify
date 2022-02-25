@@ -18,10 +18,11 @@ export default Button;
 
 const styles = StyleSheet.create({
   btn: {
-    width: '80%',
+    width: '90%',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    marginBottom: '3%',
+    marginTop: 10,
+    marginBottom: 10,
     backgroundColor: '#3871f3',
     elevation: 2,
     borderRadius: 5,
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     fontSize: 16,
-    paddingVertical: 7,
+    paddingVertical: 5,
     textAlign: 'center',
     alignContent: 'center',
     justifyContent: 'center',
