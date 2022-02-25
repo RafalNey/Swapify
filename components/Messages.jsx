@@ -3,11 +3,14 @@ import { TouchableOpacity,Text, TextInput, View, ScrollView, StyleSheet, Button 
 import {auth, database} from '../firebase';
 import {collection, addDoc, query, serverTimestamp, orderBy} from 'firebase/firestore'
 import {Formik} from 'formik'
+import { getAuth } from 'firebase/auth';
 
 const colRef = collection(database, 'messages');
 const q = query(colRef, orderBy('createdAt', 'desc'))
 
 const Messages = () => {
+    const auth= getAuth();
+    const user = auth.currentUser;
     
     const document = {
         _id:2134,
@@ -24,7 +27,9 @@ const Messages = () => {
         <ScrollView>
         <View style={{padding: 10}}>
             <Formik
-            initialValues={{message: ''}}
+            initialValues={{message: '',
+            username: user.displayName,
+        }}
             onSubmit={(values)=>{
                 console.log(values)
             }}>
