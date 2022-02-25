@@ -84,7 +84,7 @@ const Register = () => {
         .catch((err) => {
           console.log(err);
         });
-  }, [signupDetails]);
+  }, [signupDetails, image]);
 
   return (
     <KeyboardAvoidingView style={styles.registerContainer} behavior="height">
