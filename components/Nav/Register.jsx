@@ -109,12 +109,14 @@ const Register = () => {
           style={styles.loginInput}
           placeholder="Enter Password"
           onChangeText={(text) => setPassword(text)}
+          secureTextEntry
         />
         <TextInput
           value={password2}
           style={styles.loginInput}
           placeholder="Re-enter Password"
           onChangeText={(text) => setPassword2(text)}
+          secureTextEntry
         />
         {image ? (
           <Image style={styles.displayPic} source={{ uri: image }} />
