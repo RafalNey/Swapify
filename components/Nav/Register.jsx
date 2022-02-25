@@ -81,7 +81,7 @@ const Register = () => {
         .catch((err) => {
           console.log(err);
         });
-  }, [signupDetails]);
+  }, [signupDetails, image]);
 
   return (
     <SafeAreaView style={styles.registerContainer}>
