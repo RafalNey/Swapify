@@ -1,8 +1,9 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, updateProfile } from 'firebase/auth';
 import { getFirestore, collection } from 'firebase/firestore';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -29,3 +30,21 @@ export const database = getFirestore(app);
 const collectionRef = collection(database, 'test');  
 
 export default collectionRef;
+
+export const storage = getStorage()
+
+//storage
+
+export const upload = async(file, currentUser, setLoading) => {
+
+  const response = await fetch(file);
+  const blob = await response.blob();
+  const fileRef = ref(storage, `Users/${currentUser.email}/avatar.jpg`)
+  setLoading(true)
+  const snapshot =  await uploadBytes(fileRef, blob);
+  const photoURL = await getDownloadURL(fileRef)
+  console.log(photoURL)
+  updateProfile(currentUser, {photoURL})
+  setLoading(false);
+  console.log(`image uploaded to Users/${currentUser.email}/avatar.jpg`)
+}

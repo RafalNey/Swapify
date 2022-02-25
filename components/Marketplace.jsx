@@ -31,8 +31,8 @@ const Marketplace = () => {
         <Picker.Item label='Books, Films and Comics' value='Books, Films and Comics'>
         Books, Films and Comics
         </Picker.Item>
-        <Picker.Item label='Business and office' value='Business and Office'>
-          Business and office
+        <Picker.Item label='Business and Office' value='Business and Office'>
+          Business and Office
         </Picker.Item>
         <Picker.Item label='Electronics' value='Electronics'>
           Electronics

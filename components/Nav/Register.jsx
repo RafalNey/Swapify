@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   Dimensions,
+  Image,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
@@ -12,8 +13,9 @@ import { useState, useEffect } from 'react';
 import Logo from '../Home/Logo';
 import Button from '../Reusable/Button';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth, upload } from '../../firebase';
 import { formatErrorMsg } from '../Error';
+
 
 const { width } = Dimensions.get('screen');
 
@@ -35,15 +37,21 @@ const Register = () => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [signupDetails, setSignupDetails] = useState(null);
   const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false)
+
+  
 
   const pickImage = () => {
     ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     }).then((result) => {
-      console.log(result);
+      if (!result.cancelled) {
+        setImage(result.uri);
+        console.log(image)
+      }
     });
   };
 
@@ -56,7 +64,9 @@ const Register = () => {
         username: username,
         password: password,
       });
+      upload(image, auth.currentUser, setIsLoading)
       navigation.navigate('Login');
+      setImage(null)
     }
     // createUserWithEmailAndPassword(auth, email, password)
     // .then((userCredential) => {
@@ -116,8 +126,10 @@ const Register = () => {
           placeholder='Re-enter Password'
           onChangeText={(text) => setPassword2(text)}
         />
-
-        <Button btnText={'Pick a display photo'} onSubmit={pickImage} />
+        {image ? <Image 
+        style={styles.displayPic}
+        source={{uri: image}} /> : null}
+        <Button btnText={!image ? 'Pick a display photo' : 'Change photo'} onSubmit={pickImage} />
       </View>
       <Button btnText={'Submit'} onSubmit={submitHandler} />
       <Text style={styles.text}>
@@ -165,5 +177,13 @@ const styles = StyleSheet.create({
   },
   link: {
     color: 'red',
+  },
+  displayPic: {
+    height: 100,
+    width: 100,
+    marginBottom: 10,
+    borderColor: 'blue',
+    borderWidth: 2,
+    borderRadius: 50
   },
 });

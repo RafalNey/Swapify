@@ -12,6 +12,7 @@ import { Ionicons, FontAwesome, Fontisto } from '@expo/vector-icons';
 import Button from '../Reusable/Button';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../contexts/UserContext';
+import { auth } from '../../firebase';
 
 const { width, height } = Dimensions.get('screen');
 const menuW = width * 0.5;
@@ -29,10 +30,12 @@ const User = ({ route }) => {
     navigation.navigate(screen);
   };
 
+  console.log(auth.currentUser.photoURL)
   return (
     <SafeAreaView style={styles.userContainer}>
       <View style={styles.userCard}>
         {
+          // <Image style={styles.userImg} source={auth.currentUser.photoURL} />
           <SvgUri
             style={styles.userImg}
             uri={`https://avatars.dicebear.com/api/avataaars/${loggedInUser.createdAt}
