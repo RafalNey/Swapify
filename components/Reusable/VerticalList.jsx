@@ -8,15 +8,27 @@ import {
   Dimensions,
 } from 'react-native';
 import { Fontisto } from '@expo/vector-icons';
+import React, { useState, useEffect } from 'react';
+import  getItems from '../../utils/getItems';
 
 const { width } = Dimensions.get('screen');
 const imageW = width * 0.44;
 const imageH = imageW * 1.1;
 
-const VerticalList = ({ data }) => {
+const VerticalList = ({category}) => {
+
+  const [ items, setItems ] = useState([]); 
+
+  useEffect(() => {
+    getItems(category).then((itemsFromDb) =>{
+      setItems(itemsFromDb);
+    })
+}, [category]);
+
   return (
+   
     <FlatList
-      data={data}
+      data={items}
       pagingEnabled
       style={{ alignSelf: 'stretch' }}
       decelerationRate={0}
@@ -24,14 +36,16 @@ const VerticalList = ({ data }) => {
       showsVerticalScrollIndicator={false}
       keyExtractor={(_, index) => index.toString()}
       renderItem={({ item }) => {
+
         return (
           <View style={styles.itemCard}>
-            <Image source={{ uri: item }} style={styles.itemImg} />
+            <Image source={{ uri: item.img }} style={styles.itemImg} />
             <View style={styles.itemDetails}>
-              <Text style={styles.itemHeader}>Title</Text>
-              <Text>Description</Text>
+              <Text style={styles.itemHeader}>{item.title}</Text>
+              <Text>{item.description}</Text>
+              <Text>{item.posted_at}</Text>
+              <Text>{item.username}</Text>
               <View style={styles.itemFooter}>
-                <Text>Created at</Text>
                 <TouchableOpacity>
                   <Fontisto name='trash' size={24} color='#6b6565' />
                 </TouchableOpacity>

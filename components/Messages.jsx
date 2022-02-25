@@ -12,16 +12,16 @@ const Messages = () => {
     const auth= getAuth();
     const user = auth.currentUser;
     
-    const document = {
-        _id:2134,
-        itemId: 123,
-        ownerid:1234,
-        interestedPartyId:2345,
-        createdAt:'2022-02-24',
-        messages: [
-            {createdAt: '2022-02-24', senderId: 2345, message:"Hi there can I swap something for your banjo"},
-            {createdAt: '2022-02-24', senderId: 1234, message:"Sure, what do you have?"},
-        ]}
+    // const document = {
+    //     _id:2134,
+    //     itemId: 123,
+    //     ownerid:1234,
+    //     interestedPartyId:2345,
+    //     createdAt:'2022-02-24',
+    //     messages: [
+    //         {createdAt: '2022-02-24', senderId: 2345, message:"Hi there can I swap something for your banjo"},
+    //         {createdAt: '2022-02-24', senderId: 1234, message:"Sure, what do you have?"},
+    //     ]}
     
     return (
         <ScrollView>
@@ -30,8 +30,10 @@ const Messages = () => {
             initialValues={{message: '',
             username: user.displayName,
         }}
-            onSubmit={(values)=>{
+            onSubmit={(values, actions)=>{
                 console.log(values)
+                actions.resetForm();
+                addDoc(colRef, {values})
             }}>
                 {props => (<View><TextInput
             style={{height: 40}}
