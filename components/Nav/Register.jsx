@@ -1,11 +1,14 @@
 import {
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   View,
   Text,
   TextInput,
   Dimensions,
   Image,
+  Keyboard,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
@@ -15,7 +18,6 @@ import Button from '../Reusable/Button';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth, upload } from '../../firebase';
 import { formatErrorMsg } from '../Error';
-
 
 const { width } = Dimensions.get('screen');
 
@@ -99,7 +101,9 @@ const Register = () => {
   }, [signupDetails]);
 
   return (
-    <SafeAreaView style={styles.registerContainer}>
+    <KeyboardAvoidingView style={styles.registerContainer} behavior="height">
+    <SafeAreaView >
+      <ScrollView KeyboardDismissMode='interactive' keyboardsHoldPersist='always' >
       <Logo />
       <View style={styles.loginCard}>
         <TextInput
@@ -130,19 +134,22 @@ const Register = () => {
         style={styles.displayPic}
         source={{uri: image}} /> : null}
         <Button btnText={!image ? 'Pick a display photo' : 'Change photo'} onSubmit={pickImage} />
-      </View>
-      <Button btnText={'Submit'} onSubmit={submitHandler} />
+        <Button btnText={'Submit'} onSubmit={submitHandler} />
+        
       <Text style={styles.text}>
-        By registering, you confirm that you accept our
+        By registering, you confirm that you accept our{' '} 
         <Text style={styles.link} onPress={onTermsOfUsePressed}>
-          Terms of Use
+          Terms of Use{' '}
         </Text>
-        and
+        and{' '}
         <Text style={styles.link} onPress={onPrivacyPolicyPressed}>
           Privacy Policy
         </Text>
       </Text>
+      </View>
+    </ScrollView>
     </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -158,11 +165,11 @@ const styles = StyleSheet.create({
   },
   loginCard: {
     alignItems: 'center',
-    width: width,
-    marginTop: 20,
+    width: width-35,
+    marginTop: 10,
   },
   loginInput: {
-    width: '72.5%',
+    width: '90%',
     marginBottom: 18,
     padding: 9,
     fontSize: 17,
