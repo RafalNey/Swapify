@@ -1,4 +1,6 @@
-import * as React from 'react';
+// import * as React from 'react';
+import React, { useState, useEffect } from 'react';
+import  getItems from '../../utils/getItems';
 import {
   StatusBar,
   FlatList,
@@ -13,12 +15,20 @@ const { width, height } = Dimensions.get('screen');
 const imageW = width * 0.5;
 const imageH = imageW * 1.1;
 
-const ItemsSlider = ({ data }) => {
+const ItemsSlider = ({ category }) => {
+
+  const [ items, setItems ] = useState([]); 
+  useEffect(() => {
+    getItems(category).then((itemsFromDb) => {
+      setItems(itemsFromDb);
+    })
+}, []);
+
   return (
     <View style={styles.listContainer}>
       <Text style={styles.listHeader}>Recently added</Text>
       <FlatList
-        data={data}
+        data={items}
         pagingEnabled
         horizontal
         decelerationRate={0}
@@ -28,14 +38,15 @@ const ItemsSlider = ({ data }) => {
         renderItem={({ item }) => {
           return (
             <View style={styles.itemCard}>
-              <Image source={{ uri: item }} style={styles.itemImg} />
+              <Image source={{uri: item.img}} style={styles.itemImg} />
               <View style={styles.itemDescriptionContainer}>
-                <Text style={styles.itemTitle}>Image</Text>
+                <Text style={styles.itemTitle}>{item.title}</Text>
+                <Text style={styles.itemTitle}>{item.username}</Text>
               </View>
             </View>
           );
         }}
-      />
+      ></FlatList>
     </View>
   );
 };

@@ -57,14 +57,6 @@ const Login = () => {
   }, [loginDetails]);
 
   const register = () => {
-    // createUserWithEmailAndPassword(auth, email, password)
-    //   .then((userCredentials) => {
-    //     console.log(userCredentials);
-    //     navigation.navigate('Home');
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
     navigation.navigate('Register');
   };
 

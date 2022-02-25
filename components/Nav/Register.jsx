@@ -22,26 +22,23 @@ import { formatErrorMsg } from '../Error';
 const { width } = Dimensions.get('screen');
 
 const onTermsOfUsePressed = () => {
-  console.warn('Terms of Use');
+  console.warn("Terms of Use");
 };
 
 const onPrivacyPolicyPressed = () => {
-  console.warn('Privacy Policy');
+  console.warn("Privacy Policy");
 };
 
 const Register = () => {
   const navigation = useNavigation();
-  const [fullName, setFullName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [errorMsg, setErrorMsg] = useState(null);
   const [signupDetails, setSignupDetails] = useState(null);
   const [image, setImage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false)
-
-  
+  const [isLoading, setIsLoading] = useState(false);
 
   const pickImage = () => {
     ImagePicker.launchImageLibraryAsync({
@@ -52,34 +49,20 @@ const Register = () => {
     }).then((result) => {
       if (!result.cancelled) {
         setImage(result.uri);
-        console.log(image)
       }
     });
   };
 
   const submitHandler = () => {
     if (password2 !== password) {
-      console.log('Passwords do not match');
+      console.log("Passwords do not match");
     } else {
       setSignupDetails({
         email: email,
         username: username,
         password: password,
       });
-      upload(image, auth.currentUser, setIsLoading)
-      navigation.navigate('Login');
-      setImage(null)
     }
-    // createUserWithEmailAndPassword(auth, email, password)
-    // .then((userCredential) => {
-    //   updateProfile(auth.currentUser, {
-    //     displayName: username
-    //   })
-    //   console.log(auth.currentUser)
-    // })
-    // .catch((err) => {
-    //   console.log(err)
-    // })
   };
 
   useEffect(() => {
@@ -89,11 +72,14 @@ const Register = () => {
         signupDetails.email,
         signupDetails.password
       )
-        .then((userCredential) => {
+        .then(() => {
           updateProfile(auth.currentUser, {
             displayName: signupDetails.username,
           });
-          console.log(auth.currentUser);
+          image && upload(image, auth.currentUser, setIsLoading);
+        })
+        .then(() => {
+          navigation.navigate("Login");
         })
         .catch((err) => {
           console.log(err);
@@ -109,33 +95,37 @@ const Register = () => {
         <TextInput
           value={username}
           style={styles.loginInput}
-          placeholder='Username'
+          placeholder="Username"
           onChangeText={(text) => setUsername(text)}
         />
         <TextInput
           value={email}
           style={styles.loginInput}
-          placeholder='E-mail'
+          placeholder="E-mail"
           onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           value={password}
           style={styles.loginInput}
-          placeholder='Enter Password'
+          placeholder="Enter Password"
           onChangeText={(text) => setPassword(text)}
         />
         <TextInput
           value={password2}
           style={styles.loginInput}
-          placeholder='Re-enter Password'
+          placeholder="Re-enter Password"
           onChangeText={(text) => setPassword2(text)}
         />
-        {image ? <Image 
-        style={styles.displayPic}
-        source={{uri: image}} /> : null}
-        <Button btnText={!image ? 'Pick a display photo' : 'Change photo'} onSubmit={pickImage} />
-        <Button btnText={'Submit'} onSubmit={submitHandler} />
-        
+        {image ? (
+          <Image style={styles.displayPic} source={{ uri: image }} />
+        ) : null}
+        <Button
+          btnText={!image ? "Pick a display photo" : "Change photo"}
+          onSubmit={pickImage}
+        />
+      {username && email && password && password2 ? (
+        <Button btnText={"Submit"} onSubmit={submitHandler} />
+      ) : null}
       <Text style={styles.text}>
         By registering, you confirm that you accept our{' '} 
         <Text style={styles.link} onPress={onTermsOfUsePressed}>
@@ -158,10 +148,10 @@ export default Register;
 const styles = StyleSheet.create({
   registerContainer: {
     flex: 1,
-    alignItems: 'center',
-    paddingHorizontal: '5%',
-    paddingVertical: '5%',
-    backgroundColor: 'lightgrey',
+    alignItems: "center",
+    paddingHorizontal: "5%",
+    paddingVertical: "5%",
+    backgroundColor: "lightgrey",
   },
   loginCard: {
     alignItems: 'center',
@@ -175,22 +165,22 @@ const styles = StyleSheet.create({
     fontSize: 17,
     borderWidth: 1,
     borderRadius: 5,
-    backgroundColor: 'white',
-    borderColor: '#ccc9c9',
+    backgroundColor: "white",
+    borderColor: "#ccc9c9",
   },
   text: {
-    color: 'grey',
+    color: "grey",
     marginVertical: 10,
   },
   link: {
-    color: 'red',
+    color: "red",
   },
   displayPic: {
     height: 100,
     width: 100,
     marginBottom: 10,
-    borderColor: 'blue',
+    borderColor: "blue",
     borderWidth: 2,
-    borderRadius: 50
+    borderRadius: 50,
   },
 });

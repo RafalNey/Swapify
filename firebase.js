@@ -27,6 +27,10 @@ export const auth = getAuth(app);
 
 export const database = getFirestore(app);
 
+const collectionRef = collection(database, 'test');  
+
+export default collectionRef;
+
 export const storage = getStorage()
 
 //storage
@@ -39,7 +43,6 @@ export const upload = async(file, currentUser, setLoading) => {
   setLoading(true)
   const snapshot =  await uploadBytes(fileRef, blob);
   const photoURL = await getDownloadURL(fileRef)
-  console.log(photoURL)
   updateProfile(currentUser, {photoURL})
   setLoading(false);
   console.log(`image uploaded to Users/${currentUser.email}/avatar.jpg`)
