@@ -1,85 +1,42 @@
-// import React, {
-//   useState,
-//   useEffect,
-//   useLayoutEffect,
-//   useCallback,
-// } from "react";
-// import { TouchableOpacity, Text } from "react-native";
-// import { GiftedChat } from "react-native-gifted-chat";
-// import {
-//   collection,
-//   addDoc,
-//   orderBy,
-//   query,
-//   onSnapshot
-// } from 'firebase/firestore';
-// import { signOut } from 'firebase/auth';
-// import {auth, database} from '../firebase'
+import React, {useState, useEffect} from 'react';
+import { TouchableOpacity,Text, TextInput, View, ScrollView, StyleSheet, Button } from 'react-native';
+import {auth, database} from '../firebase';
+import {collection, addDoc, query, serverTimestamp, orderBy} from 'firebase/firestore'
+import {Formik} from 'formik'
 
-// export default function Messages({navigation}) {
-//   const [messages, setMessages] = useState([]);
+const colRef = collection(database, 'messages');
+const q = query(colRef, orderBy('createdAt', 'desc'))
 
-//   const onSignOut = () => {
-//     signOut(auth).catch(error => console.log('Error logging out: ', error));
-//   };
+const Messages = () => {
+    
+    const document = {
+        _id:2134,
+        itemId: 123,
+        ownerid:1234,
+        interestedPartyId:2345,
+        createdAt:'2022-02-24',
+        messages: [
+            {createdAt: '2022-02-24', senderId: 2345, message:"Hi there can I swap something for your banjo"},
+            {createdAt: '2022-02-24', senderId: 1234, message:"Sure, what do you have?"},
+        ]}
+    
+    return (
+        <ScrollView>
+        <View style={{padding: 10}}>
+            <Formik
+            initialValues={{message: ''}}
+            onSubmit={(values)=>{
+                console.log(values)
+            }}>
+                {props => (<View><TextInput
+            style={{height: 40}}
+            placeholder="New message"
+            onChangeText={props.handleChange('message')}
+            value={props.values.message}/>
+            <Button title="Submit" onPress={props.handleSubmit}/></View>)}
+            
+            </Formik></View></ScrollView>
+    )
+}
 
-//   useLayoutEffect(() => {
-//     navigation.setOptions({
-//       headerRight: () => (
-//         <TouchableOpacity
-//           style={{
-//             marginRight: 10
-//           }}
-//           onPress={onSignOut}
-//         >
-//           <Text>Logout</Text>
-//         </TouchableOpacity>
-//       )
-//     });
-//   }, [navigation]);
-
-//   useLayoutEffect(() => {
-//     const collectionRef = collection(database, 'chats');
-//     const q = query(collectionRef, orderBy('createdAt', 'desc'));
-
-//     const unsubscribe = onSnapshot(q, querySnapshot => {
-//       setMessages(
-//         querySnapshot.docs.map(doc => ({
-//           _id: doc.data()._id,
-//           createdAt: doc.data().createdAt.toDate(),
-//           text: doc.data().text,
-//           user: doc.data().user
-//         }))
-//       );
-//     });
-
-// return unsubscribe;
-//   },[]);
-
-
-// const onSend = useCallback((messages = []) => {
-//     setMessages(previousMessages =>
-//       GiftedChat.append(previousMessages, messages)
-//     );
-//     const { _id, createdAt, text, user } = messages[0];    
-//     addDoc(collection(database, 'chats'), {
-//       _id,
-//       createdAt,
-//       text,
-//       user
-//     });
-//   }, []);
-
-
-//   return (
-//     <GiftedChat
-//       messages={messages}
-//       showAvatarForEveryMessage={true}
-//       onSend={messages => onSend(messages)}
-//       user={{
-//         _id: auth?.currentUser?.email,
-//         avatar: 'https://i.pravatar.cc/300'
-//       }}
-//     />
-//   );
-// }
+export default Messages;

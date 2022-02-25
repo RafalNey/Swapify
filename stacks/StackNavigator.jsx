@@ -26,7 +26,7 @@ const StackNavigator = () => {
         <Stack.Screen name='Marketplace' component={Marketplace} />
         <Stack.Screen name='My List' component={UserList} />
         <Stack.Screen name='Swaps' component={UserSwaps} />
-        {/* <Stack.Screen name='Messages' component={Messages} /> */}
+        <Stack.Screen name='Messages' component={Messages} />
         <Stack.Screen name='User Agreement' component={UserAgreement} />
         <Stack.Screen name='Privacy' component={Privacy} />
       </Stack.Group>
