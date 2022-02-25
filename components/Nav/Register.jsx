@@ -92,6 +92,7 @@ const Register = () => {
         >
           <Logo />
           <View style={styles.loginCard}>
+            {errorMsg && <ErrorMsg errorMsg={errorMsg} />}
             <TextInput
               value={username}
               style={styles.loginInput}

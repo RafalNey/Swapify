@@ -20,7 +20,7 @@ const { width } = Dimensions.get('screen');
 const menuW = width * 0.5;
 const menuH = menuW * 1;
 
-const User = ({ route }) => {
+const User = () => {
   const navigation = useNavigation();
   const { loggedInUser, isLoggedIn } = useContext(UserContext);
 
@@ -61,7 +61,7 @@ const User = ({ route }) => {
       <View style={styles.userCard}>
         {isLoggedIn && !loggedInUser.user.photoURL ? (
           <SvgUri
-            style={styles.userImg}
+            style={styles.userAvatar}
             uri={`https://avatars.dicebear.com/api/avataaars/${loggedInUser.createdAt}
             .svg`}
           />
@@ -109,8 +109,9 @@ const styles = StyleSheet.create({
   },
   userCard: {
     position: 'relative',
-    width: menuW + 31,
-    height: menuH + 31,
+    width: menuW,
+    height: menuH,
+    justifyContent: 'center',
     marginBottom: 20,
     borderRadius: 180,
     elevation: 5,
@@ -120,8 +121,15 @@ const styles = StyleSheet.create({
   },
   cameraIcon: {
     position: 'absolute',
-    right: 12,
+    top: 0,
+    right: 0,
     zIndex: 2,
+  },
+  userAvatar: {
+    width: menuW - 45,
+    height: menuH - 45,
+    borderRadius: 180,
+    alignSelf: 'center',
   },
   userImg: {
     width: menuW,
