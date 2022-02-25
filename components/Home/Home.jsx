@@ -1,6 +1,7 @@
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import Logo from './Logo';
 import ItemsSlider from './ItemsSlider';
+import AddItem from '../User/AddItem';
 
 // need some kind of isLoading state as items not 
 
@@ -16,6 +17,7 @@ const Home = () => {
         <StatusBar default />
         <Logo />
         <ItemsSlider category={'All'} />
+        <AddItem />
       </ScrollView>
     </SafeAreaView>
   );
