@@ -5,6 +5,7 @@ import { Formik } from 'formik'
 import { useState, useEffect } from 'react';
 import postItem from '../../utils/postItem';
 import getCategories from '../../utils/getCategories';
+import { serverTimestamp } from 'firebase/firestore';
 
 const AddItem = () => {
   const [ categories, setCategories ] = useState([]); 
@@ -21,8 +22,10 @@ const AddItem = () => {
         initialValues={{title: '', img: '', description: '', category: '', username: ''}}
         onSubmit={(values, actions) => { 
           actions.resetForm();
-          values.posted_at = Date.now();
+          // values.posted_at = Date.now();
+          values.posted_at = serverTimestamp();
           postItem(values);
+          
      }}
     >
       {(props)=>(
