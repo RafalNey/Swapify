@@ -6,14 +6,12 @@ import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import { database } from '../firebase'; 
 
 const deleteItem = ({id}) => {
-    console.log(id)
     const docRef = doc(database, 'test', id);
     deleteDoc(docRef)
-      .then(() => {
-          console.log('item', id, 'has been deleted')   
+      .then(() => { 
       })
       .catch((err) => {
-        console.log('There\'s an error!', err)
+        console.log(err);
       });
 }
 

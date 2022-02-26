@@ -2,12 +2,18 @@ import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { SafeAreaView, StyleSheet, Text, TextInput, Button, View } from 'react-native';
 import { Formik } from 'formik'
-import { useState } from 'react';
-// import timestampToFirebaseObj from '../../utils/formatTimestamp';
-
+import { useState, useEffect } from 'react';
 import postItem from '../../utils/postItem';
+import getCategories from '../../utils/getCategories';
 
 const AddItem = () => {
+  const [ categories, setCategories ] = useState([]); 
+
+  useEffect(() => {
+    getCategories().then((categoriesFromDb) => {
+      setCategories(categoriesFromDb);
+    })
+  }, []);
 
   return (
     <SafeAreaView style={styles.addItemContainer}>
@@ -52,13 +58,23 @@ const AddItem = () => {
             onChangeText={props.handleChange('username')}
            
           />
-          <Text>Category:</Text>
-          <TextInput
-            style={styles.input}
-            value={props.values.category}
-            onChangeText={props.handleChange('category')}
-    
-          />
+          <Text>Please select a category:</Text>
+          <Picker
+            enabled={true}
+            placeholder= 'Select your category'
+            selectedValue={props.values.category}
+            onValueChange={props.handleChange('category')}
+          >
+
+          {categories.map((category) => {
+            return (
+              <Picker.Item
+              label={category}
+              value={category}
+              key={category}/>
+            )
+          })}
+           </Picker> 
           <Button onPress={props.handleSubmit} title='Submit'/>
         </View>
       )}
