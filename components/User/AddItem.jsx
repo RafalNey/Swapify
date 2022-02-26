@@ -30,7 +30,7 @@ const AddItem = () => {
           <Text>Add your listing below</Text>
           <Text>Title</Text>
           <TextInput
-            placeholder='Tell us what you are listing:'
+            placeholder='Tell us what you are listing...'
             style={styles.input}
             value={props.values.title}
             onChangeText={props.handleChange('title')}
