@@ -22,10 +22,8 @@ const AddItem = () => {
         initialValues={{title: '', img: '', description: '', category: '', username: ''}}
         onSubmit={(values, actions) => { 
           actions.resetForm();
-          // values.posted_at = Date.now();
           values.posted_at = serverTimestamp();
-          postItem(values);
-          
+          postItem(values);  
      }}
     >
       {(props)=>(

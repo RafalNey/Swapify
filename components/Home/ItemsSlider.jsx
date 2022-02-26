@@ -1,6 +1,6 @@
 // import * as React from 'react';
 import React, { useState, useEffect } from 'react';
-import  getItems from '../../utils/getItems';
+import getMostRecentItems from '../../utils/getMostRecentItems';
 import {
   StatusBar,
   FlatList,
@@ -15,12 +15,12 @@ const { width, height } = Dimensions.get('screen');
 const imageW = width * 0.5;
 const imageH = imageW * 1.1;
 
-const ItemsSlider = ({ category }) => {
+const ItemsSlider = () => {
 
-  const [ items, setItems ] = useState([]); 
+  const [ recentItems, setRecentItems ] = useState([]); 
   useEffect(() => {
-    getItems(category).then((itemsFromDb) => {
-      setItems(itemsFromDb);
+    getMostRecentItems().then((itemsFromDb) => {
+      setRecentItems(itemsFromDb);
     })
 }, []);
 
@@ -28,7 +28,7 @@ const ItemsSlider = ({ category }) => {
     <View style={styles.listContainer}>
       <Text style={styles.listHeader}>Recently added</Text>
       <FlatList
-        data={items}
+        data={recentItems}
         pagingEnabled
         horizontal
         decelerationRate={0}

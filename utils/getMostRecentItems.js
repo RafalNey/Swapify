@@ -1,13 +1,12 @@
 import { onSnapshot } from 'firebase/firestore';
-import { query, where } from 'firebase/firestore';
+import { query, where, orderBy } from 'firebase/firestore';
 import collectionRef from '../firebase';
 
-// .collection("items")
-// .orderBy("posted_at", "desc")
 const getMostRecentItems = () => {
 
 return new Promise ((resolve, reject) => {
-    onSnapshot(collectionRef, (snapshot) => {
+    const q = query(collectionRef, orderBy('posted_at', 'desc'))
+    onSnapshot(q, (snapshot) => {
     let itemsFromDb = [];
     snapshot.docs.forEach((doc) => {
       itemsFromDb.push({ ...doc.data(), id:doc.id});
@@ -15,7 +14,8 @@ return new Promise ((resolve, reject) => {
   resolve(itemsFromDb);
   })
   }).then((items) => {
-    return items;
+      const sixMostRecent = items.slice(0, 6);
+      return sixMostRecent;
   })
 }
 
