@@ -8,68 +8,64 @@ import { useState } from 'react';
 import postItem from '../../utils/postItem';
 
 const AddItem = () => {
+
   return (
-    <Formik
-      initialValues={{title: '', img: '', description: '', category: '', username: ''}}
-      onSubmit={(values) => { 
-        
-        values.posted_at = Date.now();
-        postItem(values);
+    <SafeAreaView style={styles.addItemContainer}>
+      <Formik
+        initialValues={{title: '', img: '', description: '', category: '', username: ''}}
+        onSubmit={(values, actions) => { 
+          actions.resetForm();
+          values.posted_at = Date.now();
+          postItem(values);
      }}
     >
-      {({handleChange, handleSubmit, values})=>(
+      {(props)=>(
         <View>
+          <Text>Add your listing below</Text>
           <Text>Title</Text>
           <TextInput
+            placeholder='Tell us what you are listing:'
             style={styles.input}
-            value={values.title}
-            onChangeText={handleChange('title')}
+            value={props.values.title}
+            onChangeText={props.handleChange('title')}
           />
           <Text>Image URL:</Text>
            <TextInput
+            placeholder='Paste in your image URL...'
             style={styles.input}
-            value={values.img}
-            onChangeText={handleChange('img')}
+            value={props.values.img}
+            onChangeText={props.handleChange('img')}
 
           />
           <Text>Description:</Text>
            <TextInput
-            placeholder={'Tell us about your item...'}
+            placeholder={'Tell us a bit about your item...'}
             style={styles.input}
-            value={values.description}
-            onChangeText={handleChange('description')}
+            value={props.values.description}
+            onChangeText={props.handleChange('description')}
             
           />
           <Text>Username:</Text>
            <TextInput
             style={styles.input}
-            value={values.username}
-            onChangeText={handleChange('username')}
+            value={props.values.username}
+            onChangeText={props.handleChange('username')}
            
           />
           <Text>Category:</Text>
           <TextInput
             style={styles.input}
-            value={values.category}
-            onChangeText={handleChange('category')}
+            value={props.values.category}
+            onChangeText={props.handleChange('category')}
     
           />
-          <Button onPress={handleSubmit} title="Submit"/>
+          <Button onPress={props.handleSubmit} title='Submit'/>
         </View>
       )}
     </Formik>
+    </SafeAreaView>
   )
 };
-
-  //     <SafeAreaView style={styles.addItemContainer}>
-  //       <Text>Post your listing below</Text><br></br>
-  
-  //     </SafeAreaView>
-  //     // </View>
-  //       )}
-  //     </Formik>
-  // )
-
 
 export default AddItem;
 
