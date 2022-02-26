@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { TouchableOpacity,Text, TextInput, View, ScrollView, StyleSheet, Button } from 'react-native';
+import { TouchableOpacity,Text, TextInput, View, ScrollView, StyleSheet} from 'react-native';
 import {auth, database} from '../firebase';
 import {collection, addDoc, query, serverTimestamp, orderBy} from 'firebase/firestore'
 import {Formik} from 'formik'
 import { getAuth } from 'firebase/auth';
+import Button from './Reusable/Button'
 
 const colRef = collection(database, 'messages');
-const q = query(colRef, orderBy('createdAt', 'desc'))
 
 const Messages = () => {
     const auth= getAuth();
@@ -29,18 +29,22 @@ const Messages = () => {
             <Formik
             initialValues={{message: '',
             username: user.displayName,
+            user_id: user.uid
         }}
             onSubmit={(values, actions)=>{
-                console.log(values)
                 actions.resetForm();
-                addDoc(colRef, {values})
+                addDoc(colRef, {username: values.username,
+                message: values.message,
+            user_id: values.user_id,
+            createdAt: serverTimestamp()}
+            )
             }}>
                 {props => (<View><TextInput
             style={{height: 40}}
             placeholder="New message"
             onChangeText={props.handleChange('message')}
             value={props.values.message}/>
-            <Button title="Submit" onPress={props.handleSubmit}/></View>)}
+            <Button btnText={'Submit'} onSubmit={props.handleSubmit}/></View>)}
             
             </Formik></View></ScrollView>
     )

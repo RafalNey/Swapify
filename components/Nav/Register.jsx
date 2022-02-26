@@ -1,11 +1,12 @@
 import {
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   View,
   Text,
   TextInput,
-  Dimensions,
   Image,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
@@ -14,22 +15,11 @@ import Logo from '../Home/Logo';
 import Button from '../Reusable/Button';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth, upload } from '../../firebase';
-import { formatErrorMsg } from '../Error';
-
-
-const { width } = Dimensions.get('screen');
-
-const onTermsOfUsePressed = () => {
-  console.warn('Terms of Use');
-};
-
-const onPrivacyPolicyPressed = () => {
-  console.warn('Privacy Policy');
-};
+import { formatErrorMsg } from '../../utils/formatErrorMsg';
+import { ErrorMsg } from '../Error';
 
 const Register = () => {
   const navigation = useNavigation();
-  const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,9 +27,7 @@ const Register = () => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [signupDetails, setSignupDetails] = useState(null);
   const [image, setImage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false)
-
-  
+  const [isLoading, setIsLoading] = useState(false);
 
   const pickImage = () => {
     ImagePicker.launchImageLibraryAsync({
@@ -50,34 +38,28 @@ const Register = () => {
     }).then((result) => {
       if (!result.cancelled) {
         setImage(result.uri);
-        console.log(image)
       }
     });
   };
 
   const submitHandler = () => {
     if (password2 !== password) {
-      console.log('Passwords do not match');
+      setErrorMsg('Passwords do not match');
     } else {
       setSignupDetails({
         email: email,
         username: username,
         password: password,
       });
-      upload(image, auth.currentUser, setIsLoading)
-      navigation.navigate('Login');
-      setImage(null)
     }
-    // createUserWithEmailAndPassword(auth, email, password)
-    // .then((userCredential) => {
-    //   updateProfile(auth.currentUser, {
-    //     displayName: username
-    //   })
-    //   console.log(auth.currentUser)
-    // })
-    // .catch((err) => {
-    //   console.log(err)
-    // })
+  };
+
+  const onTermsOfUsePressed = () => {
+    navigation.navigate('User Agreement');
+  };
+
+  const onPrivacyPolicyPressed = () => {
+    navigation.navigate('Privacy');
   };
 
   useEffect(() => {
@@ -87,62 +69,80 @@ const Register = () => {
         signupDetails.email,
         signupDetails.password
       )
-        .then((userCredential) => {
+        .then(() => {
           updateProfile(auth.currentUser, {
             displayName: signupDetails.username,
           });
-          console.log(auth.currentUser);
+          image && upload(image, auth.currentUser, setIsLoading);
+        })
+        .then(() => {
+          navigation.navigate('Login');
         })
         .catch((err) => {
-          console.log(err);
+          setErrorMsg(formatErrorMsg(err.message));
         });
-  }, [signupDetails]);
+  }, [signupDetails, image]);
 
   return (
-    <SafeAreaView style={styles.registerContainer}>
-      <Logo />
-      <View style={styles.loginCard}>
-        <TextInput
-          value={username}
-          style={styles.loginInput}
-          placeholder='Username'
-          onChangeText={(text) => setUsername(text)}
-        />
-        <TextInput
-          value={email}
-          style={styles.loginInput}
-          placeholder='E-mail'
-          onChangeText={(text) => setEmail(text)}
-        />
-        <TextInput
-          value={password}
-          style={styles.loginInput}
-          placeholder='Enter Password'
-          onChangeText={(text) => setPassword(text)}
-        />
-        <TextInput
-          value={password2}
-          style={styles.loginInput}
-          placeholder='Re-enter Password'
-          onChangeText={(text) => setPassword2(text)}
-        />
-        {image ? <Image 
-        style={styles.displayPic}
-        source={{uri: image}} /> : null}
-        <Button btnText={!image ? 'Pick a display photo' : 'Change photo'} onSubmit={pickImage} />
-      </View>
-      <Button btnText={'Submit'} onSubmit={submitHandler} />
-      <Text style={styles.text}>
-        By registering, you confirm that you accept our
-        <Text style={styles.link} onPress={onTermsOfUsePressed}>
-          Terms of Use
-        </Text>
-        and
-        <Text style={styles.link} onPress={onPrivacyPolicyPressed}>
-          Privacy Policy
-        </Text>
-      </Text>
-    </SafeAreaView>
+    <KeyboardAvoidingView style={styles.registerContainer} behavior='height'>
+      <SafeAreaView>
+        <ScrollView
+          KeyboardDismissMode='interactive'
+          keyboardsHoldPersist='always'
+        >
+          <Logo />
+          <View style={styles.loginCard}>
+            {errorMsg && <ErrorMsg errorMsg={errorMsg} />}
+            <TextInput
+              value={username}
+              style={styles.loginInput}
+              placeholder='Username'
+              onChangeText={(text) => setUsername(text)}
+            />
+            <TextInput
+              value={email}
+              style={styles.loginInput}
+              placeholder='E-mail'
+              onChangeText={(text) => setEmail(text)}
+            />
+            <TextInput
+              value={password}
+              style={styles.loginInput}
+              placeholder='Enter Password'
+              onChangeText={(text) => setPassword(text)}
+              secureTextEntry
+            />
+            <TextInput
+              value={password2}
+              style={styles.loginInput}
+              placeholder='Re-enter Password'
+              onChangeText={(text) => setPassword2(text)}
+              secureTextEntry
+            />
+            {image ? (
+              <Image style={styles.displayPic} source={{ uri: image }} />
+            ) : null}
+            <Button
+              btnText={!image ? 'Pick a display photo' : 'Change photo'}
+              onSubmit={pickImage}
+            />
+            {username && email && password && password2 ? (
+              <Button btnText={'Submit'} onSubmit={submitHandler} />
+            ) : null}
+            <Text style={styles.text}>
+              By registering, you confirm that you accept our{' '}
+              <Text style={styles.link} onPress={onTermsOfUsePressed}>
+                Terms of Use{' '}
+              </Text>
+              and{' '}
+              <Text style={styles.link} onPress={onPrivacyPolicyPressed}>
+                Privacy Policy
+              </Text>
+            </Text>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -153,37 +153,34 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingHorizontal: '5%',
-    paddingVertical: '5%',
-    backgroundColor: 'lightgrey',
+    backgroundColor: '#fff',
   },
   loginCard: {
     alignItems: 'center',
-    width: width,
-    marginTop: 20,
   },
   loginInput: {
-    width: '72.5%',
+    width: '90%',
     marginBottom: 18,
     padding: 9,
     fontSize: 17,
     borderWidth: 1,
     borderRadius: 5,
-    backgroundColor: 'white',
     borderColor: '#ccc9c9',
   },
   text: {
-    color: 'grey',
     marginVertical: 10,
+    textAlign: 'center',
+    color: '#808080',
   },
   link: {
-    color: 'red',
+    color: '#ff0000',
   },
   displayPic: {
     height: 100,
     width: 100,
     marginBottom: 10,
-    borderColor: 'blue',
+    borderColor: '#0000ff',
     borderWidth: 2,
-    borderRadius: 50
+    borderRadius: 50,
   },
 });
