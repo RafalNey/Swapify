@@ -5,7 +5,6 @@ import AddItem from '../User/AddItem';
 import DeleteItem from '../User/DeleteItem';
 import { useState } from 'react';
 
-
 const Home = () => {
   return (
     <SafeAreaView style={styles.homeContainer}>
@@ -13,8 +12,8 @@ const Home = () => {
         <StatusBar default />
         <Logo />
         <ItemsSlider />
-        <DeleteItem />
-        <AddItem />
+        {/* <DeleteItem /> */}
+        {/* <AddItem /> */}
       </ScrollView>
     </SafeAreaView>
   );
