@@ -13,8 +13,8 @@ import { Ionicons, FontAwesome, Fontisto } from '@expo/vector-icons';
 import Button from '../Reusable/Button';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import { auth, deleteAccount } from '../../firebase';
-import { deleteUser, signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
+import { deleteUser } from 'firebase/auth';
 
 const { width } = Dimensions.get('screen');
 const menuW = width * 0.5;
@@ -91,6 +91,10 @@ const User = () => {
       <View style={styles.showBtnsContainer}>
         <Button btnText={'My List'} navigationHandler={navigationHandler} />
         <Button btnText={'Swaps'} navigationHandler={navigationHandler} />
+        
+      </View>
+      <View>
+        <Button btnText={'Delete account'} onSubmit={deletePrompt} />
       </View>
       <View>
         <Button btnText={'Delete account'} onSubmit={deletePrompt} />
