@@ -12,7 +12,7 @@ const Home = () => {
       <ScrollView>
         <StatusBar default />
         <Logo />
-        <ItemsSlider category={'All'} />
+        <ItemsSlider />
         <DeleteItem />
         <AddItem />
       </ScrollView>

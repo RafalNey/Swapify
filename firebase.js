@@ -26,8 +26,8 @@ export const auth = getAuth(app);
 
 export const database = getFirestore(app);
 
-const collectionRef = collection(database, "test");
-export const messageColRef = collection(database, "messages");
+const collectionRef = collection(database, 'items');
+export const messageColRef = collection(database, 'messages');
 
 export default collectionRef;
 

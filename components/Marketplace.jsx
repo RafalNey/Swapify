@@ -6,13 +6,14 @@ import VerticalList from "./Reusable/VerticalList";
 import getCategories from "../utils/getCategories";
 
 const Marketplace = () => {
-  const [categories, setCategories] = useState(["All"]);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [categories, setCategories] = useState(['All']);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [sortBy, setSortBy] = useState('Most Recent');
 
   useEffect(() => {
     getCategories().then((categoriesFromDb) => {
       setCategories(categoriesFromDb);
-    });
+    })
   }, []);
 
   return (
@@ -35,7 +36,32 @@ const Marketplace = () => {
           );
         })}
       </Picker>
-      <VerticalList category={selectedCategory} />
+      
+      
+      <Picker
+        selectedValue={sortBy}
+        onValueChange={(value) => setSortBy(value)}
+        styles={styles.marketplaceCategory}
+      >
+      <Picker.Item
+        label='Most Recent'
+        value='Most Recent'
+        key='Most Recent'
+      />
+      <Picker.Item
+        label='Least Recent'
+        value='Least Recent'
+        key='Least Recent'
+      />
+      <Picker.Item
+        label='Title'
+        value='Title'
+        key='Title'
+      />
+       </Picker>
+      {console.log('You picked ', sortBy)}
+      <VerticalList category={selectedCategory}/>
+      
     </SafeAreaView>
   );
 };
