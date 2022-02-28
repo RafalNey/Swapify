@@ -12,12 +12,14 @@ import React, { useState, useEffect } from 'react';
 import getItems from '../../utils/getItems';
 import formatTimestamp from '../../utils/formatTimestamp';
 import { descriptionFormatter } from '../../utils/descriptionFormatter';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('screen');
 const imageW = width * 0.44;
 const imageH = imageW * 1.1;
 
 const VerticalList = ({ props }) => {
+  const navigation = useNavigation();
   const category = props.category;
   const sortBy = props.sortBy;
   const user = props.user;
@@ -40,20 +42,24 @@ const VerticalList = ({ props }) => {
       keyExtractor={(_, index) => index.toString()}
       renderItem={({ item }) => {
         return (
-          <View style={styles.itemCard}>
-            <Image source={{ uri: item.img }} style={styles.itemImg} />
-            <View style={styles.itemDetails}>
-              <Text style={styles.itemHeader}>{item.title}</Text>
-              <Text>{descriptionFormatter(item.description)}</Text>
-              <View style={styles.itemFooter}>
-                <Text>{item.username}</Text>
-                {/* <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Item', { ...item })}
+          >
+            <View style={styles.itemCard}>
+              <Image source={{ uri: item.img }} style={styles.itemImg} />
+              <View style={styles.itemDetails}>
+                <Text style={styles.itemHeader}>{item.title}</Text>
+                <Text>{descriptionFormatter(item.description)}</Text>
+                <View style={styles.itemFooter}>
+                  <Text>{item.username}</Text>
+                  {/* <TouchableOpacity>
                   <Fontisto name='trash' size={24} color='#6b6565' />
                 </TouchableOpacity> */}
+                </View>
+                <Text>{formatTimestamp(item.posted_at)}</Text>
               </View>
-              <Text>{formatTimestamp(item.posted_at)}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         );
       }}
     ></FlatList>

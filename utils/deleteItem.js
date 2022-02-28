@@ -3,16 +3,15 @@ import { deleteDoc, doc } from 'firebase/firestore';
 import { connectStorageEmulator } from 'firebase/storage';
 import { useState } from 'react';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
-import { database } from '../firebase'; 
+import { database } from '../firebase';
 
-const deleteItem = ({id}) => {
-    const docRef = doc(database, 'items', id);
-    deleteDoc(docRef)
-      .then(() => { 
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-}
+const deleteItem = async (id) => {
+  const docRef = doc(database, 'items', id);
+  await deleteDoc(docRef)
+    .then(() => {})
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-export default deleteItem; 
+export default deleteItem;

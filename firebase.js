@@ -28,7 +28,7 @@ export const database = getFirestore(app);
 
 export const messageColRef = collection(database, 'messages');
 
-const collectionRef = collection(database, 'test');
+const collectionRef = collection(database, 'items');
 export default collectionRef;
 
 export const storage = getStorage();
