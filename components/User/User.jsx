@@ -96,9 +96,6 @@ const User = () => {
       <View>
         <Button btnText={'Delete account'} onSubmit={deletePrompt} />
       </View>
-      <View>
-        <Button btnText={'Delete account'} onSubmit={deletePrompt} />
-      </View>
     </SafeAreaView>
   );
 };
