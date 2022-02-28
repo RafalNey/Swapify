@@ -8,7 +8,7 @@ import getCategories from "../utils/getCategories";
 const Marketplace = () => {
   const [categories, setCategories] = useState(['All']);
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [sortBy, setSortBy] = useState('Most Recent');
+  const [sortBy, setSortBy] = useState('posted_at desc');
 
   useEffect(() => {
     getCategories().then((categoriesFromDb) => {
@@ -41,26 +41,26 @@ const Marketplace = () => {
       <Picker
         selectedValue={sortBy}
         onValueChange={(value) => setSortBy(value)}
-        styles={styles.marketplaceCategory}
+        styles={styles.marketplaceSortBy}
       >
       <Picker.Item
         label='Most Recent'
-        value='Most Recent'
+        value='posted_at desc'
         key='Most Recent'
       />
       <Picker.Item
         label='Least Recent'
-        value='Least Recent'
+        value='posted_at asc'
         key='Least Recent'
       />
       <Picker.Item
         label='Title'
-        value='Title'
+        value='title asc'
         key='Title'
       />
        </Picker>
-      {console.log('You picked ', sortBy)}
-      <VerticalList category={selectedCategory}/>
+    
+      <VerticalList props={{category: selectedCategory, sortBy: sortBy}}/>
       
     </SafeAreaView>
   );
@@ -85,6 +85,10 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   marketplaceCategory: {
+    alignSelf: "flex-end",
+    width: "50%",
+  },
+  marketplaceSortBy: {
     alignSelf: "flex-end",
     width: "50%",
   },
