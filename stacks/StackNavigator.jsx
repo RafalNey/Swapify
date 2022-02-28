@@ -12,6 +12,7 @@ import Privacy from '../components/Nav/Privacy';
 import AddItem from '../components/User/AddItem';
 import CameraPage from '../components/CameraPage';
 import MessageList from '../components/MessageList';
+import Item from '../components/Item';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ const StackNavigator = () => {
         <Stack.Screen name='Home' component={Home} />
         <Stack.Screen name='User' component={User} />
         <Stack.Screen name='Marketplace' component={Marketplace} />
+        <Stack.Screen name='Item' component={Item} />
         <Stack.Screen name='My List' component={UserList} />
         <Stack.Screen name='Swaps' component={UserSwaps} />
         <Stack.Screen name='Messages' component={MessageList} />

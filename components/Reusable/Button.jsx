@@ -14,7 +14,7 @@ const Button = ({ btnText, navigationHandler, onSubmit, disabled }) => {
       style={[
         styles.btn,
         btns.includes(btnText) && styles.bigBtns,
-        btnText === 'Delete account' && styles.red,
+        btnText.startsWith('Delete') && styles.red,
       ]}
       onPress={eventsHandler}
     >
