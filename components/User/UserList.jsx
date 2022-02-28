@@ -2,7 +2,6 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Button from '../Reusable/Button';
 import VerticalList from '../Reusable/VerticalList';
-import { itemImgs } from '../../images/itemImgs';
 
 const UserList = () => {
   const navigation = useNavigation();
@@ -15,7 +14,7 @@ const UserList = () => {
     <View style={styles.userListContainer}>
       <Text style={styles.userListHeader}>My List</Text>
       <Button btnText={'Add Item'} navigationHandler={navigationHandler} />
-      <VerticalList data={itemImgs} />
+      <VerticalList props={{ category: 'All', sortBy: 'posted_at desc' }} />
     </View>
   );
 };
