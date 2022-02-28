@@ -1,14 +1,16 @@
 import { onSnapshot } from 'firebase/firestore';
-import { query, where } from 'firebase/firestore';
+import { query, where, orderBy } from 'firebase/firestore';
 import collectionRef from '../firebase';
 
 
-const getItems = (category) => {
+const getItems = (category, sortBy) => {
+    const sortByArray = sortBy.split(' ')
+
     let q = '';
     if (category==='All'|| category===undefined || category==='') {
-        q = collectionRef;
+        q = query(collectionRef, orderBy(sortByArray[0], sortByArray[1]))
     } else {
-        q = query(collectionRef, where('category', '==', category))
+        q = query(collectionRef, where('category', '==', category), orderBy(sortByArray[0], sortByArray[1]))
     }
     return new Promise ((resolve, reject) => {
       onSnapshot(q, (snapshot) => {

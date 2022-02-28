@@ -16,15 +16,16 @@ const { width } = Dimensions.get('screen');
 const imageW = width * 0.44;
 const imageH = imageW * 1.1;
 
-const VerticalList = ({category}) => {
-
+const VerticalList = ({props}) => {
+  const category = props.category;
+  const sortBy = props.sortBy;
   const [ items, setItems ] = useState([]); 
 
   useEffect(() => {
-    getItems(category).then((itemsFromDb) =>{
+    getItems(category, sortBy).then((itemsFromDb) =>{
       setItems(itemsFromDb);
     })
-}, [category]);
+}, [category, sortBy]);
 
   return (
    
