@@ -91,7 +91,6 @@ const User = () => {
       <View style={styles.showBtnsContainer}>
         <Button btnText={'My List'} navigationHandler={navigationHandler} />
         <Button btnText={'Swaps'} navigationHandler={navigationHandler} />
-        
       </View>
       <View>
         <Button btnText={'Delete account'} onSubmit={deletePrompt} />

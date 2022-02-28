@@ -6,12 +6,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-} from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import React, { useState, useEffect } from "react";
-import getItems from "../utils/getItems";
+} from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import React, { useState, useEffect } from 'react';
+import getItems from '../utils/getItems';
 
-const { width } = Dimensions.get("screen");
+const { width } = Dimensions.get('screen');
 const imageW = width * 0.2;
 const imageH = imageW * 1.1;
 
@@ -29,7 +29,7 @@ const MessageList = ({ navigation, category }) => {
     <FlatList
       data={items}
       pagingEnabled
-      style={{ alignSelf: "stretch" }}
+      style={{ alignSelf: 'stretch' }}
       decelerationRate={0}
       snapToInterval={imageH + 20}
       showsVerticalScrollIndicator={false}
@@ -48,13 +48,13 @@ const MessageList = ({ navigation, category }) => {
               <TouchableOpacity
                 style={styles.itemButton}
                 onPress={() =>
-                  navigation.navigate("Conversation", {
-                    messageDocId: "01ovbAjSpLRRZiBD8ujo",
+                  navigation.navigate('Conversation', {
+                    messageDocId: '01ovbAjSpLRRZiBD8ujo',
                     item: item,
                   })
                 }
               >
-                <MaterialIcons name="message" size={24} color="#6b6565" />
+                <MaterialIcons name='message' size={24} color='#6b6565' />
               </TouchableOpacity>
             </View>
           </View>
@@ -68,18 +68,18 @@ export default MessageList;
 
 const styles = StyleSheet.create({
   itemCard: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: 20,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: "#ccc9c9",
-    overflow: "hidden",
-    alignItems: "center",
+    borderColor: '#ccc9c9',
+    overflow: 'hidden',
+    alignItems: 'center',
   },
   itemImg: {
     width: imageW,
     height: imageH,
-    resizeMode: "cover",
+    resizeMode: 'cover',
   },
   itemDetail: {
     flex: 1,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   itemName: {
     fontSize: 18,
-    fontWeight: "900",
+    fontWeight: '900',
   },
   itemButton: {
     padding: 20,
