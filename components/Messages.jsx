@@ -1,7 +1,7 @@
-import { getAuth } from "firebase/auth";
-import { addDoc, doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import { getAuth } from 'firebase/auth';
+import { addDoc, doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   Text,
@@ -11,13 +11,13 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-} from "react-native";
-import { messageColRef } from "../firebase";
-import getMessage from "../utils/getMessage";
-import Button from "./Reusable/Button";
-import { StyleSheet } from "react-native";
-import { useRef } from "react";
-import { dateFormatter } from "../utils/dateFormatter";
+} from 'react-native';
+import { messageColRef } from '../firebase';
+import getMessage from '../utils/getMessage';
+import Button from './Reusable/Button';
+import { StyleSheet } from 'react-native';
+import { useRef } from 'react';
+import { dateFormatter } from '../utils/dateFormatter';
 
 const Messages = ({ route }) => {
   const { messageDocId, item } = route.params;
@@ -25,8 +25,8 @@ const Messages = ({ route }) => {
   const user = auth.currentUser;
   const [message, setMessage] = useState({});
   const newDoc = {
-    item_id: "",
-    owner_id: "",
+    item_id: '',
+    owner_id: '',
     user_id: user.uid,
     createdAt: serverTimestamp(),
     username: user.displayName,
@@ -41,7 +41,7 @@ const Messages = ({ route }) => {
   const scrollRef = useRef(null);
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
       <View style={styles.container}>
@@ -66,7 +66,7 @@ const Messages = ({ route }) => {
           }
           data={message.messages}
           pagingEnabled
-          style={{ alignSelf: "stretch" }}
+          style={{ alignSelf: 'stretch' }}
           decelerationRate={0}
           showsVerticalScrollIndicator={false}
           keyExtractor={(_, index) => index.toString()}
@@ -86,7 +86,7 @@ const Messages = ({ route }) => {
         <View>
           <View style={{ padding: 10 }}>
             <Formik
-              initialValues={{ message: "" }}
+              initialValues={{ message: '' }}
               onSubmit={(values, actions) => {
                 const newMessage = { ...message };
                 const now = new Date();
@@ -111,20 +111,20 @@ const Messages = ({ route }) => {
               }}
             >
               {(props) => (
-                <View style={{ alignItems: "center" }}>
+                <View style={{ alignItems: 'center' }}>
                   <TextInput
                     style={{
                       borderWidth: 1,
                       padding: 10,
                       height: 100,
-                      width: "95%",
+                      width: '95%',
                     }}
                     multiline
                     numberOfLines={4}
-                    placeholder="New message"
-                    onChangeText={props.handleChange("message")}
+                    placeholder='New message'
+                    onChangeText={props.handleChange('message')}
                     value={props.values.message}
-                    returnKeyType="done"
+                    returnKeyType='done'
                     blurOnSubmit={true}
                     onSubmitEditing={() => {
                       Keyboard.dismiss();
@@ -149,21 +149,21 @@ const Messages = ({ route }) => {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   itemCard: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: 5,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: "#ccc9c9",
-    overflow: "hidden",
-    alignItems: "center",
+    borderColor: '#ccc9c9',
+    overflow: 'hidden',
+    alignItems: 'center',
   },
   itemImg: {
     width: 50,
     height: 50,
-    resizeMode: "cover",
+    resizeMode: 'cover',
   },
   itemDetail: {
     flex: 1,
@@ -171,7 +171,7 @@ var styles = StyleSheet.create({
   },
   itemName: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   messageDetail: {
     flex: 1,
@@ -179,11 +179,11 @@ var styles = StyleSheet.create({
   },
   messageText: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   Form: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 });
 
