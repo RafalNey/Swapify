@@ -9,26 +9,27 @@ import {
 } from 'react-native';
 import { Fontisto } from '@expo/vector-icons';
 import React, { useState, useEffect } from 'react';
-import  getItems from '../../utils/getItems';
+import getItems from '../../utils/getItems';
 import formatTimestamp from '../../utils/formatTimestamp';
+import { descriptionFormatter } from '../../utils/descriptionFormatter';
 
 const { width } = Dimensions.get('screen');
 const imageW = width * 0.44;
 const imageH = imageW * 1.1;
 
-const VerticalList = ({props}) => {
+const VerticalList = ({ props }) => {
   const category = props.category;
   const sortBy = props.sortBy;
-  const [ items, setItems ] = useState([]); 
+  const user = props.user;
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    getItems(category, sortBy).then((itemsFromDb) =>{
+    getItems(category, sortBy, user).then((itemsFromDb) => {
       setItems(itemsFromDb);
-    })
-}, [category, sortBy]);
+    });
+  }, [category, sortBy, user]);
 
   return (
-   
     <FlatList
       data={items}
       pagingEnabled
@@ -38,20 +39,19 @@ const VerticalList = ({props}) => {
       showsVerticalScrollIndicator={false}
       keyExtractor={(_, index) => index.toString()}
       renderItem={({ item }) => {
-
         return (
           <View style={styles.itemCard}>
             <Image source={{ uri: item.img }} style={styles.itemImg} />
             <View style={styles.itemDetails}>
               <Text style={styles.itemHeader}>{item.title}</Text>
-              <Text>{item.description}</Text>
-              <Text>{formatTimestamp(item.posted_at)}</Text>
-              <Text>{item.username}</Text>
+              <Text>{descriptionFormatter(item.description)}</Text>
               <View style={styles.itemFooter}>
-                <TouchableOpacity>
+                <Text>{item.username}</Text>
+                {/* <TouchableOpacity>
                   <Fontisto name='trash' size={24} color='#6b6565' />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
+              <Text>{formatTimestamp(item.posted_at)}</Text>
             </View>
           </View>
         );
