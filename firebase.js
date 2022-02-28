@@ -1,5 +1,4 @@
 // Import the functions you need from the SDKs you need
-
 import { initializeApp } from "firebase/app";
 import { deleteUser, getAuth, updateProfile } from "firebase/auth";
 import { getFirestore, collection } from "firebase/firestore";
@@ -35,7 +34,6 @@ export default collectionRef;
 export const storage = getStorage();
 
 //storage
-
 export const upload = async (file, currentUser, setLoading) => {
   const response = await fetch(file);
   const blob = await response.blob();
