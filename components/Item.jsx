@@ -12,8 +12,13 @@ const Item = ({ route }) => {
   const [id, setId] = useState(item.id);
 
   const deleteItemHandler = async () => {
-    deleteItem(id);
-    // navigation.navigate('My List');
+    deleteItem(id)
+      .then(() => {
+        navigation.navigate('My List');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -45,7 +50,7 @@ const styles = StyleSheet.create({
   },
   itemImage: {
     width: '100%',
-    height: '30%',
+    height: '35%',
     borderRadius: 5,
     resizeMode: 'cover',
     borderWidth: 1,

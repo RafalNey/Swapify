@@ -37,7 +37,7 @@ const VerticalList = ({ props }) => {
       pagingEnabled
       style={{ alignSelf: 'stretch' }}
       decelerationRate={0}
-      snapToInterval={imageH + 20}
+      snapToInterval={imageH + 21.5}
       showsVerticalScrollIndicator={false}
       keyExtractor={(_, index) => index.toString()}
       renderItem={({ item }) => {

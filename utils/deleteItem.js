@@ -7,11 +7,8 @@ import { database } from '../firebase';
 
 const deleteItem = async (id) => {
   const docRef = doc(database, 'items', id);
-  await deleteDoc(docRef)
-    .then(() => {})
-    .catch((err) => {
-      console.log(err);
-    });
+
+  return await deleteDoc(docRef);
 };
 
 export default deleteItem;
