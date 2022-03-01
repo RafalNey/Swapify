@@ -8,15 +8,14 @@ const getAverageStars = (username) => {
 
     return new Promise((resolve, reject) => {
       onSnapshot(q, (snapshot) => {
-        let itemsFromDb = [];
+        let userFromDb = [];
         snapshot.docs.forEach((doc) => {
-          itemsFromDb.push({ ...doc.data(), id: doc.id });
+          userFromDb.push({ ...doc.data(), id: doc.id });
         });
-        resolve(itemsFromDb[0]);
+        resolve(userFromDb[0]);
       });
 
     }).then((userObj) => {
-
         let averageStars = 0
 
         if (userObj.total_stars === 0 || userObj.total_swaps === 0) {
