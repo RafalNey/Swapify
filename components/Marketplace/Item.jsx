@@ -13,14 +13,17 @@ import { useNavigation } from '@react-navigation/native';
 import deleteItem from '../../utils/deleteItem';
 import { UserContext } from '../../contexts/UserContext';
 import { dateFormatter } from '../../utils/dateFormatter';
+import Loader from '../Reusable/Loader';
 
 const Item = ({ route }) => {
   const navigation = useNavigation();
   const item = route.params;
   const [id, setId] = useState(item.id);
+  const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useContext(UserContext);
 
   const deleteItemHandler = async () => {
+    setLoading(true);
     await deleteItem(id)
       .then(() => {
         navigation.navigate('My List');
@@ -28,13 +31,17 @@ const Item = ({ route }) => {
       .catch((err) => {
         console.log(err);
       });
+
+    setLoading(false);
   };
 
   const goToLoginHandler = () => {
     navigation.navigate('Login');
   };
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <SafeAreaView style={styles.itemContainer}>
       <Image style={styles.itemImage} source={{ uri: item.img }} />
       <Text style={styles.itemTitle}>{item.title}</Text>
