@@ -6,7 +6,7 @@ import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import { database } from '../firebase';
 
 const deleteItem = async (id) => {
-  const docRef = doc(database, 'test', id);
+  const docRef = doc(database, 'item', id);
   await deleteDoc(docRef)
     .then(() => {})
     .catch((err) => {

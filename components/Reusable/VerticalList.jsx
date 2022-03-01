@@ -58,6 +58,7 @@ const VerticalList = ({ props }) => {
                   <Fontisto name='trash' size={24} color='#6b6565' />
                 </TouchableOpacity> */}
                 </View>
+                {/* {console.log(item.title, item.username)} */}
                 <AverageStarRating user={item.username}/>
                 <Text>{formatTimestamp(item.posted_at)}</Text>
               </View>
