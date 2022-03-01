@@ -21,7 +21,7 @@ const Item = ({ route }) => {
   const navigation = useNavigation();
   const item = route.params;
   const [id, setId] = useState(item.id);
-  const [messageDocId, setMessageDocId] = useState({});
+  const [messageDocId, setMessageDocId] = useState(null);
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useContext(UserContext);
 
@@ -43,10 +43,14 @@ const Item = ({ route }) => {
   };
 
   useEffect(() => {
+    if (auth.currentUser === null) {
+      auth.currentUser = 'guest'
+    }
     getMyItemMessageId(id, auth.currentUser.displayName).then((docId) => {
-      console.log(docId);
       setMessageDocId(docId);
     });
+  
+    
   }, [id]);
 
   return loading ? (
