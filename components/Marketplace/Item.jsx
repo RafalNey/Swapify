@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
 import deleteItem from '../../utils/deleteItem';
 import formattedTimestamp from '../../utils/formatTimestamp';
 import Loader from '../Reusable/Loader';
@@ -22,7 +21,7 @@ const Item = ({ route }) => {
   const navigation = useNavigation();
   const item = route.params;
   const [id, setId] = useState(item.id);
-  const [messageDocId, setMessageDocId] = useState(null);
+  const [messageDocId, setMessageDocId] = useState({});
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useContext(UserContext);
 
@@ -45,6 +44,7 @@ const Item = ({ route }) => {
 
   useEffect(() => {
     getMyItemMessageId(id, auth.currentUser.displayName).then((docId) => {
+      console.log(docId);
       setMessageDocId(docId);
     });
   }, [id]);
