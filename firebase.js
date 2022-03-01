@@ -56,7 +56,6 @@ export const uploadItemImg = async (
   setLoading(true);
   const snapshot = await uploadBytes(fileRef, blob);
   const photoURL = await getDownloadURL(fileRef);
-  setLoading(false);
 
   return photoURL;
 };

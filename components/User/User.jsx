@@ -47,6 +47,7 @@ const User = () => {
           onPress: () =>
             getItems('All', 'posted_at desc', auth.currentUser.displayName)
               .then((items) => {
+                setLoading(true);
                 items.forEach((item) => deleteItem(item.id));
               })
               .then(() => {

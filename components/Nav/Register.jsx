@@ -18,6 +18,7 @@ import { auth, upload } from '../../firebase';
 import { formatErrorMsg } from '../../utils/formatErrorMsg';
 import { ErrorMsg } from '../Error';
 import createUserObj from '../../utils/createUserObj';
+import Loader from '../Reusable/Loader';
 
 const Register = () => {
   const navigation = useNavigation();
@@ -89,7 +90,9 @@ const Register = () => {
       
   }, [signupDetails, image]);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <KeyboardAvoidingView style={styles.registerContainer} behavior='height'>
       <SafeAreaView>
         <ScrollView
