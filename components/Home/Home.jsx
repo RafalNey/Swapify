@@ -4,8 +4,10 @@ import ItemsSlider from './ItemsSlider';
 import AddItem from '../User/AddItem';
 import DeleteItem from '../User/DeleteItem';
 import { useState } from 'react';
+import StarRating from '../StarRatingForm';
 
 const Home = () => {
+  
   return (
     <SafeAreaView style={styles.homeContainer}>
       <ScrollView>
@@ -14,6 +16,7 @@ const Home = () => {
         <ItemsSlider />
         {/* <DeleteItem /> */}
         {/* <AddItem /> */}
+        <StarRating />
       </ScrollView>
     </SafeAreaView>
   );

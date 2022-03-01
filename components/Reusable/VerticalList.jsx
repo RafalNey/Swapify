@@ -13,6 +13,8 @@ import getItems from '../../utils/getItems';
 import formatTimestamp from '../../utils/formatTimestamp';
 import { descriptionFormatter } from '../../utils/descriptionFormatter';
 import { useNavigation } from '@react-navigation/native';
+import AverageStarRating from '../AverageStarRating';
+import getAverageStars from '../../utils/getAverageStar';
 
 const { width } = Dimensions.get('screen');
 const imageW = width * 0.44;
@@ -56,6 +58,7 @@ const VerticalList = ({ props }) => {
                   <Fontisto name='trash' size={24} color='#6b6565' />
                 </TouchableOpacity> */}
                 </View>
+                <AverageStarRating user={item.username}/>
                 <Text>{formatTimestamp(item.posted_at)}</Text>
               </View>
             </View>
