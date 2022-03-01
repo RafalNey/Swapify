@@ -17,6 +17,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Button from '../Reusable/Button';
 import postItem from '../../utils/postItem';
 import { useNavigation } from '@react-navigation/native';
+import Loader from '../Reusable/Loader';
 
 const AddItem = () => {
   const navigation = useNavigation();
@@ -29,7 +30,6 @@ const AddItem = () => {
     ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      // aspect: [4, 3],
       quality: 1,
     }).then((result) => {
       if (!result.cancelled) {
@@ -44,7 +44,9 @@ const AddItem = () => {
     });
   }, []);
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <SafeAreaView style={styles.addItemContainer}>
       <Formik
         initialValues={{ title: '', image, description: '', category: '' }}
@@ -67,6 +69,7 @@ const AddItem = () => {
               .then((photoURL) => {
                 postItem(values, photoURL);
                 setCounter((currCount) => currCount + 1);
+                setLoading(false);
                 return photoURL;
               })
               .then((photoURL) =>
