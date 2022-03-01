@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
         fontSize: 14
     }, 
     customRatingBarStyle: {
-        justifyContent: 'left',
         flexDirection: 'row', 
         flex: 1,
         padding: 0
@@ -59,6 +58,7 @@ const styles = StyleSheet.create({
         width: 20, 
         height: 20, 
         resizeMode: 'cover',
+        
     }, 
     buttonStyle: {
         justifyContent: 'center', 
