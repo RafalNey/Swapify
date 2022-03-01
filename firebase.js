@@ -30,8 +30,9 @@ export const messageColRef = collection(database, 'messages');
 
 const collectionRef = collection(database, 'test');
 
-export const usersColRef = collection(database, 'users');
 export default collectionRef;
+
+export const usersColRef = collection(database, 'users');
 
 export const storage = getStorage();
 
@@ -45,5 +46,5 @@ export const upload = async (file, currentUser, setLoading) => {
   const photoURL = await getDownloadURL(fileRef);
   updateProfile(currentUser, { photoURL });
   setLoading(false);
-  console.log(`image uploaded to Users/${currentUser.email}/avatar.jpg`);
+  //console.log(`image uploaded to Users/${currentUser.email}/avatar.jpg`);
 };

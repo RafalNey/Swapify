@@ -17,6 +17,7 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth, upload } from '../../firebase';
 import { formatErrorMsg } from '../../utils/formatErrorMsg';
 import { ErrorMsg } from '../Error';
+import createUserObj from '../../utils/createUserObj';
 
 const Register = () => {
   const navigation = useNavigation();
@@ -78,9 +79,14 @@ const Register = () => {
         .then(() => {
           navigation.navigate('Login');
         })
+        .then(() => {
+          createUserObj(signupDetails.username)
+        })
         .catch((err) => {
           setErrorMsg(formatErrorMsg(err.message));
-        });
+        })
+      // createUserObj();
+      
   }, [signupDetails, image]);
 
   return (

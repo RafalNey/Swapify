@@ -4,8 +4,7 @@ import { TouchableOpacity } from 'react-native';
 import getAverageStars from '../utils/getAverageStar';
 
 const AverageStarRating = ({user}) => {
-    console.log(user)
-    const userAverage = 2;
+
     const [ averageRating, setAverageRating ] = useState(0);
     const [ maxRating, setMaxRating ] = useState([1, 2, 3, 4, 5]);
     
@@ -13,10 +12,9 @@ const AverageStarRating = ({user}) => {
     const starImgCorner = 'https://raw.githubusercontent.com/tranhonghan/images/main/star_corner.png'
     useEffect(() => {
         getAverageStars(user).then((averageStars) => {
-            console.log(averageStars);
-        })
-        setAverageRating(userAverage);
-    }, []);
+            setAverageRating(averageStars);
+        });    
+    }, [user]);
     const CustomRatingBar = () => {
         return ( 
             <View key={user} style={styles.customRatingBarStyle}>
