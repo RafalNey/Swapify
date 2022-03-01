@@ -7,14 +7,13 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import { Fontisto } from '@expo/vector-icons';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import getItems from '../../utils/getItems';
-import formatTimestamp from '../../utils/formatTimestamp';
 import { descriptionFormatter } from '../../utils/descriptionFormatter';
 import { useNavigation } from '@react-navigation/native';
 import AverageStarRating from '../AverageStarRating';
 import getAverageStars from '../../utils/getAverageStar';
+import { dateFormatter } from '../../utils/dateFormatter';
 
 const { width } = Dimensions.get('screen');
 const imageW = width * 0.44;
@@ -39,7 +38,7 @@ const VerticalList = ({ props }) => {
       pagingEnabled
       style={{ alignSelf: 'stretch' }}
       decelerationRate={0}
-      snapToInterval={imageH + 20}
+      snapToInterval={imageH + 21.5}
       showsVerticalScrollIndicator={false}
       keyExtractor={(_, index) => index.toString()}
       renderItem={({ item }) => {
@@ -61,6 +60,8 @@ const VerticalList = ({ props }) => {
                 {/* {console.log(item.title, item.username)} */}
                 <AverageStarRating user={item.username}/>
                 <Text>{formatTimestamp(item.posted_at)}</Text>
+                {/* may need to decide which to keep */}
+                <Text>{dateFormatter(item.posted_at)}</Text>
               </View>
             </View>
           </TouchableOpacity>
