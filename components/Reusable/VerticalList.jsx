@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import AverageStarRating from '../AverageStarRating';
 import getAverageStars from '../../utils/getAverageStar';
 import { dateFormatter } from '../../utils/dateFormatter';
+import  formattedTimestamp  from '../../utils/formatTimestamp';
 
 
 const { width } = Dimensions.get('screen');
@@ -60,7 +61,7 @@ const VerticalList = ({ props }) => {
                 </View>
                
                 <AverageStarRating user={item.username}/>
-                <Text>{dateFormatter(item.posted_at)}</Text>
+                <Text>{formattedTimestamp(item.posted_at)}</Text>
               </View>
             </View>
           </TouchableOpacity>

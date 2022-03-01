@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import deleteItem from '../../utils/deleteItem';
 import { UserContext } from '../../contexts/UserContext';
 import { dateFormatter } from '../../utils/dateFormatter';
+import formattedTimestamp from '../../utils/formatTimestamp';
 import Loader from '../Reusable/Loader';
 
 const Item = ({ route }) => {
@@ -48,7 +49,8 @@ const Item = ({ route }) => {
       <Text style={styles.itemCategory}>{item.category}</Text>
       <View style={styles.swapContainer}>
         <Text style={styles.itemUsername}>{item.username}</Text>
-        <Text>{dateFormatter(item.posted_at)}</Text>
+        {/* <Text>{dateFormatter(item.posted_at)}</Text> */}
+        <Text>{formattedTimestamp(item.posted_at)}</Text>
       </View>
       {!isLoggedIn ? (
         <TouchableOpacity onPress={goToLoginHandler}>
