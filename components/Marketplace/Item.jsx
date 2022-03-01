@@ -1,18 +1,20 @@
+import { useContext, useState } from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
-import Button from './Reusable/Button';
-import { auth } from '../firebase';
-import formattedTimestamp from '../utils/formatTimestamp';
+import Button from '../Reusable/Button';
+import { auth } from '../../firebase';
+import formattedTimestamp from '../../utils/formatTimestamp';
 import { useNavigation } from '@react-navigation/native';
-import deleteItem from '../utils/deleteItem';
+import deleteItem from '../../utils/deleteItem';
+import { UserContext } from '../../contexts/UserContext';
 
 const Item = ({ route }) => {
   const navigation = useNavigation();
   const item = route.params;
   const [id, setId] = useState(item.id);
+  const { isLoggedIn } = useContext(UserContext);
 
   const deleteItemHandler = async () => {
-    deleteItem(id)
+    await deleteItem(id)
       .then(() => {
         navigation.navigate('My List');
       })
@@ -30,7 +32,7 @@ const Item = ({ route }) => {
         <Text style={styles.itemUsername}>{item.username}</Text>
         <Text>{formattedTimestamp(item.posted_at)}</Text>
       </View>
-      {auth.currentUser.displayName === item.username ? (
+      {!isLoggedIn ? null : auth.currentUser.displayName === item.username ? (
         <Button btnText={'Delete Item'} onSubmit={deleteItemHandler} />
       ) : (
         <Button btnText={'Offer Swap'} />
