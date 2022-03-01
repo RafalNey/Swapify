@@ -7,12 +7,11 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import { Fontisto } from '@expo/vector-icons';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import getItems from '../../utils/getItems';
-import formatTimestamp from '../../utils/formatTimestamp';
 import { descriptionFormatter } from '../../utils/descriptionFormatter';
 import { useNavigation } from '@react-navigation/native';
+import { dateFormatter } from '../../utils/dateFormatter';
 
 const { width } = Dimensions.get('screen');
 const imageW = width * 0.44;
@@ -56,7 +55,7 @@ const VerticalList = ({ props }) => {
                   <Fontisto name='trash' size={24} color='#6b6565' />
                 </TouchableOpacity> */}
                 </View>
-                <Text>{formatTimestamp(item.posted_at)}</Text>
+                <Text>{dateFormatter(item.posted_at)}</Text>
               </View>
             </View>
           </TouchableOpacity>

@@ -1,11 +1,18 @@
 import { useContext, useState } from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Button from '../Reusable/Button';
 import { auth } from '../../firebase';
-import formattedTimestamp from '../../utils/formatTimestamp';
 import { useNavigation } from '@react-navigation/native';
 import deleteItem from '../../utils/deleteItem';
 import { UserContext } from '../../contexts/UserContext';
+import { dateFormatter } from '../../utils/dateFormatter';
 
 const Item = ({ route }) => {
   const navigation = useNavigation();
@@ -23,6 +30,10 @@ const Item = ({ route }) => {
       });
   };
 
+  const goToLoginHandler = () => {
+    navigation.navigate('Login');
+  };
+
   return (
     <SafeAreaView style={styles.itemContainer}>
       <Image style={styles.itemImage} source={{ uri: item.img }} />
@@ -30,9 +41,15 @@ const Item = ({ route }) => {
       <Text style={styles.itemCategory}>{item.category}</Text>
       <View style={styles.swapContainer}>
         <Text style={styles.itemUsername}>{item.username}</Text>
-        <Text>{formattedTimestamp(item.posted_at)}</Text>
+        <Text>{dateFormatter(item.posted_at)}</Text>
       </View>
-      {!isLoggedIn ? null : auth.currentUser.displayName === item.username ? (
+      {!isLoggedIn ? (
+        <TouchableOpacity onPress={goToLoginHandler}>
+          <Text style={styles.register}>
+            Please login or register to offer swap
+          </Text>
+        </TouchableOpacity>
+      ) : auth.currentUser.displayName === item.username ? (
         <Button btnText={'Delete Item'} onSubmit={deleteItemHandler} />
       ) : (
         <Button btnText={'Offer Swap'} />
@@ -86,5 +103,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 5,
     backgroundColor: '#f7f7f7',
+  },
+  register: {
+    marginVertical: 10,
+    fontSize: 17,
+    textAlign: 'center',
+    color: '#0000ff',
   },
 });

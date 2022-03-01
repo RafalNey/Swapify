@@ -35,5 +35,25 @@ export const upload = async (file, currentUser, setLoading) => {
   const photoURL = await getDownloadURL(fileRef);
   updateProfile(currentUser, { photoURL });
   setLoading(false);
-  console.log(`image uploaded to Users/${currentUser.email}/avatar.jpg`);
+};
+
+export const uploadItemImg = async (
+  counter,
+  file,
+  currentUser,
+  setLoading,
+  title
+) => {
+  const response = await fetch(file);
+  const blob = await response.blob();
+  const fileRef = ref(
+    storage,
+    `Users/${currentUser.email}/listing_images/${title}/item_${counter}.jpg`
+  );
+  setLoading(true);
+  const snapshot = await uploadBytes(fileRef, blob);
+  const photoURL = await getDownloadURL(fileRef);
+  setLoading(false);
+
+  return photoURL;
 };
