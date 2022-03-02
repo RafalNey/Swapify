@@ -2,16 +2,14 @@ import { onSnapshot } from 'firebase/firestore';
 import { query, where } from 'firebase/firestore';
 import { usersColRef } from '../firebase';
 
-const getAverageStars = (username) => { 
+const getAverageStars = (username) => {
+  let q = query(usersColRef, where('username', '==', username));
 
-    let q = query(usersColRef, where('username', '==', username));
-
-    return new Promise((resolve, reject) => {
-      onSnapshot(q, (snapshot) => {
-        let userFromDb = [];
-        snapshot.docs.forEach((doc) => {
-          userFromDb.push({ ...doc.data(), id: doc.id });
-        });
+  return new Promise((resolve, reject) => {
+    onSnapshot(q, (snapshot) => {
+      let userFromDb = [];
+      snapshot.docs.forEach((doc) => {
+        userFromDb.push({ ...doc.data(), id: doc.id });
         resolve(userFromDb[0]);
       });
 
@@ -29,6 +27,7 @@ const getAverageStars = (username) => {
     .catch((err) => {
       throw new Error(err);
     });
-}
+  })
+};
 
 export default getAverageStars;
