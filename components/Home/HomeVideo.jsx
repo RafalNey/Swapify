@@ -6,15 +6,25 @@ const { width } = Dimensions.get('screen');
 const videoW = width * 1.2;
 const videoH = videoW * 0.5;
 
-const HomeVideo = () => {
+const HomeVideo = ({ navigation }) => {
   const video = useRef(null);
   const [status, setStatus] = useState({});
 
   useEffect(() => {
-    (() => {
-      video.current.playAsync();
-    })();
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      video && video.current.playAsync();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      video && video.current.pauseAsync();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View style={styles.videoContainer}>
@@ -23,7 +33,7 @@ const HomeVideo = () => {
         ref={video}
         style={styles.video}
         source={require('../../video/HomeVideo.mp4')}
-        isMuted={true}
+        isMuted={false}
         resizeMode='contain'
         isLooping
         onPlaybackStatusUpdate={(status) => setStatus(() => status)}
