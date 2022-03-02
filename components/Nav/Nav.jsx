@@ -19,7 +19,8 @@ const Nav = () => {
     navigation.navigate(componentName);
     setIsPressed(false);
   };
-
+  // console.log('logged in ', isLoggedIn)
+  // console.log('logged in user ', loggedInUser)
   return (
     <>
       <View style={styles.navContainer}>
@@ -38,7 +39,7 @@ const Nav = () => {
 
         <TouchableOpacity 
           onPress={() => {
-            if(!isLoggedIn) {
+            if(isLoggedIn === false) {
               alert('Please log in to view your messages.')
             } else {
               navigationHandler('Messages');

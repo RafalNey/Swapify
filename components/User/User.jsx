@@ -34,7 +34,7 @@ const User = () => {
   const navigationHandler = (screen) => {
     navigation.navigate(screen);
   };
-console.log(auth.currentUser)
+// console.log(auth.currentUser)
   const deletePrompt = () => {
     Alert.alert(
       'Are you sure?',

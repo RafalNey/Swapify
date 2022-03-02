@@ -17,13 +17,17 @@ const getAverageStars = (username) => {
 
     }).then((userObj) => {
         let averageStars = 0
-
-        if (userObj.total_stars === 0 || userObj.total_swaps === 0) {
-            averageStars = 0;
-        } else {
-          averageStars = userObj.total_stars / userObj.total_swaps;
+        if (userObj !== undefined) {
+          if (userObj.total_stars === 0 || userObj.total_swaps === 0) {
+              averageStars = 0;
+          } else {
+            averageStars = userObj.total_stars / userObj.total_swaps;
+          }
         }
         return Math.round(averageStars * 10) / 10;
+    })
+    .catch((err) => {
+      throw new Error(err);
     });
 }
 
