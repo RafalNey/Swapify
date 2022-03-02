@@ -19,6 +19,7 @@ import { formatErrorMsg } from '../../utils/formatErrorMsg';
 import { ErrorMsg } from '../Error';
 import createUserObj from '../../utils/createUserObj';
 import Loader from '../Reusable/Loader';
+import { createUserLocation } from '../../utils/createUserLocation';
 
 const Register = () => {
   const navigation = useNavigation();
@@ -53,6 +54,7 @@ const Register = () => {
         email: email,
         username: username,
         password: password,
+        location: location
       });
     }
   };
@@ -64,7 +66,7 @@ const Register = () => {
   const onPrivacyPolicyPressed = () => {
     navigation.navigate('Privacy');
   };
-
+  
   useEffect(() => {
     signupDetails &&
       createUserWithEmailAndPassword(
@@ -79,12 +81,16 @@ const Register = () => {
           image && upload(image, auth.currentUser, setIsLoading);
         })
         .then(() => {
+          createUserLocation(signupDetails.location, signupDetails.email)
+        })
+        .then(() => {
           navigation.navigate('Login');
         })
         .then(() => {
           createUserObj(signupDetails.username)
         })
         .catch((err) => {
+          console.log(err)
           setErrorMsg(formatErrorMsg(err.message));
         })
       // createUserObj();

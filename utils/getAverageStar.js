@@ -17,7 +17,6 @@ const getAverageStars = (username) => {
 
     }).then((userObj) => {
         let averageStars = 0
-
         if (userObj.total_stars === 0 || userObj.total_swaps === 0) {
             averageStars = 0;
         } else {

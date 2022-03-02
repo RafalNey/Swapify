@@ -11,12 +11,13 @@ import { SvgUri } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons, FontAwesome, Fontisto } from '@expo/vector-icons';
 import Button from '../Reusable/Button';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { auth } from '../../firebase';
 import { deleteUser } from 'firebase/auth';
 import getItems from '../../utils/getItems';
 import deleteItem from '../../utils/deleteItem';
+import { getLocation } from '../../getLocation';
 
 const { width } = Dimensions.get('screen');
 const menuW = width * 0.5;
@@ -26,6 +27,7 @@ const User = () => {
   const navigation = useNavigation();
   const { loggedInUser, isLoggedIn } = useContext(UserContext);
   const [loading, setLoading] = useState(false)
+  const [location, setLocation] = useState('')
 
   const openCamera = () => {
     navigationHandler('Camera');
@@ -34,7 +36,22 @@ const User = () => {
   const navigationHandler = (screen) => {
     navigation.navigate(screen);
   };
-console.log(auth.currentUser)
+
+useEffect(() => {
+getLocation(auth.currentUser.email)
+.then((user) => {
+  setLocation(user[0].userLocation)
+})
+.catch((err) => {
+  console.log(err)
+})
+console.log(location)
+}, [])
+
+
+
+
+
   const deletePrompt = () => {
     Alert.alert(
       'Are you sure?',
@@ -95,7 +112,7 @@ console.log(auth.currentUser)
       </Text>
       <Text style={styles.userLocation}>
         <Ionicons name='md-location-sharp' size={20} color='#6b6565' />
-        Manchester, UK
+        {location}, UK
       </Text>
       <FontAwesome name='star-o' size={24} color='#000' />
       <View style={styles.showBtnsContainer}>
