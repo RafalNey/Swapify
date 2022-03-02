@@ -79,7 +79,7 @@ const AddItem = () => {
       >
         {(props) => (
           <View style={styles.form}>
-            <Text style={styles.formHeader}>Add your listing below</Text>
+            <Text style={styles.formHeader}>Add your listing bel</Text>
             <Text style={styles.label}>Please select a category:</Text>
             <Picker
               enabled={true}
