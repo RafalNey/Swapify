@@ -16,6 +16,10 @@ import { UserContext } from '../../contexts/UserContext';
 import { auth } from '../../firebase';
 import { getMyItemMessageId } from '../../utils/messageQueries';
 import Button from '../Reusable/Button';
+import MapView from 'react-native-maps';
+import { Marker } from 'react-native-maps';
+import locationList from '../../utils/locationList';
+
 
 const Item = ({ route }) => {
   const navigation = useNavigation();
@@ -24,6 +28,8 @@ const Item = ({ route }) => {
   const [messageDocId, setMessageDocId] = useState(null);
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useContext(UserContext);
+
+ 
 
   const deletePrompt = () => {
     Alert.alert('Wait!', 'Are you sure you want to delete this listing?', [
@@ -73,10 +79,26 @@ const Item = ({ route }) => {
         <Text style={styles.itemUsername}>{item.username}</Text>
         <Text>{item.location}, UK</Text>
         </View>
+        
         <Text>{formattedTimestamp(item.posted_at)}</Text>
+        
       </View>
+      </View>
+
+      <View>
+        <MapView
+        style={{height: '50%', marginTop: 10}}
+        region={locationList[item.location]}
+        >
+        <Marker
+        coordinate={locationList[item.location].marker}
+        />
+        </MapView>
+        
+        
       </View>
       <Text style={styles.itemDescription}>{item.description}</Text>
+      
 
       {!item.swapped && (
         <View>
