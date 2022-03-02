@@ -33,7 +33,7 @@ const HomeVideo = ({ navigation }) => {
         ref={video}
         style={styles.video}
         source={require('../../video/HomeVideo.mp4')}
-        isMuted={false}
+        isMuted={true}
         resizeMode='contain'
         isLooping
         onPlaybackStatusUpdate={(status) => setStatus(() => status)}

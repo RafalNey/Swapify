@@ -11,15 +11,15 @@ const AverageStarRating = ({ user }) => {
     'https://raw.githubusercontent.com/tranhonghan/images/main/star_corner.png';
 
   useEffect(() => {
-      let isMounted = true
-      
+    let isMounted = true;
+
     getAverageStars(user)
       .then((averageStars) => {
-       isMounted && setAverageRating(averageStars);
+        isMounted && setAverageRating(averageStars);
       })
       .catch((err) => console.log(err.message));
 
-      return () => isMounted = false;
+    return () => (isMounted = false);
   }, [user]);
 
   return (
@@ -48,9 +48,9 @@ const AverageStarRating = ({ user }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    margin: 10,
-    justifyContent: 'center',
+    // marginVertical: 10,
+    // justifyContent: 'center',
+    alignItems: 'flex-end',
   },
   textStyle: {
     textAlign: 'left',
@@ -58,8 +58,6 @@ const styles = StyleSheet.create({
   },
   customRatingBarStyle: {
     flexDirection: 'row',
-    flex: 1,
-    padding: 0,
   },
   starImgStyle: {
     width: 20,
