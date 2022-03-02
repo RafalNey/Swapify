@@ -27,6 +27,8 @@ export default collectionRef;
 
 export const usersColRef = collection(database, 'users');
 
+export const userLocationRef = collection(database, `locations`)
+
 export const storage = getStorage();
 
 export const upload = async (file, currentUser, setLoading) => {
