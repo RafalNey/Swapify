@@ -9,6 +9,7 @@ const postItem = (item, imageURL) => {
     category: item.category,
     username: item.username,
     posted_at: item.posted_at,
+    location: item.location
   });
 };
 
