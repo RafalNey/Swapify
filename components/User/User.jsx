@@ -46,7 +46,7 @@ getLocation(auth.currentUser.email)
 .catch((err) => {
   console.log(err)
 })
-console.log(location)
+
 }, [])
 
 
