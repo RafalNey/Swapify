@@ -24,6 +24,7 @@ import { isoDateFormatter } from "../utils/dateFormatter";
 import AverageStarRating from "./AverageStarRating";
 import StarRatingForm from "./StarRatingForm";
 import markAsSwapped from "../utils/markAsSwapped";
+
 const now = new Date();
 
 const Messages = ({ route }) => {
