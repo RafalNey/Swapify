@@ -51,7 +51,6 @@ const Item = ({ route }) => {
   const goToLoginHandler = () => {
     navigation.navigate('Login');
   };
-
   useEffect(() => {
     if (auth.currentUser === null) {
       auth.currentUser = 'guest';
@@ -65,12 +64,17 @@ const Item = ({ route }) => {
     <Loader />
   ) : (
     <SafeAreaView style={styles.itemContainer}>
+      <View style={styles.itemCard}>
       <Image style={styles.itemImage} source={{ uri: item.img }} />
       <Text style={styles.itemTitle}>{item.title}</Text>
       <Text style={styles.itemCategory}>{item.category}</Text>
       <View style={styles.swapContainer}>
+        <View>
         <Text style={styles.itemUsername}>{item.username}</Text>
+        <Text>{item.location}, UK</Text>
+        </View>
         <Text>{formattedTimestamp(item.posted_at)}</Text>
+      </View>
       </View>
       <Text style={styles.itemDescription}>{item.description}</Text>
 
@@ -94,8 +98,10 @@ const Item = ({ route }) => {
                 })
               }
             />
+            
           )}
         </View>
+        
       )}
       {!!item.swapped && (
         <View>
@@ -121,8 +127,13 @@ const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     padding: '5%',
-    backgroundColor: '#fff',
+    backgroundColor: '#D1D1D1',
   },
+  itemCard: {
+  backgroundColor: '#fff',
+  borderRadius: 30,
+  },
+
   itemImage: {
     width: '100%',
     height: '35%',
