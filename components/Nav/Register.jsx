@@ -149,7 +149,7 @@ const Register = () => {
               btnText={!image ? 'Pick a display photo' : 'Change photo'}
               onSubmit={pickImage}
             />
-            {username && email && password && password2 ? (
+            {username && email && password && password2 && location ? (
               <Button btnText={'Submit'} onSubmit={submitHandler} />
             ) : null}
             <Text style={styles.text}>

@@ -33,7 +33,7 @@ const VerticalList = ({ props }) => {
     getItems(category, sortBy, user).then((itemsFromDb) => {
       setItems(itemsFromDb);
     });
-  }, [category, sortBy, user]);
+  }, [category, sortBy, user, items]);
 
   return (
     <FlatList
