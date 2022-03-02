@@ -6,6 +6,7 @@ const formattedTimestamp = (timestamp) => {
     formattedTimestamp = new Date(timestamp.seconds * 1000);
   }
   const formatted = String(formattedTimestamp);
+  
   return formatted.slice(0, formatted.lastIndexOf(':'));
 };
 

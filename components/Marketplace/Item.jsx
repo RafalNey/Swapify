@@ -7,12 +7,13 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
+
+import deleteItem from '../../utils/deleteItem';
+import formattedTimestamp from '../../utils/formatTimestamp';
+import Loader from '../Reusable/Loader';
 import { UserContext } from "../../contexts/UserContext";
-import { dateFormatter } from "../../utils/dateFormatter";
 import { auth } from "../../firebase";
-import Loader from "../Reusable/Loader";
-import deleteItem from "../../utils/deleteItem";
 import { getMyItemMessageId } from "../../utils/messageQueries";
 import Button from "../Reusable/Button";
 
@@ -42,9 +43,14 @@ const Item = ({ route }) => {
   };
 
   useEffect(() => {
+    if (auth.currentUser === null) {
+      auth.currentUser = 'guest'
+    }
     getMyItemMessageId(id, auth.currentUser.displayName).then((docId) => {
       setMessageDocId(docId);
     });
+  
+    
   }, [id]);
 
   return loading ? (
@@ -56,7 +62,7 @@ const Item = ({ route }) => {
       <Text style={styles.itemCategory}>{item.category}</Text>
       <View style={styles.swapContainer}>
         <Text style={styles.itemUsername}>{item.username}</Text>
-        <Text>{dateFormatter(item.posted_at)}</Text>
+        <Text>{formattedTimestamp(item.posted_at)}</Text>
       </View>
       {!isLoggedIn ? (
         <TouchableOpacity onPress={goToLoginHandler}>

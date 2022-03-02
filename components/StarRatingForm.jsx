@@ -35,7 +35,7 @@ const StarRating = () => {
     }
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.textStyle}>Please rate your swap.</Text>
+            <Text style={styles.textStyle}>Please rate your swap</Text>
             <CustomRatingBar />
             <Text style={styles.textStyle}>
                 {rating + ' / ' + maxRating.length}
