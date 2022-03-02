@@ -18,8 +18,12 @@ import Button from "./Reusable/Button";
 import { StyleSheet } from "react-native";
 import { useRef } from "react";
 import { isoDateFormatter } from "../utils/dateFormatter";
+import { useNavigation } from '@react-navigation/native';
+
 const now = new Date();
+
 const Messages = ({ route }) => {
+  const [ username, setUsername ] = useState(route.params.item.ownerName);
   const { messageDocId, item } = route.params;
   const auth = getAuth();
   const user = auth.currentUser;
@@ -31,17 +35,27 @@ const Messages = ({ route }) => {
     messages: [],
     item: item,
   };
+  const navigation = useNavigation();
+  const navigationHandler = (screen) => {
+    navigation.navigate(screen, {
+      username: username,
+    });
+  };
 
   useEffect(() => {
+   
     if (messageDocId) {
       getMessage(messageDocId).then((messageDoc) => {
         messageDoc ? setMessage(messageDoc) : setMessage(newDoc);
+ 
       });
     } else {
       setMessage(newDoc);
     }
   }, [messageDocId, item]);
+    
   const scrollRef = useRef(null);
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -62,7 +76,6 @@ const Messages = ({ route }) => {
             </View>
           </View>
         </View>
-
         <FlatList
           ref={scrollRef}
           onContentSizeChange={() =>
@@ -88,6 +101,7 @@ const Messages = ({ route }) => {
               </View>
             );
           }}
+          
         ></FlatList>
 
         <View>
@@ -148,6 +162,10 @@ const Messages = ({ route }) => {
                 </View>
               )}
             </Formik>
+            <Button
+              btnText={`Rate Your Swap`}
+              navigationHandler={navigationHandler}
+            />
           </View>
         </View>
       </View>
