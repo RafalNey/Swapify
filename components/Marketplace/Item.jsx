@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
-import { useContext, useState, useEffect } from "react";
+import { useNavigation } from '@react-navigation/native';
+import { useContext, useState, useEffect } from 'react';
 import {
   Image,
   SafeAreaView,
@@ -8,14 +8,14 @@ import {
   TouchableOpacity,
   View,
   Alert,
-} from "react-native";
-import deleteItem from "../../utils/deleteItem";
-import formattedTimestamp from "../../utils/formatTimestamp";
-import Loader from "../Reusable/Loader";
-import { UserContext } from "../../contexts/UserContext";
-import { auth } from "../../firebase";
-import { getMyItemMessageId } from "../../utils/messageQueries";
-import Button from "../Reusable/Button";
+} from 'react-native';
+import deleteItem from '../../utils/deleteItem';
+import formattedTimestamp from '../../utils/formatTimestamp';
+import Loader from '../Reusable/Loader';
+import { UserContext } from '../../contexts/UserContext';
+import { auth } from '../../firebase';
+import { getMyItemMessageId } from '../../utils/messageQueries';
+import Button from '../Reusable/Button';
 
 const Item = ({ route }) => {
   const navigation = useNavigation();
@@ -26,18 +26,18 @@ const Item = ({ route }) => {
   const { isLoggedIn } = useContext(UserContext);
 
   const deletePrompt = () => {
-    Alert.alert("Wait!", "Are you sure you want to delete this listing?", [
+    Alert.alert('Wait!', 'Are you sure you want to delete this listing?', [
       {
-        text: "Cancel",
+        text: 'Cancel',
       },
       {
-        text: "yep, delete",
+        text: 'yep, delete',
         onPress: () => {
           setLoading(true);
           deleteItem(id)
             .then(() => {
-              Alert.alert("Success", "Listing deleted");
-              navigation.navigate("My List");
+              Alert.alert('Success', 'Listing deleted');
+              navigation.navigate('My List');
               setLoading(false);
             })
             .catch((err) => {
@@ -49,12 +49,12 @@ const Item = ({ route }) => {
   };
 
   const goToLoginHandler = () => {
-    navigation.navigate("Login");
+    navigation.navigate('Login');
   };
 
   useEffect(() => {
     if (auth.currentUser === null) {
-      auth.currentUser = "guest";
+      auth.currentUser = 'guest';
     }
     getMyItemMessageId(id, auth.currentUser.displayName).then((docId) => {
       setMessageDocId(docId);
@@ -83,12 +83,12 @@ const Item = ({ route }) => {
               </Text>
             </TouchableOpacity>
           ) : auth.currentUser.displayName === item.username ? (
-            <Button btnText={"Delete Item"} onSubmit={() => deletePrompt()} />
+            <Button btnText={'Delete Item'} onSubmit={() => deletePrompt()} />
           ) : (
             <Button
-              btnText={"Offer Swap"}
+              btnText={'Offer Swap'}
               onSubmit={() =>
-                navigation.navigate("Conversation", {
+                navigation.navigate('Conversation', {
                   messageDocId: messageDocId,
                   item: item,
                 })
@@ -101,10 +101,10 @@ const Item = ({ route }) => {
         <View>
           <Text
             style={{
-              alignSelf: "center",
+              alignSelf: 'center',
               padding: 10,
               fontSize: 20,
-              fontWeight: "700",
+              fontWeight: '700',
             }}
           >
             Swap completed
@@ -120,33 +120,33 @@ export default Item;
 const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
-    padding: "5%",
-    backgroundColor: "#fff",
+    padding: '5%',
+    backgroundColor: '#fff',
   },
   itemImage: {
-    width: "100%",
-    height: "35%",
+    width: '100%',
+    height: '35%',
     borderRadius: 5,
-    resizeMode: "cover",
+    resizeMode: 'cover',
     borderWidth: 1,
-    borderColor: "#ccc9c9",
+    borderColor: '#ccc9c9',
   },
   itemTitle: {
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: 20,
     marginBottom: 10,
     fontSize: 28,
   },
   itemCategory: {
-    marginBottom: 60,
+    marginBottom: 45,
     fontSize: 18,
-    textAlign: "center",
-    fontStyle: "italic",
+    textAlign: 'center',
+    fontStyle: 'italic',
   },
   swapContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 15,
   },
   itemUsername: {
@@ -156,14 +156,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     padding: 20,
     fontSize: 16,
-    textAlign: "center",
+    textAlign: 'center',
     borderRadius: 5,
-    backgroundColor: "#f7f7f7",
+    backgroundColor: '#f7f7f7',
   },
   register: {
     marginVertical: 10,
     fontSize: 17,
-    textAlign: "center",
-    color: "#0000ff",
+    textAlign: 'center',
+    color: '#0000ff',
   },
 });
