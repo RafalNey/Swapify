@@ -27,7 +27,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
-  const [location, setLocation] = useState('')
+  const [location, setLocation] = useState('');
   const [errorMsg, setErrorMsg] = useState(null);
   const [signupDetails, setSignupDetails] = useState(null);
   const [image, setImage] = useState(null);
@@ -54,7 +54,7 @@ const Register = () => {
         email: email,
         username: username,
         password: password,
-        location: location
+        location: location,
       });
     }
   };
@@ -66,7 +66,7 @@ const Register = () => {
   const onPrivacyPolicyPressed = () => {
     navigation.navigate('Privacy');
   };
-  
+
   useEffect(() => {
     signupDetails &&
       createUserWithEmailAndPassword(
@@ -81,20 +81,17 @@ const Register = () => {
           image && upload(image, auth.currentUser, setIsLoading);
         })
         .then(() => {
-          createUserLocation(signupDetails.location, signupDetails.email)
+          createUserLocation(signupDetails.location, signupDetails.email);
         })
         .then(() => {
           navigation.navigate('Login');
         })
         .then(() => {
-          createUserObj(signupDetails.username)
+          createUserObj(signupDetails.username);
         })
         .catch((err) => {
-          console.log(err)
           setErrorMsg(formatErrorMsg(err.message));
-        })
-      // createUserObj();
-      
+        });
   }, [signupDetails, image]);
 
   return isLoading ? (
@@ -140,7 +137,6 @@ const Register = () => {
               style={styles.loginInput}
               placeholder='Current city'
               onChangeText={(text) => setLocation(text)}
-              
             />
             {image ? (
               <Image style={styles.displayPic} source={{ uri: image }} />
@@ -196,7 +192,7 @@ const styles = StyleSheet.create({
     color: '#808080',
   },
   link: {
-    color: '#ff0000',
+    color: '#dd0101',
   },
   displayPic: {
     height: 100,

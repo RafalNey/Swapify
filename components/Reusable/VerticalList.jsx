@@ -12,14 +12,11 @@ import getItems from '../../utils/getItems';
 import { descriptionFormatter } from '../../utils/descriptionFormatter';
 import { useNavigation } from '@react-navigation/native';
 import AverageStarRating from '../AverageStarRating';
-import getAverageStars from '../../utils/getAverageStar';
-import { dateFormatter } from '../../utils/dateFormatter';
-import  formattedTimestamp  from '../../utils/formatTimestamp';
-
+import formattedTimestamp from '../../utils/formatTimestamp';
 
 const { width } = Dimensions.get('screen');
-const imageW = width * 0.44;
-const imageH = imageW * 1.1;
+const imageW = width * 0.46;
+const imageH = imageW * 1.13;
 
 const VerticalList = ({ props }) => {
   const navigation = useNavigation();
@@ -27,7 +24,6 @@ const VerticalList = ({ props }) => {
   const sortBy = props.sortBy;
   const user = props.user;
   const [items, setItems] = useState([]);
-  //const [userForAverageStars, setUserForAverageStars] = useState('');
 
   useEffect(() => {
     getItems(category, sortBy, user).then((itemsFromDb) => {
@@ -52,17 +48,15 @@ const VerticalList = ({ props }) => {
             <View style={styles.itemCard}>
               <Image source={{ uri: item.img }} style={styles.itemImg} />
               <View style={styles.itemDetails}>
+                <Text style={styles.itemUsername}>{item.username}</Text>
                 <Text style={styles.itemHeader}>{item.title}</Text>
-                <Text>{descriptionFormatter(item.description)}</Text>
-                <View style={styles.itemFooter}>
-                  <Text>{item.username}</Text>
-                  {/* <TouchableOpacity>
-                  <Fontisto name='trash' size={24} color='#6b6565' />
-                </TouchableOpacity> */}
-                </View>
-               
-                <AverageStarRating user={item.username}/>
-                <Text>{formattedTimestamp(item.posted_at)}</Text>
+                <Text style={styles.itemDescription}>
+                  {descriptionFormatter(item.description)}
+                </Text>
+                <AverageStarRating user={item.username} />
+                <Text style={styles.postedAt}>
+                  {formattedTimestamp(item.posted_at)}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -91,15 +85,20 @@ const styles = StyleSheet.create({
   itemDetails: {
     flex: 1,
     justifyContent: 'space-between',
-    padding: '3%',
+    paddingVertical: '2%',
+    paddingHorizontal: '3%',
+  },
+  itemUsername: {
+    textAlign: 'right',
   },
   itemHeader: {
     textAlign: 'center',
     fontSize: 17,
   },
-  itemFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+  itemDescription: {
+    // textAlign: 'center',
+  },
+  postedAt: {
+    textAlign: 'right',
   },
 });
