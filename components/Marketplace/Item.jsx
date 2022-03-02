@@ -73,24 +73,43 @@ const Item = ({ route }) => {
         <Text>{formattedTimestamp(item.posted_at)}</Text>
       </View>
       <Text style={styles.itemDescription}>{item.description}</Text>
-      {!isLoggedIn ? (
-        <TouchableOpacity onPress={goToLoginHandler}>
-          <Text style={styles.register}>
-            Please login or register to offer swap
+
+      {!item.swapped && (
+        <View>
+          {!isLoggedIn ? (
+            <TouchableOpacity onPress={goToLoginHandler}>
+              <Text style={styles.register}>
+                Please login or register to offer swap
+              </Text>
+            </TouchableOpacity>
+          ) : auth.currentUser.displayName === item.username ? (
+            <Button btnText={'Delete Item'} onSubmit={() => deletePrompt()} />
+          ) : (
+            <Button
+              btnText={'Offer Swap'}
+              onSubmit={() =>
+                navigation.navigate('Conversation', {
+                  messageDocId: messageDocId,
+                  item: item,
+                })
+              }
+            />
+          )}
+        </View>
+      )}
+      {!!item.swapped && (
+        <View>
+          <Text
+            style={{
+              alignSelf: 'center',
+              padding: 10,
+              fontSize: 20,
+              fontWeight: '700',
+            }}
+          >
+            Swap completed
           </Text>
-        </TouchableOpacity>
-      ) : auth.currentUser.displayName === item.username ? (
-        <Button btnText={'Delete Item'} onSubmit={() => deletePrompt()} />
-      ) : (
-        <Button
-          btnText={'Offer Swap'}
-          onSubmit={() =>
-            navigation.navigate('Conversation', {
-              messageDocId: messageDocId,
-              item: item,
-            })
-          }
-        />
+        </View>
       )}
     </SafeAreaView>
   );
@@ -119,7 +138,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
   },
   itemCategory: {
-    marginBottom: 60,
+    marginBottom: 45,
     fontSize: 18,
     textAlign: 'center',
     fontStyle: 'italic',

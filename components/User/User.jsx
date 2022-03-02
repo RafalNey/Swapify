@@ -37,6 +37,7 @@ const User = () => {
     navigation.navigate(screen);
   };
 
+
 useEffect(() => {
 getLocation(auth.currentUser.email)
 .then((user) => {
@@ -47,6 +48,7 @@ getLocation(auth.currentUser.email)
 })
 console.log(location)
 }, [])
+
 
 
 

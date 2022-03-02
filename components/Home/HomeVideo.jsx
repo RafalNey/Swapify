@@ -1,10 +1,10 @@
 import { View, StyleSheet, Dimensions } from 'react-native';
-import { Video, AVPlaybackStatus } from 'expo-av';
+import { Video } from 'expo-av';
 import { useRef, useState, useEffect } from 'react';
 
 const { width } = Dimensions.get('screen');
-const videoW = width * 1;
-const videoH = videoW * 0.56;
+const videoW = width * 1.2;
+const videoH = videoW * 0.5;
 
 const HomeVideo = () => {
   const video = useRef(null);
@@ -22,9 +22,7 @@ const HomeVideo = () => {
       <Video
         ref={video}
         style={styles.video}
-        source={{
-          uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-        }}
+        source={require('../../video/HomeVideo.mp4')}
         isMuted={true}
         resizeMode='contain'
         isLooping
@@ -44,15 +42,16 @@ const styles = StyleSheet.create({
   },
   videoOverlay: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 5,
     zIndex: 2,
-    height: videoH,
+    height: videoH - 16,
     width: videoW,
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
   },
   video: {
     position: 'absolute',
     zIndex: 1,
+    flex: 1,
     height: videoH,
     width: videoW,
   },
