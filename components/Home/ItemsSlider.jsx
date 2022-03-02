@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('screen');
 const imageW = width * 0.5;
-const imageH = imageW * 1.1;
+const imageH = imageW * 1;
 
 const ItemsSlider = () => {
   const navigation = useNavigation();
