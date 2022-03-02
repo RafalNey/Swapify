@@ -5,18 +5,21 @@ import getAverageStars from '../utils/getAverageStar';
 const AverageStarRating = ({ user }) => {
   const [averageRating, setAverageRating] = useState(0);
   const [maxRating, setMaxRating] = useState([1, 2, 3, 4, 5]);
- 
   const starImgFilled =
     'https://raw.githubusercontent.com/tranhonghan/images/main/star_filled.png';
   const starImgCorner =
     'https://raw.githubusercontent.com/tranhonghan/images/main/star_corner.png';
 
   useEffect(() => {
+      let isMounted = true
+      
     getAverageStars(user)
       .then((averageStars) => {
-        setAverageRating(averageStars);
+       isMounted && setAverageRating(averageStars);
       })
       .catch((err) => console.log(err.message));
+
+      return () => isMounted = false;
   }, [user]);
 
   return (

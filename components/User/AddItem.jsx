@@ -22,6 +22,7 @@ import Button from '../Reusable/Button';
 import postItem from '../../utils/postItem';
 import { useNavigation } from '@react-navigation/native';
 import Loader from '../Reusable/Loader';
+import { getLocation } from '../../getLocation';
 
 const AddItem = () => {
   const navigation = useNavigation();
@@ -29,6 +30,7 @@ const AddItem = () => {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [counter, setCounter] = useState(1);
+  const [location, setLocation] = useState('')
 
   const pickImage = () => {
     ImagePicker.launchImageLibraryAsync({
@@ -48,6 +50,13 @@ const AddItem = () => {
     });
   }, []);
 
+  useEffect(() => {
+    getLocation(auth.currentUser.email)
+    .then((user) => {
+      setLocation(user[0].userLocation)
+    })
+  }, [location])
+
   return loading ? (
     <Loader />
   ) : (
@@ -61,7 +70,7 @@ const AddItem = () => {
           actions.resetForm();
           values.posted_at = serverTimestamp();
           values.username = auth.currentUser.displayName;
-          
+          values.location = location
           values.title &&
             values.description &&
             values.category &&
@@ -136,6 +145,7 @@ const AddItem = () => {
         )}
       </Formik>
       </ScrollView>
+      
     </SafeAreaView>
   );
 };
@@ -143,16 +153,15 @@ const AddItem = () => {
 export default AddItem;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-  },
   addItemContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#D1D1D1',
   },
   form: {
     padding: '5%',
+    backgroundColor: '#fff',
+    margin: 10,
+    borderRadius: 20
   },
   formHeader: {
     marginBottom: 50,
