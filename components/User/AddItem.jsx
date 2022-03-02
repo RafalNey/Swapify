@@ -9,7 +9,8 @@ import {
   View,
   KeyboardAvoidingView, 
   TouchableWithoutFeedback, 
-  Keyboard
+  Keyboard, 
+  ScrollView
 } from 'react-native';
 import { Formik } from 'formik';
 import { useState, useEffect } from 'react';
@@ -50,15 +51,17 @@ const AddItem = () => {
   return loading ? (
     <Loader />
   ) : (
-
+   
     <SafeAreaView style={styles.addItemContainer}>
+      <ScrollView >
       <Formik
         initialValues={{ title: '', image, description: '', category: '' }}
         onSubmit={(values, actions) => {
+           
           actions.resetForm();
           values.posted_at = serverTimestamp();
           values.username = auth.currentUser.displayName;
-
+          
           values.title &&
             values.description &&
             values.category &&
@@ -70,7 +73,7 @@ const AddItem = () => {
               setLoading,
               values.title
             )
-              .then((photoURL) => {
+            .then((photoURL) => {
                 postItem(values, photoURL);
                 setCounter((currCount) => currCount + 1);
                 setLoading(false);
@@ -132,6 +135,7 @@ const AddItem = () => {
           </View>
         )}
       </Formik>
+      </ScrollView>
     </SafeAreaView>
   );
 };
