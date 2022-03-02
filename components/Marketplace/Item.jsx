@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert
 } from 'react-native';
 
 import deleteItem from '../../utils/deleteItem';
@@ -25,18 +26,34 @@ const Item = ({ route }) => {
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useContext(UserContext);
 
-  const deleteItemHandler = async () => {
-    setLoading(true);
-    await deleteItem(id)
-      .then(() => {
-        navigation.navigate("My List");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
 
-    setLoading(false);
-  };
+const deletePrompt = () => {
+  Alert.alert(
+    'Wait!',
+    'Are you sure you want to delete this listing?',
+    [
+      {
+        text: 'Cancel'
+      },
+      {
+        text: 'yep, delete',
+        onPress: () => {
+          setLoading(true)
+          deleteItem(id)
+          
+          .then(() => {
+            Alert.alert('Success', 'Listing deleted');
+            navigation.navigate('My List');
+            setLoading(false)
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        }
+      }
+    ]
+  )
+}
 
   const goToLoginHandler = () => {
     navigation.navigate("Login");
@@ -48,9 +65,7 @@ const Item = ({ route }) => {
     }
     getMyItemMessageId(id, auth.currentUser.displayName).then((docId) => {
       setMessageDocId(docId);
-    });
-  
-    
+    });  
   }, [id]);
 
   return loading ? (
@@ -64,6 +79,7 @@ const Item = ({ route }) => {
         <Text style={styles.itemUsername}>{item.username}</Text>
         <Text>{formattedTimestamp(item.posted_at)}</Text>
       </View>
+      <Text style={styles.itemDescription}>{item.description}</Text>
       {!isLoggedIn ? (
         <TouchableOpacity onPress={goToLoginHandler}>
           <Text style={styles.register}>
@@ -71,7 +87,7 @@ const Item = ({ route }) => {
           </Text>
         </TouchableOpacity>
       ) : auth.currentUser.displayName === item.username ? (
-        <Button btnText={"Delete Item"} onSubmit={deleteItemHandler} />
+        <Button btnText={'Delete Item'} onSubmit={() => deletePrompt()} />
       ) : (
         <Button
           btnText={"Offer Swap"}
@@ -82,19 +98,7 @@ const Item = ({ route }) => {
             })
           }
         />
-        // <TouchableOpacity
-        //   style={styles.itemButton}
-        // onPress={() =>
-        //   navigation.navigate("Conversation", {
-        //     messageDocId: messageDocId,
-        //     item: item,
-        //   })
-        // }
-        // >
-        //   <MaterialIcons name="message" size={24} color="#6b6565" />
-        // </TouchableOpacity>
       )}
-      <Text style={styles.itemDescription}>{item.description}</Text>
     </SafeAreaView>
   );
 };
