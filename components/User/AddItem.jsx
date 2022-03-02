@@ -7,6 +7,10 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  KeyboardAvoidingView, 
+  TouchableWithoutFeedback, 
+  Keyboard, 
+  ScrollView
 } from 'react-native';
 import { Formik } from 'formik';
 import { useState, useEffect } from 'react';
@@ -47,14 +51,17 @@ const AddItem = () => {
   return loading ? (
     <Loader />
   ) : (
+   
     <SafeAreaView style={styles.addItemContainer}>
+      <ScrollView >
       <Formik
         initialValues={{ title: '', image, description: '', category: '' }}
         onSubmit={(values, actions) => {
+           
           actions.resetForm();
           values.posted_at = serverTimestamp();
           values.username = auth.currentUser.displayName;
-
+          
           values.title &&
             values.description &&
             values.category &&
@@ -66,7 +73,7 @@ const AddItem = () => {
               setLoading,
               values.title
             )
-              .then((photoURL) => {
+            .then((photoURL) => {
                 postItem(values, photoURL);
                 setCounter((currCount) => currCount + 1);
                 setLoading(false);
@@ -79,7 +86,7 @@ const AddItem = () => {
       >
         {(props) => (
           <View style={styles.form}>
-            <Text style={styles.formHeader}>Add your listing bel</Text>
+            <Text style={styles.formHeader}>Add your listing below</Text>
             <Text style={styles.label}>Please select a category:</Text>
             <Picker
               enabled={true}
@@ -115,6 +122,7 @@ const AddItem = () => {
               btnText={!image ? 'Add photo' : 'Change photo'}
               onSubmit={pickImage}
             />
+           
             {image ? (
               <Image style={styles.displayPic} source={{ uri: image }} />
             ) : null}
@@ -127,6 +135,7 @@ const AddItem = () => {
           </View>
         )}
       </Formik>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -134,6 +143,10 @@ const AddItem = () => {
 export default AddItem;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+  },
   addItemContainer: {
     flex: 1,
     backgroundColor: '#fff',

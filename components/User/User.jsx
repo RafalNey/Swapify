@@ -36,6 +36,7 @@ const User = () => {
   const navigationHandler = (screen) => {
     navigation.navigate(screen);
   };
+// console.log(auth.currentUser)
 
 
 useEffect(() => {

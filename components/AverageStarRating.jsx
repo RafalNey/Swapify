@@ -5,7 +5,7 @@ import getAverageStars from '../utils/getAverageStar';
 const AverageStarRating = ({ user }) => {
   const [averageRating, setAverageRating] = useState(0);
   const [maxRating, setMaxRating] = useState([1, 2, 3, 4, 5]);
-
+ 
   const starImgFilled =
     'https://raw.githubusercontent.com/tranhonghan/images/main/star_filled.png';
   const starImgCorner =

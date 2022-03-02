@@ -11,6 +11,7 @@ const sendRatingToUser = (rating, username) => {
         userFromDb.push({ ...doc.data(), id: doc.id });
       });
       resolve(userFromDb[0]);
+      
     });
   }).then((userObj) => {
     const currentStars = userObj.total_stars;
@@ -19,8 +20,14 @@ const sendRatingToUser = (rating, username) => {
     updateDoc(docRef, {
       total_stars: currentStars + rating,
       total_swaps: currentSwaps + 1,
-    }).then(() => {});
-  });
+    })
+    .catch((err) => {
+      console.log('There\'s an error', err)
+    })
+    .then(() => {
+
+    })
+  })
 };
 
 export default sendRatingToUser;

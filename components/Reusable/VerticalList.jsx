@@ -27,6 +27,7 @@ const VerticalList = ({ props }) => {
   const sortBy = props.sortBy;
   const user = props.user;
   const [items, setItems] = useState([]);
+  //const [userForAverageStars, setUserForAverageStars] = useState('');
 
   useEffect(() => {
     getItems(category, sortBy, user).then((itemsFromDb) => {
