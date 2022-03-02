@@ -1,7 +1,7 @@
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
-import Logo from './Logo';
-import ItemsSlider from './ItemsSlider';
-import HomeVideo from './HomeVideo';
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from "react-native";
+import Logo from "./Logo";
+import ItemsSlider from "./ItemsSlider";
+import HomeVideo from "./HomeVideo";
 
 const Home = () => {
   return (
@@ -20,7 +20,7 @@ export default Home;
 const styles = StyleSheet.create({
   homeContainer: {
     flex: 1,
-    paddingVertical: '5%',
-    backgroundColor: '#fff',
+    paddingVertical: "5%",
+    backgroundColor: "#fff",
   },
 });
