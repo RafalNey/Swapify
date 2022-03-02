@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons, Fontisto, MaterialIcons } from '@expo/vector-icons';
 import { UserContext } from '../../contexts/UserContext';
 import Menu from './Menu';
 
 const Nav = () => {
-  const { loggedInUser, isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn } = useContext(UserContext);
   const [isPressed, setIsPressed] = useState(false);
   const navigation = useNavigation();
 
@@ -19,8 +19,7 @@ const Nav = () => {
     navigation.navigate(componentName);
     setIsPressed(false);
   };
-  // console.log('logged in ', isLoggedIn)
-  // console.log('logged in user ', loggedInUser)
+
   return (
     <>
       <View style={styles.navContainer}>
@@ -37,15 +36,15 @@ const Nav = () => {
           <Fontisto name='shopping-store' size={20} color='#6b6565' />
         </TouchableOpacity>
 
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={() => {
-            if(isLoggedIn === false) {
-              alert('Please log in to view your messages.')
+            if (isLoggedIn === false) {
+              alert('Please log in to view your messages.');
             } else {
               navigationHandler('Messages');
             }
-          }
-          }>
+          }}
+        >
           <MaterialIcons name='message' size={24} color='#6b6565' />
         </TouchableOpacity>
 
@@ -56,7 +55,6 @@ const Nav = () => {
             <Ionicons name='close-sharp' size={30} color='#6b6565' />
           )}
         </TouchableOpacity>
-
       </View>
       <Menu navigationHandler={navigationHandler} isPressed={isPressed} />
     </>
