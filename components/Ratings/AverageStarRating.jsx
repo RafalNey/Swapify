@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Image } from 'react-native';
-import getAverageStars from '../utils/getAverageStar';
+import getAverageStars from '../../utils/getAverageStar';
 
 const AverageStarRating = ({ user }) => {
   const [averageRating, setAverageRating] = useState(0);
