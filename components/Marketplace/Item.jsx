@@ -71,7 +71,10 @@ const Item = ({ route }) => {
       {loading ? (
         <Loader />
       ) : (
-        <ScrollView style={styles.itemCard}>
+        <ScrollView
+          style={styles.itemCard}
+          showsVerticalScrollIndicator={false}
+        >
           <Image style={styles.itemImage} source={{ uri: item.img }} />
           <Text style={styles.itemTitle}>{item.title}</Text>
           <Text style={styles.itemCategory}>{item.category}</Text>
