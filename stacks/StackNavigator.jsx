@@ -4,14 +4,14 @@ import Login from '../components/Nav/Login';
 import Register from '../components/Nav/Register';
 import User from '../components/User/User';
 import UserList from '../components/User/UserList';
-import Messages from '../components/Messages';
+import Messages from '../components/Messages/Messages';
 import UserAgreement from '../components/Nav/UserAgreement';
 import Marketplace from '../components/Marketplace/Marketplace';
 import Item from '../components/Marketplace/Item';
 import Privacy from '../components/Nav/Privacy';
 import AddItem from '../components/User/AddItem';
-import CameraPage from '../components/CameraPage';
-import MessageList from '../components/MessageList';
+import CameraPage from '../components/Camera';
+import MessageList from '../components/Messages/MessageList';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,7 +40,6 @@ const StackNavigator = () => {
         <Stack.Screen name='Register' component={Register} />
         <Stack.Screen name='Add Item' component={AddItem} />
         <Stack.Screen name='Camera' component={CameraPage} />
-        {/* LeaveComment?  */}
       </Stack.Group>
     </Stack.Navigator>
   );

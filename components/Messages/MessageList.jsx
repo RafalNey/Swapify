@@ -10,9 +10,8 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import React, { useState, useEffect } from 'react';
-import { getMyMessagesItems } from '../utils/messageQueries';
+import { getMyMessagesItems } from '../../utils/messageQueries';
 import { getAuth } from 'firebase/auth';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const { width } = Dimensions.get('screen');
 const imageW = width * 0.2;

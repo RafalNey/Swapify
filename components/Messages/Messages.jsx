@@ -15,15 +15,15 @@ import {
   Platform,
   Modal,
 } from 'react-native';
-import { messageColRef } from '../firebase';
-import { getMessage } from '../utils/messageQueries';
-import Button from './Reusable/Button';
+import { messageColRef } from '../../firebase';
+import { getMessage } from '../../utils/messageQueries';
+import Button from '../Reusable/Button';
 import { StyleSheet } from 'react-native';
 import { useRef } from 'react';
-import { isoDateFormatter } from '../utils/dateFormatter';
-import AverageStarRating from './AverageStarRating';
-import StarRatingForm from './StarRatingForm';
-import markAsSwapped from '../utils/markAsSwapped';
+import { isoDateFormatter } from '../../utils/dateFormatter';
+import AverageStarRating from '../Ratings/AverageStarRating';
+import StarRatingForm from '../Ratings/StarRatingForm';
+import markAsSwapped from '../../utils/markAsSwapped';
 
 const now = new Date();
 

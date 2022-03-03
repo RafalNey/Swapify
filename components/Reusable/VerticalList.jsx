@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 import getItems from '../../utils/getItems';
 import { descriptionFormatter } from '../../utils/descriptionFormatter';
 import { useNavigation } from '@react-navigation/native';
-import AverageStarRating from '../AverageStarRating';
+import AverageStarRating from '../Ratings/AverageStarRating';
 import formattedTimestamp from '../../utils/formatTimestamp';
 
 const { width } = Dimensions.get('screen');
