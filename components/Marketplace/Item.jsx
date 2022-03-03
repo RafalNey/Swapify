@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   Alert,
+  ScrollView,
 } from "react-native";
 import deleteItem from "../../utils/deleteItem";
 import formattedTimestamp from "../../utils/formatTimestamp";
@@ -55,7 +56,10 @@ const Item = ({ route }) => {
     navigation.navigate("Login");
   };
   useEffect(() => {
-    if (!auth.currentUser) {
+    if (
+      auth.currentUser?.displayName !== undefined &&
+      auth.currentUser?.displayName !== null
+    ) {
       getMyItemMessageId(id, auth.currentUser.displayName).then((docId) => {
         setMessageDocId(docId);
       });
@@ -66,69 +70,71 @@ const Item = ({ route }) => {
     <Loader />
   ) : (
     <SafeAreaView style={styles.itemContainer}>
-      <View style={styles.itemCard}>
-        <Image style={styles.itemImage} source={{ uri: item.img }} />
-        <Text style={styles.itemTitle}>{item.title}</Text>
-        <Text style={styles.itemCategory}>{item.category}</Text>
-        <View style={styles.swapContainer}>
-          <View style={styles.userInfo}>
-            <Text style={styles.itemUsername}>User: {item.username}</Text>
-            <Text>{formattedTimestamp(item.posted_at)}</Text>
+      <ScrollView>
+        <View style={styles.itemCard}>
+          <Image style={styles.itemImage} source={{ uri: item.img }} />
+          <Text style={styles.itemTitle}>{item.title}</Text>
+          <Text style={styles.itemCategory}>{item.category}</Text>
+          <View style={styles.swapContainer}>
+            <View style={styles.userInfo}>
+              <Text style={styles.itemUsername}>User: {item.username}</Text>
+              <Text>{formattedTimestamp(item.posted_at)}</Text>
+            </View>
           </View>
         </View>
-      </View>
 
-      {locationList[item.location] ? (
-        <View style={styles.mapContainer}>
-          <Text style={styles.locationText}>Location</Text>
-          <MapView
-            style={{ height: "50%", marginTop: 10 }}
-            region={locationList[item.location]}
-          >
-            <Marker coordinate={locationList[item.location].marker} />
-          </MapView>
-        </View>
-      ) : null}
+        {locationList[item.location] ? (
+          <View style={styles.mapContainer}>
+            <Text style={styles.locationText}>Location</Text>
+            <MapView
+              style={{ height: "50%", marginTop: 10 }}
+              region={locationList[item.location]}
+            >
+              <Marker coordinate={locationList[item.location].marker} />
+            </MapView>
+          </View>
+        ) : null}
 
-      <Text style={styles.itemDescription}>{item.description}</Text>
+        <Text style={styles.itemDescription}>{item.description}</Text>
 
-      {!item.swapped && (
-        <View>
-          {!isLoggedIn ? (
-            <TouchableOpacity onPress={goToLoginHandler}>
-              <Text style={styles.register}>
-                Please login or register to offer swap
-              </Text>
-            </TouchableOpacity>
-          ) : auth.currentUser.displayName === item.username ? (
-            <Button btnText={"Delete Item"} onSubmit={() => deletePrompt()} />
-          ) : (
-            <Button
-              btnText={"Offer Swap"}
-              onSubmit={() =>
-                navigation.navigate("Conversation", {
-                  messageDocId: messageDocId,
-                  item: item,
-                })
-              }
-            />
-          )}
-        </View>
-      )}
-      {!!item.swapped && (
-        <View>
-          <Text
-            style={{
-              alignSelf: "center",
-              padding: 10,
-              fontSize: 20,
-              fontWeight: "700",
-            }}
-          >
-            Swap completed
-          </Text>
-        </View>
-      )}
+        {!item.swapped && (
+          <View>
+            {!isLoggedIn ? (
+              <TouchableOpacity onPress={goToLoginHandler}>
+                <Text style={styles.register}>
+                  Please login or register to offer swap
+                </Text>
+              </TouchableOpacity>
+            ) : auth.currentUser.displayName === item.username ? (
+              <Button btnText={"Delete Item"} onSubmit={() => deletePrompt()} />
+            ) : (
+              <Button
+                btnText={"Offer Swap"}
+                onSubmit={() =>
+                  navigation.navigate("Conversation", {
+                    messageDocId: messageDocId,
+                    item: item,
+                  })
+                }
+              />
+            )}
+          </View>
+        )}
+        {!!item.swapped && (
+          <View>
+            <Text
+              style={{
+                alignSelf: "center",
+                padding: 10,
+                fontSize: 20,
+                fontWeight: "700",
+              }}
+            >
+              Swap completed
+            </Text>
+          </View>
+        )}
+      </ScrollView>
     </SafeAreaView>
   );
 };
