@@ -19,7 +19,7 @@ import Button from '../Reusable/Button';
 import postItem from '../../utils/postItem';
 import { useNavigation } from '@react-navigation/native';
 import Loader from '../Reusable/Loader';
-import { getLocation } from '../../getLocation';
+import { getLocation } from '../../utils/getLocation';
 
 const AddItem = () => {
   const navigation = useNavigation();

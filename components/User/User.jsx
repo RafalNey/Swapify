@@ -17,7 +17,7 @@ import { auth } from '../../firebase';
 import { deleteUser } from 'firebase/auth';
 import getItems from '../../utils/getItems';
 import deleteItem from '../../utils/deleteItem';
-import { getLocation } from '../../getLocation';
+import { getLocation } from '../../utils/getLocation';
 
 const { width } = Dimensions.get('screen');
 const menuW = width * 0.5;
