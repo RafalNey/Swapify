@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons, FontAwesome, Fontisto } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import Button from '../Reusable/Button';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/UserContext';
@@ -93,14 +93,6 @@ const User = () => {
             source={{ uri: auth.currentUser.photoURL }}
           />
         )}
-
-        <Fontisto
-          style={styles.cameraIcon}
-          name='camera'
-          size={35}
-          color='#6b6565'
-          onPress={openCamera}
-        />
       </View>
       <Text style={styles.userName}>
         {auth.currentUser && auth.currentUser.displayName}
