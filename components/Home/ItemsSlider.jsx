@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     borderRadius: 10,
     overflow: 'hidden',
+    elevation: 2,
   },
   itemImg: {
     width: imageW,
