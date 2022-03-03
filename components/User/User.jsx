@@ -101,7 +101,6 @@ const User = () => {
         <Ionicons name='md-location-sharp' size={20} color='#6b6565' />
         {location}, UK
       </Text>
-      <FontAwesome name='star-o' size={24} color='#000' />
       <View style={styles.showBtnsContainer}>
         <Button btnText={'My List'} navigationHandler={navigationHandler} />
         <Button btnText={'Delete account'} onSubmit={deletePrompt} />
@@ -153,7 +152,7 @@ const styles = StyleSheet.create({
   },
   userLocation: {
     marginVertical: 10,
-    fontSize: 18,
+    fontSize: 16,
   },
   showBtnsContainer: {
     marginVertical: 30,
