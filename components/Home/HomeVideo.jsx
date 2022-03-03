@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   videoOverlay: {
     position: 'absolute',
-    bottom: 5,
+    bottom: '2%',
     zIndex: 2,
     height: videoH - 16,
     width: videoW,
