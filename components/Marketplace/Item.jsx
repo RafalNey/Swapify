@@ -29,6 +29,7 @@ const Item = ({ route }) => {
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useContext(UserContext);
 
+
  
 
   const deletePrompt = () => {
@@ -75,17 +76,19 @@ const Item = ({ route }) => {
       <Text style={styles.itemTitle}>{item.title}</Text>
       <Text style={styles.itemCategory}>{item.category}</Text>
       <View style={styles.swapContainer}>
-        <View>
-        <Text style={styles.itemUsername}>{item.username}</Text>
-        <Text>{item.location}, UK</Text>
+        <View style={styles.userInfo}>
+        <Text style={styles.itemUsername}>User: {item.username}</Text>
+        <Text>{formattedTimestamp(item.posted_at)}</Text>
         </View>
         
-        <Text>{formattedTimestamp(item.posted_at)}</Text>
+        
         
       </View>
       </View>
 
-      <View>
+
+      {locationList[item.location] ? <View style={styles.mapContainer}>
+        <Text style={styles.locationText}>Location</Text>
         <MapView
         style={{height: '50%', marginTop: 10}}
         region={locationList[item.location]}
@@ -96,7 +99,8 @@ const Item = ({ route }) => {
         </MapView>
         
         
-      </View>
+      </View> : null}
+      
       <Text style={styles.itemDescription}>{item.description}</Text>
       
 
@@ -156,6 +160,19 @@ const styles = StyleSheet.create({
   borderRadius: 30,
   },
 
+  userInfo: {
+    marginLeft: 60,
+  },
+  mapContainer: {
+    backgroundColor: '#fff',
+    marginTop: 10,
+    padding: 3,
+    borderRadius: 30,
+  },
+
+  locationText: {
+    marginLeft: 100
+  },
   itemImage: {
     width: '100%',
     height: '35%',
