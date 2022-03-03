@@ -56,14 +56,14 @@ const Item = ({ route }) => {
     navigation.navigate('Login');
   };
   useEffect(() => {
-    if (auth.currentUser === null) {
-      auth.currentUser = 'guest';
-    }
-    getMyItemMessageId(id, auth.currentUser.displayName)
-      .then((docId) => {
+    if (
+      auth.currentUser?.displayName !== undefined &&
+      auth.currentUser?.displayName !== null
+    ) {
+      getMyItemMessageId(id, auth.currentUser.displayName).then((docId) => {
         setMessageDocId(docId);
-      })
-      .catch((err) => console.log(err.message));
+      });
+    }
   }, [id]);
 
   return (
