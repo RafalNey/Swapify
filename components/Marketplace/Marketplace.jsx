@@ -19,7 +19,7 @@ const Marketplace = () => {
   return (
     <SafeAreaView style={styles.marketplaceContainer}>
       <View style={styles.marketplaceHeaderCard}>
-        <Fontisto name='shopping-store' size={24} color='#6b6565' />
+        <Fontisto name='shopping-store' size={24} color='#5b5858' />
         <Text style={styles.marketplaceHeader}>
           {!selectedCategory ? 'Marketplace' : selectedCategory}
         </Text>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: '3%',
     paddingTop: '5%',
-    backgroundColor: '#fff',
+    backgroundColor: '#f4f3f3',
   },
   marketplaceHeaderCard: {
     flexDirection: 'row',
@@ -81,13 +81,16 @@ const styles = StyleSheet.create({
   sortContainer: {
     flexDirection: 'row',
     marginBottom: 10,
+    padding: 10,
   },
   marketplaceCategory: {
-    width: '50%',
+    width: '48%',
     marginRight: 10,
+    backgroundColor: '#fff',
   },
 
   marketplaceSortBy: {
-    width: '50%',
+    width: '48%',
+    backgroundColor: '#fff',
   },
 });

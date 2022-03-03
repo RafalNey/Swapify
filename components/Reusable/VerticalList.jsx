@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
   itemCard: {
     flexDirection: 'row',
     marginBottom: 20,
-    borderWidth: 1,
     borderRadius: 5,
-    borderColor: '#ccc9c9',
+    backgroundColor: '#fff',
     overflow: 'hidden',
+    elevation: 2,
   },
   itemImg: {
     width: imageW,
@@ -94,9 +94,6 @@ const styles = StyleSheet.create({
   itemHeader: {
     textAlign: 'center',
     fontSize: 17,
-  },
-  itemDescription: {
-    // textAlign: 'center',
   },
   postedAt: {
     textAlign: 'right',

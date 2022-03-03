@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 15,
     paddingHorizontal: 20,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#ccc9c9',
   },

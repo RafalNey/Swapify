@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingHorizontal: '5%',
-    backgroundColor: '#fff',
+    backgroundColor: '#f4f3f3',
   },
   loginCard: {
     alignItems: 'center',
@@ -185,11 +185,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderColor: '#ccc9c9',
+    backgroundColor: '#fff',
   },
   text: {
     marginVertical: 10,
     textAlign: 'center',
-    color: '#808080',
+    color: '#424141',
   },
   link: {
     color: '#dd0101',

@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   legalContainer: {
     flex: 1,
     padding: '5%',
-    backgroundColor: '#fff',
+    backgroundColor: '#f4f3f3',
   },
   legalHeader: {
     alignSelf: 'flex-start',

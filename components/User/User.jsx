@@ -26,8 +26,8 @@ const menuH = menuW * 1;
 const User = () => {
   const navigation = useNavigation();
   const { loggedInUser, isLoggedIn } = useContext(UserContext);
-  const [loading, setLoading] = useState(false)
-  const [location, setLocation] = useState('')
+  const [loading, setLoading] = useState(false);
+  const [location, setLocation] = useState('');
 
   const openCamera = () => {
     navigationHandler('Camera');
@@ -36,24 +36,16 @@ const User = () => {
   const navigationHandler = (screen) => {
     navigation.navigate(screen);
   };
-// console.log(auth.currentUser)
 
-
-useEffect(() => {
-getLocation(auth.currentUser.email)
-.then((user) => {
-  setLocation(user[0].userLocation)
-})
-.catch((err) => {
-  console.log(err)
-})
-
-}, [])
-
-
-
-
-
+  useEffect(() => {
+    getLocation(auth.currentUser.email)
+      .then((user) => {
+        setLocation(user[0].userLocation);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const deletePrompt = () => {
     Alert.alert(
@@ -120,9 +112,6 @@ getLocation(auth.currentUser.email)
       <FontAwesome name='star-o' size={24} color='#000' />
       <View style={styles.showBtnsContainer}>
         <Button btnText={'My List'} navigationHandler={navigationHandler} />
-        <Button btnText={'Swaps'} navigationHandler={navigationHandler} />
-      </View>
-      <View>
         <Button btnText={'Delete account'} onSubmit={deletePrompt} />
       </View>
     </SafeAreaView>
@@ -135,7 +124,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#f4f3f3',
   },
   userCard: {
     position: 'relative',
@@ -175,9 +164,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   showBtnsContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
     marginVertical: 30,
   },
 });

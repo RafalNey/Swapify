@@ -7,14 +7,14 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
-} from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import React, { useState, useEffect } from "react";
-import { getMyMessagesItems } from "../utils/messageQueries";
-import { getAuth } from "firebase/auth";
-import { SafeAreaView } from "react-native-safe-area-context";
+} from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import React, { useState, useEffect } from 'react';
+import { getMyMessagesItems } from '../utils/messageQueries';
+import { getAuth } from 'firebase/auth';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const { width } = Dimensions.get("screen");
+const { width } = Dimensions.get('screen');
 const imageW = width * 0.2;
 const imageH = imageW * 1.1;
 
@@ -22,10 +22,10 @@ const MessageList = ({ navigation, category }) => {
   const auth = getAuth();
   const [messages1, setMessages1] = useState([]);
   const [messages2, setMessages2] = useState([]);
-  const [sortBy, setSortBy] = useState("posted_at desc");
+  const [sortBy, setSortBy] = useState('posted_at desc');
 
   useEffect(() => {
-    getMyMessagesItems(auth.currentUser.displayName, "ownerName").then(
+    getMyMessagesItems(auth.currentUser.displayName, 'ownerName').then(
       (messages1) => {
         setMessages1(messages1);
       }
@@ -33,7 +33,7 @@ const MessageList = ({ navigation, category }) => {
   }, [category, sortBy]);
 
   useEffect(() => {
-    getMyMessagesItems(auth.currentUser.displayName, "username").then(
+    getMyMessagesItems(auth.currentUser.displayName, 'username').then(
       (messages2) => {
         setMessages2(messages2);
       }
@@ -41,7 +41,7 @@ const MessageList = ({ navigation, category }) => {
   }, [category, sortBy]);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: '#f4f3f3' }}>
       <Text style={styles.msgHeader}>Giving away...</Text>
       <FlatList
         data={messages1}
@@ -62,13 +62,13 @@ const MessageList = ({ navigation, category }) => {
                 <TouchableOpacity
                   style={styles.itemButton}
                   onPress={() =>
-                    navigation.navigate("Conversation", {
+                    navigation.navigate('Conversation', {
                       messageDocId: item.id,
                       item: item,
                     })
                   }
                 >
-                  <MaterialIcons name="message" size={24} color="#6b6565" />
+                  <MaterialIcons name='message' size={24} color='#6b6565' />
                 </TouchableOpacity>
               </View>
             </View>
@@ -95,13 +95,13 @@ const MessageList = ({ navigation, category }) => {
                 <TouchableOpacity
                   style={styles.itemButton}
                   onPress={() =>
-                    navigation.navigate("Conversation", {
+                    navigation.navigate('Conversation', {
                       messageDocId: item.id,
                       item: item,
                     })
                   }
                 >
-                  <MaterialIcons name="message" size={24} color="#6b6565" />
+                  <MaterialIcons name='message' size={24} color='#6b6565' />
                 </TouchableOpacity>
               </View>
             </View>
@@ -117,24 +117,24 @@ export default MessageList;
 const styles = StyleSheet.create({
   msgHeader: {
     fontSize: 20,
-    fontWeight: "900",
-    margin: "2%",
+    fontWeight: '900',
+    marginHorizontal: '2%',
+    marginVertical: '4%',
   },
   itemCard: {
-    flexDirection: "row",
-    marginBottom: 20,
-    borderWidth: 1,
+    flexDirection: 'row',
+    marginBottom: 10,
+    elevation: 2,
+    overflow: 'hidden',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    margin: '2%',
     borderRadius: 5,
-    borderColor: "#ccc9c9",
-    overflow: "hidden",
-    alignItems: "center",
-    backgroundColor: "#ddd",
-    margin: "2%",
   },
   itemImg: {
     width: imageW,
     height: imageH,
-    resizeMode: "cover",
+    resizeMode: 'cover',
   },
   itemDetail: {
     flex: 1,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   },
   itemName: {
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   itemButton: {
     padding: 20,

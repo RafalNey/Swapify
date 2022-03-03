@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   Alert,
+  ScrollView,
 } from 'react-native';
 import deleteItem from '../../utils/deleteItem';
 import formattedTimestamp from '../../utils/formatTimestamp';
@@ -20,7 +21,6 @@ import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import locationList from '../../utils/locationList';
 
-
 const Item = ({ route }) => {
   const navigation = useNavigation();
   const item = route.params;
@@ -28,9 +28,6 @@ const Item = ({ route }) => {
   const [messageDocId, setMessageDocId] = useState(null);
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useContext(UserContext);
-
-
- 
 
   const deletePrompt = () => {
     Alert.alert('Wait!', 'Are you sure you want to delete this listing?', [
@@ -62,86 +59,75 @@ const Item = ({ route }) => {
     if (auth.currentUser === null) {
       auth.currentUser = 'guest';
     }
-    getMyItemMessageId(id, auth.currentUser.displayName).then((docId) => {
-      setMessageDocId(docId);
-    });
+    getMyItemMessageId(id, auth.currentUser.displayName)
+      .then((docId) => {
+        setMessageDocId(docId);
+      })
+      .catch((err) => console.log(err.message));
   }, [id]);
 
-  return loading ? (
-    <Loader />
-  ) : (
+  return (
     <SafeAreaView style={styles.itemContainer}>
-      <View style={styles.itemCard}>
-      <Image style={styles.itemImage} source={{ uri: item.img }} />
-      <Text style={styles.itemTitle}>{item.title}</Text>
-      <Text style={styles.itemCategory}>{item.category}</Text>
-      <View style={styles.swapContainer}>
-        <View style={styles.userInfo}>
-        <Text style={styles.itemUsername}>User: {item.username}</Text>
-        <Text>{formattedTimestamp(item.posted_at)}</Text>
-        </View>
-        
-        
-        
-      </View>
-      </View>
-
-
-      {locationList[item.location] ? <View style={styles.mapContainer}>
-        <Text style={styles.locationText}>Location</Text>
-        <MapView
-        style={{height: '50%', marginTop: 10}}
-        region={locationList[item.location]}
-        >
-        <Marker
-        coordinate={locationList[item.location].marker}
-        />
-        </MapView>
-        
-        
-      </View> : null}
-      
-      <Text style={styles.itemDescription}>{item.description}</Text>
-      
-
-      {!item.swapped && (
-        <View>
-          {!isLoggedIn ? (
-            <TouchableOpacity onPress={goToLoginHandler}>
-              <Text style={styles.register}>
-                Please login or register to offer swap
-              </Text>
-            </TouchableOpacity>
-          ) : auth.currentUser.displayName === item.username ? (
-            <Button btnText={'Delete Item'} onSubmit={() => deletePrompt()} />
-          ) : (
-            <Button
-              btnText={'Offer Swap'}
-              onSubmit={() =>
-                navigation.navigate('Conversation', {
-                  messageDocId: messageDocId,
-                  item: item,
-                })
-              }
-            />
-            
+      {loading ? (
+        <Loader />
+      ) : (
+        <ScrollView style={styles.itemCard}>
+          <Image style={styles.itemImage} source={{ uri: item.img }} />
+          <Text style={styles.itemTitle}>{item.title}</Text>
+          <Text style={styles.itemCategory}>{item.category}</Text>
+          <View style={styles.userInfo}>
+            <Text style={styles.itemUsername}>{item.username}</Text>
+            <Text>{formattedTimestamp(item.posted_at)}</Text>
+          </View>
+          {!item.swapped && (
+            <View>
+              {!isLoggedIn ? (
+                <TouchableOpacity onPress={goToLoginHandler}>
+                  <Text style={styles.register}>
+                    Please login or register to offer swap
+                  </Text>
+                </TouchableOpacity>
+              ) : auth.currentUser.displayName === item.username ? (
+                <Button
+                  btnText={'Delete Item'}
+                  onSubmit={() => deletePrompt()}
+                />
+              ) : (
+                <Button
+                  btnText={'Offer Swap'}
+                  onSubmit={() =>
+                    navigation.navigate('Conversation', {
+                      messageDocId: messageDocId,
+                      item: item,
+                    })
+                  }
+                />
+              )}
+            </View>
           )}
-        </View>
-        
-      )}
-      {!!item.swapped && (
-        <View>
-          <Text
-            style={{
-              alignSelf: 'center',
-              padding: 10,
-              fontSize: 20,
-              fontWeight: '700',
-            }}
-          >
-            Swap completed
-          </Text>
-        </View>
+          {!!item.swapped && (
+            <View>
+              <Text
+                style={{
+                  alignSelf: 'center',
+                  padding: 10,
+                  fontSize: 20,
+                  fontWeight: '700',
+                }}
+              >
+                Swap completed
+              </Text>
+            </View>
+          )}
+          <Text style={styles.itemDescription}>{item.description}</Text>
+          {locationList[item.location] ? (
+            <View>
+              <MapView style={styles.map} region={locationList[item.location]}>
+                <Marker coordinate={locationList[item.location].marker} />
+              </MapView>
+            </View>
+          ) : null}
+        </ScrollView>
       )}
     </SafeAreaView>
   );
@@ -153,29 +139,23 @@ const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     padding: '5%',
-    backgroundColor: '#D1D1D1',
+    backgroundColor: '#f4f3f3',
   },
   itemCard: {
-  backgroundColor: '#fff',
-  borderRadius: 30,
-  },
-
-  userInfo: {
-    marginLeft: 60,
-  },
-  mapContainer: {
+    paddingVertical: '3.8%',
+    paddingHorizontal: '3%',
+    overflow: 'hidden',
     backgroundColor: '#fff',
-    marginTop: 10,
-    padding: 3,
-    borderRadius: 30,
+    borderRadius: 10,
+    elevation: 2,
   },
-
-  locationText: {
-    marginLeft: 100
+  map: {
+    height: '50%',
+    marginTop: 20,
   },
   itemImage: {
     width: '100%',
-    height: '35%',
+    height: '30%',
     borderRadius: 5,
     resizeMode: 'cover',
     borderWidth: 1,
@@ -183,27 +163,27 @@ const styles = StyleSheet.create({
   },
   itemTitle: {
     textAlign: 'center',
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: 10,
+    marginBottom: 5,
     fontSize: 28,
   },
   itemCategory: {
-    marginBottom: 45,
+    marginBottom: 35,
     fontSize: 18,
     textAlign: 'center',
     fontStyle: 'italic',
   },
-  swapContainer: {
+  userInfo: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 15,
+    alignItems: 'flex-end',
+    marginBottom: 10,
   },
   itemUsername: {
-    fontSize: 20,
+    fontSize: 18,
   },
   itemDescription: {
-    marginTop: 20,
+    marginTop: 10,
     padding: 20,
     fontSize: 16,
     textAlign: 'center',
@@ -211,8 +191,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f7f7f7',
   },
   register: {
-    marginVertical: 10,
-    fontSize: 17,
+    marginVertical: 5,
+    fontSize: 15,
     textAlign: 'center',
     color: '#0000ff',
   },

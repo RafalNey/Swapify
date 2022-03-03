@@ -7,10 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  KeyboardAvoidingView, 
-  TouchableWithoutFeedback, 
-  Keyboard, 
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import { Formik } from 'formik';
 import { useState, useEffect } from 'react';
@@ -30,7 +27,7 @@ const AddItem = () => {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [counter, setCounter] = useState(1);
-  const [location, setLocation] = useState('')
+  const [location, setLocation] = useState('');
 
   const pickImage = () => {
     ImagePicker.launchImageLibraryAsync({
@@ -51,101 +48,97 @@ const AddItem = () => {
   }, []);
 
   useEffect(() => {
-    getLocation(auth.currentUser.email)
-    .then((user) => {
-      setLocation(user[0].userLocation)
-    })
-  }, [location])
+    getLocation(auth.currentUser.email).then((user) => {
+      setLocation(user[0].userLocation);
+    });
+  }, [location]);
 
   return loading ? (
     <Loader />
   ) : (
-   
     <SafeAreaView style={styles.addItemContainer}>
-      <ScrollView >
-      <Formik
-        initialValues={{ title: '', image, description: '', category: '' }}
-        onSubmit={(values, actions) => {
-           
-          actions.resetForm();
-          values.posted_at = serverTimestamp();
-          values.username = auth.currentUser.displayName;
-          values.location = location
-          values.title &&
-            values.description &&
-            values.category &&
-            image &&
-            uploadItemImg(
-              counter,
-              image,
-              auth.currentUser,
-              setLoading,
-              values.title
-            )
-            .then((photoURL) => {
-                postItem(values, photoURL);
-                setCounter((currCount) => currCount + 1);
-                setLoading(false);
-                return photoURL;
-              })
-              .then((photoURL) =>
-                navigation.navigate('Item', { ...values, img: photoURL })
-              );
-        }}
-      >
-        {(props) => (
-          <View style={styles.form}>
-            <Text style={styles.formHeader}>Add your listing below</Text>
-            <Text style={styles.label}>Please select a category:</Text>
-            <Picker
-              enabled={true}
-              placeholder='Select your category'
-              selectedValue={props.values.category}
-              onValueChange={props.handleChange('category')}
-            >
-              {categories.map((category) => {
-                return (
-                  <Picker.Item
-                    label={category}
-                    value={category}
-                    key={category}
-                  />
+      <ScrollView>
+        <Formik
+          initialValues={{ title: '', image, description: '', category: '' }}
+          onSubmit={(values, actions) => {
+            actions.resetForm();
+            values.posted_at = serverTimestamp();
+            values.username = auth.currentUser.displayName;
+            values.location = location;
+            values.title &&
+              values.description &&
+              values.category &&
+              image &&
+              uploadItemImg(
+                counter,
+                image,
+                auth.currentUser,
+                setLoading,
+                values.title
+              )
+                .then((photoURL) => {
+                  postItem(values, photoURL);
+                  setCounter((currCount) => currCount + 1);
+                  setLoading(false);
+                  return photoURL;
+                })
+                .then((photoURL) =>
+                  navigation.navigate('Item', { ...values, img: photoURL })
                 );
-              })}
-            </Picker>
-            <Text style={styles.label}>Title</Text>
-            <TextInput
-              placeholder='Tell us what you are listing...'
-              style={styles.input}
-              value={props.values.title}
-              onChangeText={props.handleChange('title')}
-            />
-            <Text style={styles.label}>Description:</Text>
-            <TextInput
-              placeholder={'Tell us a bit about your item...'}
-              style={styles.input}
-              value={props.values.description}
-              onChangeText={props.handleChange('description')}
-            />
-            <Button
-              btnText={!image ? 'Add photo' : 'Change photo'}
-              onSubmit={pickImage}
-            />
-           
-            {image ? (
-              <Image style={styles.displayPic} source={{ uri: image }} />
-            ) : null}
-            <TouchableOpacity
-              style={styles.submitBtn}
-              onPress={props.handleSubmit}
-            >
-              <Text style={styles.submitBtnText}>Submit</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </Formik>
+          }}
+        >
+          {(props) => (
+            <View style={styles.form}>
+              <Text style={styles.formHeader}>Add your listing below</Text>
+              <Text style={styles.label}>Please select a category:</Text>
+              <Picker
+                enabled={true}
+                placeholder='Select your category'
+                selectedValue={props.values.category}
+                onValueChange={props.handleChange('category')}
+              >
+                {categories.map((category) => {
+                  return (
+                    <Picker.Item
+                      label={category}
+                      value={category}
+                      key={category}
+                    />
+                  );
+                })}
+              </Picker>
+              <Text style={styles.label}>Title</Text>
+              <TextInput
+                placeholder='Tell us what you are listing...'
+                style={styles.input}
+                value={props.values.title}
+                onChangeText={props.handleChange('title')}
+              />
+              <Text style={styles.label}>Description:</Text>
+              <TextInput
+                placeholder={'Tell us a bit about your item...'}
+                style={styles.input}
+                value={props.values.description}
+                onChangeText={props.handleChange('description')}
+              />
+              <Button
+                btnText={!image ? 'Add photo' : 'Change photo'}
+                onSubmit={pickImage}
+              />
+
+              {image ? (
+                <Image style={styles.displayPic} source={{ uri: image }} />
+              ) : null}
+              <TouchableOpacity
+                style={styles.submitBtn}
+                onPress={props.handleSubmit}
+              >
+                <Text style={styles.submitBtnText}>Submit</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </Formik>
       </ScrollView>
-      
     </SafeAreaView>
   );
 };
@@ -155,13 +148,14 @@ export default AddItem;
 const styles = StyleSheet.create({
   addItemContainer: {
     flex: 1,
-    backgroundColor: '#D1D1D1',
+    backgroundColor: '#f4f3f3',
   },
   form: {
     padding: '5%',
     backgroundColor: '#fff',
     margin: 10,
-    borderRadius: 20
+    borderRadius: 20,
+    elevation: 2,
   },
   formHeader: {
     marginBottom: 50,
