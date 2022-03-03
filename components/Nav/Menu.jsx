@@ -1,17 +1,20 @@
 import {
   StyleSheet,
   SafeAreaView,
+  View,
   Text,
   Dimensions,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
+import TeamLogo from '../Reusable/TeamLogo';
 
-const { width, height } = Dimensions.get('screen');
+const { height } = Dimensions.get('screen');
 
 const Menu = ({ navigationHandler, isPressed }) => {
   const menuItems = [
@@ -21,8 +24,7 @@ const Menu = ({ navigationHandler, isPressed }) => {
     'User Agreement',
     'Privacy',
   ];
-  const [isLogged, setIsLogged] = useState(false);
-  const { isLoggedIn, loggedInUser, setLoggedInUser } = useContext(UserContext);
+  const { setLoggedInUser } = useContext(UserContext);
 
   const loginHandler = () => {
     navigationHandler('Login');
@@ -89,6 +91,7 @@ const Menu = ({ navigationHandler, isPressed }) => {
           <Text style={styles.menuItemText}>Logout</Text>
         </TouchableOpacity>
       )}
+      <TeamLogo />
     </SafeAreaView>
   );
 };
