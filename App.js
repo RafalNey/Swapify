@@ -4,11 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './stacks/StackNavigator';
 import { UserContext } from './contexts/UserContext';
 import Nav from './components/Nav/Nav';
+import { LogBox } from 'react-native';
 
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState({});
   const isLoggedIn = Object.keys(loggedInUser).length > 0;
-
+  LogBox.ignoreAllLogs();
   return (
     <UserContext.Provider value={{ loggedInUser, setLoggedInUser, isLoggedIn }}>
       <SafeAreaView style={styles.container}>
