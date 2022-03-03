@@ -59,7 +59,7 @@ export default ItemsSlider;
 const styles = StyleSheet.create({
   listContainer: {
     height: imageH,
-    marginHorizontal: 10,
+    marginLeft: 5,
   },
   listHeader: {
     marginBottom: 10,

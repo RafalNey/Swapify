@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, StatusBar, SafeAreaView } from 'react-native';
+import { StyleSheet, StatusBar, SafeAreaView, LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './stacks/StackNavigator';
 import { UserContext } from './contexts/UserContext';
@@ -8,6 +8,7 @@ import Nav from './components/Nav/Nav';
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState({});
   const isLoggedIn = Object.keys(loggedInUser).length > 0;
+  LogBox.ignoreAllLogs();
 
   return (
     <UserContext.Provider value={{ loggedInUser, setLoggedInUser, isLoggedIn }}>
