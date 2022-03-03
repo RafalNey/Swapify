@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: '2%',
     zIndex: 2,
-    height: videoH - 16,
+    height: videoH - 17,
     width: videoW,
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
   },
