@@ -81,14 +81,12 @@ const Item = ({ route }) => {
       {locationList[item.location] ? (
         <View style={styles.mapContainer}>
           <Text style={styles.locationText}>Location</Text>
-          {/* <MapView
-        style={{height: '50%', marginTop: 10}}
-        region={locationList[item.location]}
-        >
-        <Marker
-        coordinate={locationList[item.location].marker}
-        />
-        </MapView> */}
+          <MapView
+            style={{ height: "50%", marginTop: 10 }}
+            region={locationList[item.location]}
+          >
+            <Marker coordinate={locationList[item.location].marker} />
+          </MapView>
         </View>
       ) : null}
 
