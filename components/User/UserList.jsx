@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     paddingTop: '5%',
     paddingHorizontal: '3%',
-    backgroundColor: '#fff',
+    backgroundColor: '#f4f3f3',
   },
   userListHeader: {
     alignSelf: 'flex-start',

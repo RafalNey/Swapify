@@ -31,11 +31,9 @@ const Nav = () => {
             onPress={() => navigationHandler('Home')}
           />
         </TouchableOpacity>
-
         <TouchableOpacity onPress={() => navigationHandler('Marketplace')}>
           <Fontisto name='shopping-store' size={20} color='#6b6565' />
         </TouchableOpacity>
-
         <TouchableOpacity
           onPress={() => {
             if (isLoggedIn === false) {
@@ -47,7 +45,22 @@ const Nav = () => {
         >
           <MaterialIcons name='message' size={24} color='#6b6565' />
         </TouchableOpacity>
-
+        <TouchableOpacity
+          onPress={() => {
+            if (isLoggedIn === false) {
+              alert('Please log in to use camera.');
+            } else {
+              navigationHandler('Camera');
+            }
+          }}
+        >
+          <Fontisto
+            style={styles.cameraIcon}
+            name='camera'
+            size={20}
+            color='#6b6565'
+          />
+        </TouchableOpacity>
         <TouchableOpacity onPress={menuOpenHandler}>
           {!isPressed ? (
             <Ionicons name='ios-menu-sharp' size={30} color='#6b6565' />
@@ -69,7 +82,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 15,
     paddingHorizontal: 20,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#ccc9c9',
   },

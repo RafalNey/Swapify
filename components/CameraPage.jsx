@@ -11,8 +11,6 @@ import { MaterialIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import * as MediaLibrary from 'expo-media-library';
 import finger from '../images/finger.png';
-// import { updateProfile } from 'firebase/auth';
-// import { auth } from '../firebase';
 
 const CameraPage = () => {
   const navigation = useNavigation();

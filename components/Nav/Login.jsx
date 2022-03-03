@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: '5%',
-    backgroundColor: '#fff',
+    backgroundColor: '#f4f3f3',
   },
   loginCard: {
     alignItems: 'center',
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     borderWidth: 1,
     borderRadius: 5,
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     borderColor: '#ccc9c9',
   },
   register: {

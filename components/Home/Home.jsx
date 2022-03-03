@@ -1,4 +1,11 @@
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, View, Text } from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  View,
+  Text,
+} from 'react-native';
 import Logo from './Logo';
 import ItemsSlider from './ItemsSlider';
 import HomeVideo from './HomeVideo';
@@ -12,16 +19,17 @@ const Home = () => {
       <ScrollView>
         <StatusBar default />
         <Logo />
-
-        <View style ={styles.welcomeMessage}>
-          <Text style={styles.welcomeText}>Get rid of unwanted stuff and we won't charge you a penny!</Text>
+        <View style={styles.welcomeMessage}>
+          <Text style={styles.welcomeText}>
+            Get rid of unwanted stuff and we won't charge you a penny!
+          </Text>
           <Text></Text>
           <Text style={styles.welcomeText}>Done with it? SWAPIFY it!</Text>
           <Text style={styles.welcomeText}>Get started today!</Text>
         </View>
         <HomeVideo navigation={navigation} />
         <View style={styles.sliderContainer}>
-        <ItemsSlider />
+          <ItemsSlider />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -33,7 +41,7 @@ const styles = StyleSheet.create({
   homeContainer: {
     flex: 1,
     paddingVertical: '5%',
-    backgroundColor: '#D1D1D1',
+    backgroundColor: '#f4f3f3',
   },
 
   welcomeMessage: {
@@ -41,20 +49,18 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#fff',
     margin: 10,
-    borderRadius: 30,
+    borderRadius: 10,
+    elevation: 2,
   },
 
   welcomeText: {
     fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'center'
-    
+    textAlign: 'center',
   },
 
   sliderContainer: {
-    backgroundColor: '#fff',
-    padding: 15,
     margin: 10,
-    borderRadius: 30,
-  }
+    borderRadius: 10,
+  },
 });

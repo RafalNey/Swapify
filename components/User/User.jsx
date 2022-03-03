@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons, FontAwesome, Fontisto } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import Button from '../Reusable/Button';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/UserContext';
@@ -26,8 +26,8 @@ const menuH = menuW * 1;
 const User = () => {
   const navigation = useNavigation();
   const { loggedInUser, isLoggedIn } = useContext(UserContext);
-  const [loading, setLoading] = useState(false)
-  const [location, setLocation] = useState('')
+  const [loading, setLoading] = useState(false);
+  const [location, setLocation] = useState('');
 
   const openCamera = () => {
     navigationHandler('Camera');
@@ -36,24 +36,16 @@ const User = () => {
   const navigationHandler = (screen) => {
     navigation.navigate(screen);
   };
-// console.log(auth.currentUser)
 
-
-useEffect(() => {
-getLocation(auth.currentUser.email)
-.then((user) => {
-  setLocation(user[0].userLocation)
-})
-.catch((err) => {
-  console.log(err)
-})
-
-}, [])
-
-
-
-
-
+  useEffect(() => {
+    getLocation(auth.currentUser.email)
+      .then((user) => {
+        setLocation(user[0].userLocation);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const deletePrompt = () => {
     Alert.alert(
@@ -101,14 +93,6 @@ getLocation(auth.currentUser.email)
             source={{ uri: auth.currentUser.photoURL }}
           />
         )}
-
-        <Fontisto
-          style={styles.cameraIcon}
-          name='camera'
-          size={35}
-          color='#6b6565'
-          onPress={openCamera}
-        />
       </View>
       <Text style={styles.userName}>
         {auth.currentUser && auth.currentUser.displayName}
@@ -120,9 +104,6 @@ getLocation(auth.currentUser.email)
       <FontAwesome name='star-o' size={24} color='#000' />
       <View style={styles.showBtnsContainer}>
         <Button btnText={'My List'} navigationHandler={navigationHandler} />
-        <Button btnText={'Swaps'} navigationHandler={navigationHandler} />
-      </View>
-      <View>
         <Button btnText={'Delete account'} onSubmit={deletePrompt} />
       </View>
     </SafeAreaView>
@@ -135,7 +116,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#f4f3f3',
   },
   userCard: {
     position: 'relative',
@@ -175,9 +156,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   showBtnsContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
     marginVertical: 30,
   },
 });

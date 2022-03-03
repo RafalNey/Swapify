@@ -1,8 +1,8 @@
-import { getAuth } from "firebase/auth";
-import { addDoc, doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { Formik } from "formik";
-import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { getAuth } from 'firebase/auth';
+import { addDoc, doc, setDoc } from 'firebase/firestore';
+import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {
   Image,
   Text,
@@ -14,16 +14,16 @@ import {
   TouchableOpacity,
   Platform,
   Modal,
-} from "react-native";
-import { messageColRef } from "../firebase";
-import { getMessage } from "../utils/messageQueries";
-import Button from "./Reusable/Button";
-import { StyleSheet } from "react-native";
-import { useRef } from "react";
-import { isoDateFormatter } from "../utils/dateFormatter";
-import AverageStarRating from "./AverageStarRating";
-import StarRatingForm from "./StarRatingForm";
-import markAsSwapped from "../utils/markAsSwapped";
+} from 'react-native';
+import { messageColRef } from '../firebase';
+import { getMessage } from '../utils/messageQueries';
+import Button from './Reusable/Button';
+import { StyleSheet } from 'react-native';
+import { useRef } from 'react';
+import { isoDateFormatter } from '../utils/dateFormatter';
+import AverageStarRating from './AverageStarRating';
+import StarRatingForm from './StarRatingForm';
+import markAsSwapped from '../utils/markAsSwapped';
 
 const now = new Date();
 
@@ -54,7 +54,7 @@ const Messages = ({ route }) => {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
       <View style={styles.container}>
@@ -63,7 +63,7 @@ const Messages = ({ route }) => {
             onPress={() => {
               const item = { ...message.item };
               item.swapped = !!message.swapped;
-              navigation.navigate("Item", item);
+              navigation.navigate('Item', item);
             }}
           >
             <View>
@@ -96,7 +96,7 @@ const Messages = ({ route }) => {
           }
           data={message.messages}
           pagingEnabled
-          style={{ alignSelf: "stretch" }}
+          style={{ alignSelf: 'stretch' }}
           decelerationRate={0}
           showsVerticalScrollIndicator={false}
           keyExtractor={(_, index) => index.toString()}
@@ -116,7 +116,7 @@ const Messages = ({ route }) => {
         <View>
           <View style={{ padding: 10 }}>
             <Formik
-              initialValues={{ message: "" }}
+              initialValues={{ message: '' }}
               onSubmit={(values, actions) => {
                 const newMessage = { ...message };
 
@@ -147,7 +147,7 @@ const Messages = ({ route }) => {
                   <Modal
                     visible={modalVisible}
                     onRequestClose={() => {
-                      Alert.alert("Modal has been closed.");
+                      Alert.alert('Modal has been closed.');
                       setModalVisible(!modalVisible);
                     }}
                   >
@@ -155,7 +155,7 @@ const Messages = ({ route }) => {
                       <View style={styles.modalView}>
                         <StarRatingForm username={message.username} />
                         <Button
-                          btnText={"Complete swap"}
+                          btnText={'Complete swap'}
                           onSubmit={() => {
                             markAsSwapped(message.item.id, messageDocId);
                             setModalVisible(!modalVisible);
@@ -165,21 +165,21 @@ const Messages = ({ route }) => {
                       </View>
                     </View>
                   </Modal>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <TextInput
                       style={{
                         borderWidth: 1,
                         padding: 10,
                         height: 100,
-                        width: "95%",
+                        width: '95%',
                         flex: 1,
                       }}
                       multiline
                       numberOfLines={4}
-                      placeholder="New message"
-                      onChangeText={props.handleChange("message")}
+                      placeholder='New message'
+                      onChangeText={props.handleChange('message')}
                       value={props.values.message}
-                      returnKeyType="done"
+                      returnKeyType='done'
                       blurOnSubmit={true}
                       onSubmitEditing={() => {
                         Keyboard.dismiss();
@@ -196,7 +196,7 @@ const Messages = ({ route }) => {
                   </View>
 
                   {user.displayName === message.ownerName && (
-                    <View style={{ alignItems: "center", paddingTop: 10 }}>
+                    <View style={{ alignItems: 'center', paddingTop: 10 }}>
                       {!message.swapped && (
                         <Button
                           btnText={
@@ -209,7 +209,7 @@ const Messages = ({ route }) => {
                         />
                       )}
                       {!!message.swapped && (
-                        <Text style={{ fontSize: 20, fontWeight: "700" }}>
+                        <Text style={{ fontSize: 20, fontWeight: '700' }}>
                           Swap completed
                         </Text>
                       )}
@@ -228,31 +228,32 @@ const Messages = ({ route }) => {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
+    backgroundColor: '#f4f3f3',
   },
   itemCard: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: 5,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: "#ccc9c9",
-    overflow: "hidden",
-    alignItems: "center",
+    borderColor: '#ccc9c9',
+    overflow: 'hidden',
+    alignItems: 'center',
   },
   messageCard: {
-    flexDirection: "row",
-    margin: "2%",
+    flexDirection: 'row',
+    margin: '2%',
     borderWidth: 1,
     borderRadius: 8,
-    borderColor: "#ccc9c9",
-    overflow: "hidden",
-    alignItems: "center",
-    backgroundColor: "#ddd",
+    borderColor: '#ccc9c9',
+    overflow: 'hidden',
+    alignItems: 'center',
+    backgroundColor: '#ddd',
   },
   itemImg: {
     width: 100,
     height: 100,
-    resizeMode: "cover",
+    resizeMode: 'cover',
   },
   itemDetail: {
     flex: 1,
@@ -260,7 +261,7 @@ var styles = StyleSheet.create({
   },
   itemName: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   messageDetail: {
     flex: 1,
@@ -268,25 +269,25 @@ var styles = StyleSheet.create({
   },
   messageText: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   Form: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 22,
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
+    alignItems: 'center',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -301,19 +302,19 @@ var styles = StyleSheet.create({
     elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: '#F194FF',
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: '#2196F3',
   },
   textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center",
+    textAlign: 'center',
   },
 });
 
