@@ -1,6 +1,6 @@
 # Swapify
 
-_A mobile app build for the purpose of people exchanging items between each other with no monetary involvement. The goal of this project was to build a platform that won't charge you for listing your items and they can do that with an ease._
+_A mobile app build for the purpose of people exchanging items between each other with no monetary involvement. The goal of this project was to build a platform that won't charge you for listing your items and users can post an item with an ease._
 
 ## Meet the team
 
