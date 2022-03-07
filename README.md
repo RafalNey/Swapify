@@ -88,4 +88,4 @@ expo start
 
 Then it will give you a QR code in the terminal that you can scan with your phone using Expo Go and that's it your app is live and ready to build!
 
-<img src="images/QR.png" alt="screenshot" width="900" height="300"/>
+<img src="images/QR.png" alt="screenshot" width="600" height="300"/>
