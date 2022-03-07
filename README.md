@@ -6,24 +6,22 @@ _A mobile app build for the purpose of people exchanging items between each othe
 
 ## Meet the team
 
----
-
 - Laura Thomason
 - Nenad Tsvetanovski
 - Rayhaan Ugharadar
 - Rafal Ney
 - Rosie Vallely
 
-## Watch demo
-
 ---
+
+## Watch demo
 
 If you want to learn more about this project and watch our demo follow the link bellow
 (northcoderslink.com)
 
-## Tech stack
-
 ---
+
+## Tech stack
 
 - React Native
 - Expo
@@ -33,15 +31,15 @@ If you want to learn more about this project and watch our demo follow the link 
 - Excalidraw
 - Git & GitHub
 
-## Basic requirements
-
 ---
+
+## Basic requirements
 
 To run this app on your computer, make sure you have version [**NodeJS v16.11.0**](https://nodejs.org/en/) and [**Git**](https://git-scm.com) installed.
 
-## Download
-
 ---
+
+## Download
 
 You can find the repository on [**GitHub**](https://github.com/Nesh00/swapping-app) and clone it down or just download the ZIP file.
 
@@ -50,9 +48,9 @@ git clone https://github.com/Nesh00/swapping-app
 
 ```
 
-## Installation
-
 ---
+
+## Installation
 
 First thing you need to do is install Expo globally.
 
@@ -66,9 +64,9 @@ Once you have the repository on your computer, navigate to that repository in yo
 npm install
 ```
 
-## Run app
-
 ---
+
+## Run app
 
 There are few ways you can run this app:
 
@@ -76,15 +74,17 @@ There are few ways you can run this app:
 - Run it in the web browser
 - Run it on your mobile device through [**Expo Go**](https://expo.dev/client) which you can find in App Store/Google Play
 
-## Run with Expo Go
-
 ---
+
+## Run with Expo Go
 
 First you need start the app.
 
 ```
 expo start
 ```
+
+---
 
 Then it will give you a QR code in the terminal that you can scan with your phone using Expo Go and that's it your app is live and ready to build!
 
