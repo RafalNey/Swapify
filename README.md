@@ -2,8 +2,6 @@
 
 _A mobile app build for the purpose of people exchanging items between each other with no monetary involvement. The goal of this project was to build a platform that won't charge you for listing your items and they can do that with an ease._
 
-<img src="images/Logo.png" alt="screenshot" width="900" height="300"/>
-
 ## Meet the team
 
 - Laura Thomason
@@ -89,3 +87,5 @@ expo start
 Then it will give you a QR code in the terminal that you can scan with your phone using Expo Go and that's it your app is live and ready to build!
 
 <img src="images/QR.png" alt="screenshot" width="600" height="300"/>
+
+---
