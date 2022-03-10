@@ -1,13 +1,13 @@
 # Swapify
 
-_A mobile app build for the purpose of people exchanging items between each other with no monetary involvement. The goal of this project was to build a platform that won't charge you for listing your items and users can post an item with an ease._
+A mobile app build for people who want to exchang items between each other with no monetary involvement. The goal of this project was to build a platform that won't charge you for listing your items and everybody can browse between the items and making swaps.
 
 ## Meet the team
 
+- Rafal Ney
 - Laura Thomason
 - Nenad Tsvetanovski
 - Rayhaan Ugharadar
-- Rafal Ney
 - Rosie Vallely
 
 ---
@@ -15,7 +15,7 @@ _A mobile app build for the purpose of people exchanging items between each othe
 ## Watch demo
 
 If you want to learn more about this project and watch our demo follow the link bellow
-(northcoderslink.com)
+https://youtu.be/lAhZAQDOVWA
 
 ---
 
